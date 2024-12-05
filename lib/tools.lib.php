@@ -156,22 +156,6 @@ function getRenderAlleDozenten()
   $htmlheader = '
 <style type="text/css">
 
-#overlay {
-  position: fixed; /* Sit on top of the page content */
-  display: none; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-  z-index: 2; /* Specify a stack order in case you\'re using a different order for other elements */
-  cursor: pointer; /* Add a pointer on hover */
-}
-
-
-
     .logo { padding: 5px;   width: 250px;  float: right;  height:90px;  }
 
     td, th { color      : #000000;
@@ -232,15 +216,289 @@ function getRenderAlleDozenten()
   $db = connectDB();
   $html = renderDozentenListe( $db );
   $html = $htmlheader . $html;
-  error_reporting(0 );
-  
- # if ( $output == 'pdf' )
- # { renderPDF( $html );
- # }
- # else
-  { echo $html;
-  }
+#  error_reporting(0 );
+  echo $html;
 }
 
+
+
+
+function getRenderAlleDozentenSem()
+{
+  $htmlheader = '
+<style type="text/css">
+
+    .logo { padding: 5px;   width: 250px;  float: right;  height:90px;  }
+
+    td, th { color      : #000000;
+         padding    : 6px;
+         font-family: Arial, sans-serif;
+         font-size  : 12px;
+         border-bottom: 1px solid gray;
+    }
+
+    td.head {
+        color: white;
+        font-weight: bold;
+        background-color:  darkgrey;
+    }
+
+    td.sum {
+        color      : #000000;
+        background-color: #eeeeee;
+    }
+
+    td.sal {
+        color      : #000000;
+        background-color: lightyellow;
+    }
+    
+    .taL { text-align: left;  }
+    .taR { text-align: right; }
+    .taC { text-align: right; }
+
+    .headertxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        height: 110px;
+        line-height: 95%;
+    }
+
+    .datetxt { text-align: right;
+        font-family: Arial, sans-serif;
+        font-size  : 14px;
+    }
+
+    .betrefftxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-top: 45px;
+    }
+
+    .fliestxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        line-height: 150%;
+    }
+</style>
+';
+  $html = '';
+  $db = connectDB();
+  $html = renderDozentenListeSem( $db );
+  $html = $htmlheader . $html;
+#  error_reporting(0 );
+  echo $html;
+}
+
+
+
+
+
+function getRenderAlleFaecher()
+{
+  $htmlheader = '
+<style type="text/css">
+   td, th { color      : #000000;
+         padding    : 6px;
+         font-family: Arial, sans-serif;
+         font-size  : 12px;
+         border-bottom: 1px solid gray;
+    }
+
+    td.head {
+        color: white;
+        font-weight: bold;
+        background-color:  darkgrey;
+    }
+
+    td.sum {
+        color      : #000000;
+        background-color: #eeeeee;
+    }
+
+    td.sal {
+        color      : #000000;
+        background-color: lightyellow;
+    }
+    
+    .taL { text-align: left;  }
+    .taR { text-align: right; }
+    .taC { text-align: center; }
+
+    .headertxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        height: 110px;
+        line-height: 95%;
+    }
+
+    .datetxt { text-align: right;
+        font-family: Arial, sans-serif;
+        font-size  : 14px;
+    }
+
+    .betrefftxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-top: 45px;
+    }
+
+    .fliestxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        line-height: 150%;
+    }
+</style>
+';
+  $html = '';
+  $db = connectDB();
+  $html = renderFaecherListe( $db );
+  $html = $htmlheader . $html;
+#  error_reporting(0 );
+  echo $html;
+  
+}
+
+
+
+
+
+function getRenderAlleDepartments()
+{
+  $htmlheader = '
+<style type="text/css">
+   td, th { color      : #000000;
+         padding    : 6px;
+         font-family: Arial, sans-serif;
+         font-size  : 12px;
+         border-bottom: 1px solid gray;
+    }
+
+    td.head {
+        color: white;
+        font-weight: bold;
+        background-color:  darkgrey;
+    }
+
+    td.sum {
+        color      : #000000;
+        background-color: #eeeeee;
+    }
+
+    td.sal {
+        color      : #000000;
+        background-color: lightyellow;
+    }
+    
+    .taL { text-align: left;  }
+    .taR { text-align: right; }
+    .taC { text-align: center; }
+
+    .headertxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        height: 110px;
+        line-height: 95%;
+    }
+
+    .datetxt { text-align: right;
+        font-family: Arial, sans-serif;
+        font-size  : 14px;
+    }
+
+    .betrefftxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-top: 45px;
+    }
+
+    .fliestxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        line-height: 150%;
+    }
+</style>
+';
+  $html = '';
+  $db = connectDB();
+  $html = renderDepartmentListe( $db );
+  $html = $htmlheader . $html;
+#  error_reporting(0 );
+  echo $html;
+  
+}
+
+function getRenderAlleStudiengang()
+{
+  $htmlheader = '
+<style type="text/css">
+   td, th { color      : #000000;
+         padding    : 6px;
+         font-family: Arial, sans-serif;
+         font-size  : 12px;
+         border-bottom: 1px solid gray;
+    }
+
+    td.head {
+        color: white;
+        font-weight: bold;
+        background-color:  darkgrey;
+    }
+
+    td.sum {
+        color      : #000000;
+        background-color: #eeeeee;
+    }
+
+    td.sal {
+        color      : #000000;
+        background-color: lightyellow;
+    }
+    
+    .taL { text-align: left;  }
+    .taR { text-align: right; }
+    .taC { text-align: center; }
+
+    .headertxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        height: 110px;
+        line-height: 95%;
+    }
+
+    .datetxt { text-align: right;
+        font-family: Arial, sans-serif;
+        font-size  : 14px;
+    }
+
+    .betrefftxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-top: 45px;
+    }
+
+    .fliestxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        line-height: 150%;
+    }
+</style>
+';
+  $html = '';
+  $db = connectDB();
+  $html = renderStudiengangListe( $db );
+  $html = $htmlheader . $html;
+#  error_reporting(0 );
+  echo $html;
+  
+}
 
 ?>

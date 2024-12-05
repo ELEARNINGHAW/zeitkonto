@@ -1,8 +1,7 @@
 <?php
 
 function connectDB()
-{
-  $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
+{ $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
   if ($db -> connect_errno)
   { echo "Failed to connect to MySQL: " . $db->connect_error;
     exit();
@@ -11,15 +10,13 @@ function connectDB()
 }
 
 function getVeranstaltungsliste( $db, $dozentKurz, $jahr, $semester )
-{
-  $veranstaltungsliste = array();
+{ $veranstaltungsliste = array();
   
   $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
                                    . "\" AND DozentKurz = \"". $dozentKurz
                                    . "\" AND Semester   = \"". $semester
                                    . "\" ORDER BY Fach";
   
- 
   $result = $db -> query($sql1);
   $row    = $result -> fetch_all( MYSQLI_ASSOC );
   
@@ -48,7 +45,6 @@ function getVeranstaltungsliste( $db, $dozentKurz, $jahr, $semester )
   return $veranstaltungsliste;
 }
 
-
 function getEntlastungsliste($db,  $dozentKurz, $jahr, $semester)
 {
   $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
@@ -75,32 +71,133 @@ function getEntlastungsliste($db,  $dozentKurz, $jahr, $semester)
 }
 
 
+
+function getFaecherListe( $db )
+{
+  $faecherliste = array();
+  $sql6 = "SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
+  $result = $db -> query($sql6);
+  
+  $row = $result -> fetch_all(MYSQLI_ASSOC);
+  
+  foreach ($row as $r4)
+  {  $faecherliste[] = $r4;
+  }
+
+  return $faecherliste;
+}
+
+
+
+
+
+
+function getStudiengangListe( $db )
+{
+  $studiengangliste = array();
+  $sql6 = "SELECT * FROM `studiengang` ORDER BY Name  ASC , Name  ";
+  $result = $db -> query($sql6);
+  
+  $row = $result -> fetch_all(MYSQLI_ASSOC);
+  
+  foreach ($row as $r4)
+  {  $studiengangliste[] = $r4;
+  }
+  
+  return $studiengangliste;
+}
+
+
+
+function getDepartmentListe( $db )
+{
+  $departmentliste = array();
+  $sql6 = "SELECT * FROM `department` ORDER BY Name  ASC , Name  ";
+  $result = $db -> query($sql6);
+  
+  $row = $result -> fetch_all(MYSQLI_ASSOC);
+  
+  foreach ($row as $r4)
+  {  $departmentliste[] = $r4;
+  }
+  
+  return $departmentliste;
+}
+
+
+
 function getDozentenListe( $db )
 {
+  
   $dozentenliste = array();
   
-  $sql6 = "SELECT * FROM `dozent` ";
+  $sql6 = "SELECT * FROM `dozent` ORDER BY Name  ";
   $result = $db -> query($sql6);
   
   $row = $result -> fetch_all(MYSQLI_ASSOC);
   
   foreach ($row as $r4)
   {
-    $jahr = 2023;
-    $semester = 'S';
-    
-    $r4['AnzV'] = sizeof( getVeranstaltungsliste( $db, $r4['Kurz'], $jahr, $semester ) );
-    
+    $r4[ 'Anrede' ] = setAnrede( $r4 );
     $dozentenliste[] = $r4;
   }
+ 
+  return $dozentenliste;
+}
+
+function getDozentenListeSem( $db )
+{ $jahr     =  $_SESSION[ 'aktuell' ][ 'Jahr'     ] ;
+  $semester =  $_SESSION[ 'aktuell' ][ 'Semester' ] ;
+  
+  $dozentenliste = array();
+  
+  $sql6 = "SELECT * FROM `dozent` ORDER BY Status DESC, Name  ";
+  $result = $db -> query($sql6);
+  
+  $row = $result -> fetch_all(MYSQLI_ASSOC);
+  
+  foreach ($row as $r4)
+  { $r4[ 'AnzV'   ] = sizeof( getVeranstaltungsliste( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
+    $r4[ 'AnzE'   ] = sizeof( getEntlastungsliste(    $db, $r4[ 'Kurz' ], $jahr, $semester ) );
+    $r4[ 'Anrede' ] = setAnrede( $r4 );
+    
+    if ($r4[ 'AnzV'   ] > 0 OR   $r4[ 'AnzE'   ] > 0 )   # Liste 1: Dozenten mit Lehre oder Entlastung
+    {  $tmpListe1[] = $r4;}
+    else
+    { $tmpListe2[] = $r4;}                                # Liste  2: Dozenten ohne Lehre und ohne Entlastung
+    
+  }
+  foreach ($tmpListe2 as $tl2)
+  { $tmpListe1[] = $tl2;                                 # Liste 2 wird an die Liste 1 angehängt
+  }
+  $dozentenliste = $tmpListe1;
+  
   return $dozentenliste;
 }
 
 
 
+
+
+
+
+function setAnrede($dozent)
+{ if( $dozent [ 'Geschlecht' ] == 'm')
+  {   $a = 'Sehr geehrter Herr ';
+      if ( $dozent [ 'Status' ] == 'Prof' )
+      {  $a = 'Lieber Kollege';
+      }
+  }
+  
+  else {   $a = 'Sehr geehrte Frau ';
+    if ( $dozent [ 'Status' ] == 'Prof' )
+    {  $a = 'Liebe Kollegin';
+    }
+  }
+}
+
 function getDozent( $db, $dozentKurz)
-{
-  $sql6 = "SELECT * FROM `dozent` WHERE  Kurz =\"". $dozentKurz ."\"";
+{ $sql6 = "SELECT * FROM `dozent` WHERE  Kurz =\"". $dozentKurz ."\"";
   $result = $db -> query($sql6);
   
   $row = $result -> fetch_all(MYSQLI_ASSOC);
@@ -113,16 +210,12 @@ function getDozent( $db, $dozentKurz)
 
 
 function getDozentLV( $db, $dozentKurz, $jahr, $semester)
-{
-    $sql7 = "SELECT * FROM `lehrverpflichtung` WHERE Jahr = \"" . $jahr . "\" AND DozKurz = \"". $dozentKurz ."\"  AND Semester = \"". $semester ."\"";
-  #deb($sql7);
-    $result = $db -> query($sql7);
-    $row = $result -> fetch_all(MYSQLI_ASSOC);
+{  $sql7 = "SELECT * FROM `lehrverpflichtung` WHERE Jahr = \"" . $jahr . "\" AND DozKurz = \"". $dozentKurz ."\"  AND Semester = \"". $semester ."\"";
+   $result = $db -> query($sql7);
+   $row = $result -> fetch_all(MYSQLI_ASSOC);
     
   foreach ($row as $r7)
-  {
-   # deb($r7,1 );
-    $dozentLV = $r7;
+  {  $dozentLV = $r7;
   }
   return $dozentLV;
 }

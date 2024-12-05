@@ -1,30 +1,104 @@
 <?php
+function renderFaecherListe( $db )
+{
+  $faecherliste = array();
+  $faecherliste = getFaecherListe( $db );
+  
+  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
+              <th  style="width: 20%;" class="taC head" > Kurz      </th>
+              <th  style="width: 50%;" class="taC head" > Name      </th>
+              <th  style="width: 10%;" class="taC head" > Typ       </th>
+              <th  style="width: 20%;" class="taC head" > Kommentar </th>
+              </tr> ' ;
+  
+  foreach ( $faecherliste  as $fl )
+  { $r .= '<tr>
+                 <td class="taC">' . $fl[ "Kurz"      ] . ' </td>
+                 <td class="taL">' . $fl[ "Name"      ] . '</td>
+                 <td class="taC">' . $fl[ "Typ"       ] . '</td>
+                 <td class="taC">' . $fl[ "Kommentar" ] . '</td>
+</tr>';
+  }
+  
+  mysqli_close($db);
+  return $r;
+}
+
+
+
+
+
+
+function renderStudiengangListe( $db )
+{
+  $studiengangliste = array();
+  $studiengangliste = getStudiengangListe( $db );
+  
+  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
+              <th  style="width: 25%;" class="taC head" > Kurz      </th>
+              <th  style="width: 50%;" class="taC head" > Name      </th>
+              <th  style="width: 25%;" class="taC head" > DepKurz      </th>
+              </tr> ' ;
+  
+  foreach ( $studiengangliste  as $dl )
+  { $r .= '<tr>
+                 <td class="taC">' . $dl[ "Kurz"      ] . ' </td>
+                 <td class="taL">' . $dl[ "Name"      ] . '</td>
+                 <td class="taC">' . $dl[ "DepKurz"      ] . ' </td>
+
+</tr>';
+  }
+  
+  mysqli_close($db);
+  return $r;
+}
+
+
+
+function renderDepartmentListe( $db )
+{
+  $departmentliste = array();
+  $departmentliste = getDepartmentListe( $db );
+  
+  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
+              <th  style="width: 50%;" class="taC head" > Kurz      </th>
+              <th  style="width: 50%;" class="taC head" > Name      </th>
+              </tr> ' ;
+  
+  foreach ( $departmentliste  as $dl )
+  { $r .= '<tr>
+                 <td class="taC">' . $dl[ "Kurz"      ] . ' </td>
+                 <td class="taL">' . $dl[ "Name"      ] . '</td>
+</tr>';
+  }
+  
+  mysqli_close($db);
+  return $r;
+}
+
 
 function renderDozentenListe( $db )
 {
   $dozentenliste   = array();
-  $dozentenliste   = getDozentenListe( $db);
+  $dozentenliste   = getDozentenListe( $db );
   
-$r = '<table cellpadding="5" cellspacing="0" style="width: 50%;   position: relative;" >';
+  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
-              <th  style="width: 10%"                   > Anz.V </th>
-              <th  style="width: 10%"                   > Kurz </th>
-              <th  style="width: 15%;" class="taC head" > Vorname </th>
+              <th  style="width: 5%"                   > Kurz </th>
+              <th  style="width: 10%;" class="taC head" > Vorname </th>
               <th  style="width: 15%;" class="taC head" > Name </th>
               <th  style="width: 10%;" class="taC head" > Ges </th>
               <th  style="width: 10%;" class="taC head" > Status </th>
-              <th  style="width: 20%;" class="taC head" > Mail </th>
+              <th  style="width: 15%;" class="taC head" > Mail </th>
               <th  style="width: 5%; " class="taC head" > Zust. </th>
-              <th  style="width: 10%;" class="taC head" > Pflicht </th>
+              <th  style="width: 5%;" class="taC head" > Pflicht </th>
               </tr> ' ;
-  
  
   foreach ( $dozentenliste  as $dl )
-  {
-    $r .= '<tr>
-                 <td class="taC">
-                 <a   style="text-decoration: none;"  target="stunenbilanz" href="https://localhost/zeitkonto/?action=sb&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzV" ] . '</span></a>
-                 <a   style="text-decoration: none;"  target="stunenbilanz" href="https://localhost/zeitkonto/?action=sb&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzV" ] . '</span></a> </td>
+  { $r .= '<tr>
                  <td class="taL">' . $dl[ "Kurz" ] . ' </td>
                  <td class="taC">' . $dl[ "Vorname" ] . '</td>
                  <td class="taC">' . $dl[ "Name" ] . '</td>
@@ -32,27 +106,62 @@ $r = '<table cellpadding="5" cellspacing="0" style="width: 50%;   position: rela
                  <td class="taC">' . $dl[ "Status" ] . '</td>
                  <td class="taC">' . $dl[ "Mailadresse" ] . '</td>
                  <td class="taC">' . $dl[ "Mailzustellung" ] . '</td>
-                 <td class="taC">' . number_format( $dl[ "Pflicht_weg" ], 2 ) . '</td></tr> '    ;
+                 <td class="taC">' . number_format( $dl[ "Pflicht_weg" ], 2 ) . '</td>
+</tr>';
   }
-  
-  $jahr       = '2023';
-  $dozentKurz = 'Gtt';
-  $semester   = 'S';
-  
- # deb(getStundenbilanz( $jahr, $dozentKurz , $semester, 'ohne' ),1);
-
-#  $r .= '<div id="overlay" onclick="off()"><iframe width="100%" height="100%" srcdoc = "'.  getStundenbilanz( $jahr, $dozentKurz , $semester, 'ohne' ) .'">';
-  #$r .= '<div id="overlay" onclick="off();">';
-  $r .= '<iframe  name="stunenbilanz" style=" position: sticky; top: 30px; left: 50%;" onclick="off();" width="50%" height="100%" srcdoc = "ABDC"></iframe></div>';
-  #$r .= '<script>
-  #function on()  { document.getElementById("overlay").style.display = "block";  }
-  #function off() { document.getElementById("overlay").style.display = "none";  }
-  #</script>';
   
   mysqli_close($db);
   
   return $r;
 }
+
+
+
+
+function renderDozentenListeSem( $db )
+{
+  $dozentenliste   = array();
+  $dozentenliste   = getDozentenListeSem( $db );
+  
+  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">' ;
+  $r .='<th  style="width: 5% ;"                  > Kurz     </th>' ;
+  $r .='<th  style="width: 10%;" class="taC head" > Vorname  </th>' ;
+  $r .='<th  style="width: 15%;" class="taC head" > Name     </th>' ;
+  $r .='<th  style="width: 10%"                   > Anz.V    </th>' ;
+#  $r .='<th  style="width: 10%;" class="taC head" > Ges      </th>' ;
+  $r .='<th  style="width: 10%;" class="taC head" > Status   </th>' ;
+#  $r .='<th  style="width: 15%;" class="taC head" > Mail     </th>' ;
+#  $r .='<th  style="width: 5%; " class="taC head" > Zust.    </th>' ;
+  $r .='<th  style="width: 5%; " class="taC head" > Pflicht  </th>' ;
+  $r .='<th  style="width: 5%"                    > PDF      </th>' ;
+  $r .='<th  style="width: 5%"                    > Edit     </th>' ;
+  $r .='</tr> ' ;
+  
+  foreach ( $dozentenliste  as $dl )
+  { $r .= '<tr>';
+         $r .= '<td class="taL">' . $dl[ "Kurz"    ] . '</td>';
+         $r .= '<td class="taC">' . $dl[ "Vorname" ] . '</td>';
+         $r .= '<td class="taC">' . $dl[ "Name"    ] . '</td>';
+         $r .= '<td class="taC">';
+         $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzV" ] . '</span>:';
+         $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzE" ] . '</span>';         $r .= '</td>';
+#         $r .= '<td class="taC">' . $dl[ "Geschlecht"     ] . '</td>';
+         $r .= '<td class="taC">' . $dl[ "Status"         ] . '</td>';
+#        $r .= '<td class="taC">' . $dl[ "Mailadresse"    ] . '</td>';
+#         $r .= '<td class="taC">' . $dl[ "Mailzustellung" ] . '</td>';
+         $r .= '<td class="taC">' . number_format( $dl[ "Pflicht_weg" ], 2 ) . '</td>';
+         $r .= '<td class="taC"> <a   style="text-decoration: none;"  target="rechts" href="https://localhost/zeitkonto/?action=sb&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;"><img height="20px;" src="img/pdf.png"></span></a> </td>';
+         $r .= '<td class="taC"> <a   style="text-decoration: none;"  target="rechts" href="https://localhost/zeitkonto/?action=sb&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;"><img height="20px;" src="img/edit.svg"></span></a> </td>';
+$r .= '</tr>';
+  }
+  
+  mysqli_close($db);
+  
+  return $r;
+}
+
+
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester )
 {
@@ -111,23 +220,21 @@ function renderZeitkontoProf($dozent)
 	</tr>
 	
 </table>
-  <div class="betrefftxt" >aktuelle Stundenbilanz für das Semester '
-    . $dozent["aktuell"]["dozentLV"]["Semester"]  .'    '
-    . $dozent["aktuell"]["dozentLV"]["Jahr"]  .'
- </div>';
-$html .=  '';
+  <div class="betrefftxt" >aktuelle Stundenbilanz für das Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .'   </div>';
  
-$html .=  '<div class="fliestxt" >
-Lieber Kollege '.$dozent["Name"].', <br/><br/>
+  $html .=  '';
+ 
+$html .=  '<div class="fliestxt" >'
+.$dozent["Anrede"].' '.$dozent["Name"].', <br/><br/>
 hiermit erhalten Sie die aktuelle Stundenbilanz für das zurückliegende Semester.</div><br/>' ;
  $html .= '<table cellspacing="0" style="width: 100%;" >
 
 <tr style="background-color: #cccccc;">
               <td  style="width: 90%"                  > </td>
               <td  style="width: 10%;" class="taC head" > LVS </td></tr>
-<tr><td class="taL"    >Ihre Lehrverpflichtung:                        </td><td class="taC"     >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'Pflicht'  ] , 2 ) .'</td></tr>
 <tr><td class="taL sum">Summe der Lehrveranstaltungen und Entlastungen:</td><td class="taC sum" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'summeLuE' ] , 2 ) .'</td></tr>
-<tr><td class="taL sal">Ihr Saldo im Sommersemester 2023 beträgt:      </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</td></tr>
+<tr><td class="taL"    >Ihre Lehrverpflichtung:                        </td><td class="taC"     >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'Pflicht'  ] , 2 ) .'</td></tr>
+<tr><td class="taL sal">Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:      </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</td></tr>
 </table>';
   
  $html .=  '<br/><div class="fliestxt"> Wir haben im Einzelnen für Sie folgende Leistungen notiert:</div><br/>';
