@@ -96,8 +96,6 @@ else
 </head>
 <body style="background-color:white;">
 
-
-
 <div class="dropdown" style="width: 49%;">
   <div class="dropbtn"  id="Button2" >Basis Tabellen</div>
   <div class="dropdown-content">
@@ -107,8 +105,6 @@ else
     <a href="index.php?action=edep"  target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Department\' ; ">Department</a>
   </div>
 </div>
-
-
 
 <div class="dropdown"  style="width: 49%;">
   <div class="dropbtn" id="Button1">Semester</div>
@@ -127,21 +123,14 @@ else
   </div>
 </div>
 
-
 ';
   
-  
-  
   echo $html;
-  
-  
-  
-  echo '<iframe width="49%" height="800px" name="rechts" ></iframe>';
-  echo '<iframe width="49%" height="800px" name="links" src="index.php?action=ad&jahr=2023&semester=S&"></iframe>';
+
+  echo '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="rechts" ></iframe>';
+  echo '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="index.php?action=ad&jahr=2023&semester=S&"></iframe>';
   
   echo '</body></html>';
-
-
 }
 
 ?>
