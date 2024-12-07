@@ -4,7 +4,7 @@ function renderFaecherListe( $db )
   $faecherliste = array();
   $faecherliste = getFaecherListe( $db );
   
-  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r = '<table  style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
               <th  style="width: 20%;" class="taC head" > Kurz      </th>
               <th  style="width: 50%;" class="taC head" > Name      </th>
@@ -14,20 +14,21 @@ function renderFaecherListe( $db )
   
   foreach ( $faecherliste  as $fl )
   { $r .= '<tr>
+     
+
+                 
                  <td class="taC">' . $fl[ "Kurz"      ] . ' </td>
-                 <td class="taL">' . $fl[ "Name"      ] . '</td>
-                 <td class="taC">' . $fl[ "Typ"       ] . '</td>
-                 <td class="taC">' . $fl[ "Kommentar" ] . '</td>
+                 <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'fach\'  , \'Name\'       ,  this , \'Kurz\'  ,  \''.  $fl[ "Kurz"  ]. '\'   ); " >' . $fl[ "Name"       ]  . '</td>
+                 <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'fach\'  , \'Typ\'        ,  this , \'Kurz\'  ,  \''.  $fl[ "Kurz"  ]. '\'   ); " >' . $fl[ "Typ"        ]  . '</td>
+                 <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'fach\'  , \'Kommentar\'  ,  this , \'Kurz\'  ,  \''.  $fl[ "Kurz"  ]. '\'   ); " >' . $fl[ "Kommentar"  ]  . '</td>
+
+             
 </tr>';
   }
-  
+    $r .= '</table>';
   mysqli_close($db);
   return $r;
 }
-
-
-
-
 
 
 function renderStudiengangListe( $db )
@@ -35,7 +36,7 @@ function renderStudiengangListe( $db )
   $studiengangliste = array();
   $studiengangliste = getStudiengangListe( $db );
   
-  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
               <th  style="width: 25%;" class="taC head" > Kurz      </th>
               <th  style="width: 50%;" class="taC head" > Name      </th>
@@ -44,25 +45,23 @@ function renderStudiengangListe( $db )
   
   foreach ( $studiengangliste  as $dl )
   { $r .= '<tr>
-                 <td class="taC">' . $dl[ "Kurz"      ] . ' </td>
-                 <td class="taL">' . $dl[ "Name"      ] . '</td>
-                 <td class="taC">' . $dl[ "DepKurz"      ] . ' </td>
+                 <td class="taC"   >' . $dl[ "Kurz"      ] . ' </td>
+                 <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'studiengang\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'           );   " >' . $dl[ "Name"  ]    .  '</td>
+                   <td class="taC"   >' . $dl[ "DepKurz"      ] . ' </td>
 
 </tr>';
   }
-  
+  $r .= '</table>';
   mysqli_close($db);
   return $r;
 }
-
-
 
 function renderDepartmentListe( $db )
 {
   $departmentliste = array();
   $departmentliste = getDepartmentListe( $db );
   
-  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
               <th  style="width: 50%;" class="taC head" > Kurz      </th>
               <th  style="width: 50%;" class="taC head" > Name      </th>
@@ -71,10 +70,11 @@ function renderDepartmentListe( $db )
   foreach ( $departmentliste  as $dl )
   { $r .= '<tr>
                  <td class="taC">' . $dl[ "Kurz"      ] . ' </td>
-                 <td class="taL">' . $dl[ "Name"      ] . '</td>
-</tr>';
+                 <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'department\'  , \'Name\'       ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'   ); " >' . $dl[ "Name"       ]  . '</td>
+ 
+   </tr>';
   }
-  
+    $r .= '</table>';
   mysqli_close($db);
   return $r;
 }
@@ -85,7 +85,7 @@ function renderDozentenListe( $db )
   $dozentenliste   = array();
   $dozentenliste   = getDozentenListe( $db );
   
-  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
               <th  style="width: 5%"                   > Kurz </th>
               <th  style="width: 10%;" class="taC head" > Vorname </th>
@@ -100,16 +100,18 @@ function renderDozentenListe( $db )
   foreach ( $dozentenliste  as $dl )
   { $r .= '<tr>
                  <td class="taL">' . $dl[ "Kurz" ] . ' </td>
-                 <td class="taC">' . $dl[ "Vorname" ] . '</td>
-                 <td class="taC">' . $dl[ "Name" ] . '</td>
-                 <td class="taC">' . $dl[ "Geschlecht" ] . '</td>
-                 <td class="taC">' . $dl[ "Status" ] . '</td>
-                 <td class="taC">' . $dl[ "Mailadresse" ] . '</td>
-                 <td class="taC">' . $dl[ "Mailzustellung" ] . '</td>
-                 <td class="taC">' . number_format( $dl[ "Pflicht_weg" ], 2 ) . '</td>
+                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'  );   " >' . $dl[ "Vorname"  ]    .  '</td>
+                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'  );   " >' . $dl[ "Name"  ]    .  '</td>
+                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'  );   " >' . $dl[ "Geschlecht"  ]    .  '</td>
+                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'  );   " >' . $dl[ "Status"  ]    .  '</td>
+                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'  );   " >' . $dl[ "Mailadresse"  ]    .  '</td>
+                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'  );   " >' . $dl[ "Mailzustellung"  ]    .  '</td>
+                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Name\'  ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'  );   " >' .  number_format( $dl[ "Pflicht_weg" ], 2 ) .  '</td>
+
+    
 </tr>';
   }
-  
+    $r .= '</table>';
   mysqli_close($db);
   
   return $r;
@@ -123,7 +125,7 @@ function renderDozentenListeSem( $db )
   $dozentenliste   = array();
   $dozentenliste   = getDozentenListeSem( $db );
   
-  $r = '<table cellpadding="5" cellspacing="0" style="width: 100%;   position: relative;" >';
+  $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">' ;
   $r .='<th  style="width: 5% ;"                  > Kurz     </th>' ;
   $r .='<th  style="width: 10%;" class="taC head" > Vorname  </th>' ;
@@ -155,7 +157,7 @@ function renderDozentenListeSem( $db )
          $r .= '<td class="taC"> <a   style="text-decoration: none;"  target="rechts" href="https://localhost/zeitkonto/?action=sb&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;"><img height="20px;" src="img/edit.svg"></span></a> </td>';
 $r .= '</tr>';
   }
-  
+    $r .= '</table>';
   mysqli_close($db);
   
   return $r;
@@ -227,7 +229,7 @@ function renderZeitkontoProf($dozent)
 $html .=  '<div class="fliestxt" >'
 .$dozent["Anrede"].' '.$dozent["Name"].', <br/><br/>
 hiermit erhalten Sie die aktuelle Stundenbilanz für das zurückliegende Semester.</div><br/>' ;
- $html .= '<table cellspacing="0" style="width: 100%;" >
+ $html .= '<table   style="width: 100%;" >
 
 <tr style="background-color: #cccccc;">
               <td  style="width: 90%"                  > </td>

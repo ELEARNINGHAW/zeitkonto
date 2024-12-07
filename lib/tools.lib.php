@@ -1,6 +1,104 @@
 <?php
 
 require_once('lib/TCPDF/tcpdf.php');
+ $htmlheader = '
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <meta charset="UTF-8">
+        <title> title </title>
+
+<style type="text/css">
+   td, th { color      : #000000;
+         padding    : 6px;
+         font-family: Arial, sans-serif;
+         font-size  : 12px;
+         border-bottom: 1px solid gray;
+    }
+
+    td.head {
+        color: white;
+        font-weight: bold;
+        background-color:  darkgrey;
+    }
+
+    td.sum {
+        color      : #000000;
+        background-color: #eeeeee;
+    }
+
+    td.sal {
+        color      : #000000;
+        background-color: lightyellow;
+    }
+    
+    .taL { text-align: left;  }
+    .taR { text-align: right; }
+    .taC { text-align: center; }
+
+    .headertxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        height: 110px;
+        line-height: 95%;
+    }
+
+    .datetxt { text-align: right;
+        font-family: Arial, sans-serif;
+        font-size  : 14px;
+    }
+
+    .betrefftxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-top: 45px;
+    }
+
+    .fliestxt { text-align: left;
+        font-family: Arial, sans-serif;
+        font-size  : 12px;
+        line-height: 150%;
+    }
+</style>
+
+
+<script>
+function me( x )  // -- Make Element editable
+{ x.contentEditable = "true";
+}
+
+function setV2DB( t , k, v , c , i )   // -- Set Value to DataBase
+{ if ( v.innerHTML.length == 0 )
+  { v.innerHTML    = "";
+    v.style.border = "0px";
+    return;
+  }
+  var xmlhttp = new XMLHttpRequest();
+
+  /*  xmlhttp.onreadystatechange = function()
+  { if ( this.readyState == 4 && this.status == 200)
+  {
+  }
+  }
+
+  */
+
+  xmlhttp.open( "GET" , "setV2DB.php?t=" + t  + "&k=" + k  + "&v=" + v.innerHTML + "&c=" + c + "&i=" + i   , true );
+  xmlhttp.send();
+ }
+</script>
+    </head>
+    <body>
+';
+
+
+$htmlfooter = '
+</body>
+</html>
+';
 
 // Erstellung des PDF Dokuments
 
@@ -8,7 +106,7 @@ function renderPDF($html)
 {
  $pdfName = "DAS PDF";
  
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // Dokumenteninformationen
 $pdf->SetCreator(PDF_CREATOR);
@@ -53,83 +151,9 @@ $pdf->Output($pdfName, 'I');
 }
 
 
-
-
-
-
-
-
-
-
-
-
 function getStundenbilanz($jahr, $dozentKurz , $semester, $output = 'html')
 {
-  $htmlheader = '
-<style type="text/css">
-    .logo { padding: 5px;   width: 250px;  float: right;  height:90px;  }
-
-    td { color      : #000000;
-         padding    : 6px;
-         font-family: Arial, sans-serif;
-         font-size  : 12px;
-         border-bottom: 1px solid gray;
-    }
-
-    td.head {
-        padding    : 6px;
-        font-family: Arial, sans-serif;
-        color: white;
-        font-weight: bold;
-        background-color:  darkgrey;
-    }
-
-    td.sum {
-        color      : #000000;
-        padding    : 6px;
-        font-family: Arial, sans-serif;
-        background-color: #eeeeee;
-    }
-
-    td.sal {
-        color      : #000000;
-        padding    : 6px;
-        font-family: Arial, sans-serif;
-        background-color: lightyellow;
-    }
-    
-    .taL { text-align: left;  }
-    .taR { text-align: right; }
-    .taC { text-align: right; }
-
-    .headertxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        height: 110px;
-        line-height: 95%;
-    }
-
-    .datetxt { text-align: right;
-        font-family: Arial, sans-serif;
-        font-size  : 14px;
-    }
-
-    .betrefftxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        margin-top: 45px;
-    }
-
-    .fliestxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        line-height: 150%;
-    }
-</style>
-';
-  
+    global $htmlheader;
   $db = connectDB();
   $html = renderStundenbilanz( $db, $dozentKurz, $jahr, $semester );
   $html = $htmlheader . $html;
@@ -145,357 +169,61 @@ function getStundenbilanz($jahr, $dozentKurz , $semester, $output = 'html')
   else
   { echo $html;
   }
-  
 }
-
-
 
 
 function getRenderAlleDozenten()
 {
-  $htmlheader = '
-<style type="text/css">
-
-    .logo { padding: 5px;   width: 250px;  float: right;  height:90px;  }
-
-    td, th { color      : #000000;
-         padding    : 6px;
-         font-family: Arial, sans-serif;
-         font-size  : 12px;
-         border-bottom: 1px solid gray;
-    }
-
-    td.head {
-        color: white;
-        font-weight: bold;
-        background-color:  darkgrey;
-    }
-
-    td.sum {
-        color      : #000000;
-        background-color: #eeeeee;
-    }
-
-    td.sal {
-        color      : #000000;
-        background-color: lightyellow;
-    }
-    
-    .taL { text-align: left;  }
-    .taR { text-align: right; }
-    .taC { text-align: right; }
-
-    .headertxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        height: 110px;
-        line-height: 95%;
-    }
-
-    .datetxt { text-align: right;
-        font-family: Arial, sans-serif;
-        font-size  : 14px;
-    }
-
-    .betrefftxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        margin-top: 45px;
-    }
-
-    .fliestxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        line-height: 150%;
-    }
-</style>
-';
+  global $htmlheader, $htmlfooter;
   $html = '';
   $db = connectDB();
   $html = renderDozentenListe( $db );
-  $html = $htmlheader . $html;
-#  error_reporting(0 );
+  $html = $htmlheader . $html . $htmlfooter;
   echo $html;
 }
-
-
-
 
 function getRenderAlleDozentenSem()
 {
-  $htmlheader = '
-<style type="text/css">
-
-    .logo { padding: 5px;   width: 250px;  float: right;  height:90px;  }
-
-    td, th { color      : #000000;
-         padding    : 6px;
-         font-family: Arial, sans-serif;
-         font-size  : 12px;
-         border-bottom: 1px solid gray;
-    }
-
-    td.head {
-        color: white;
-        font-weight: bold;
-        background-color:  darkgrey;
-    }
-
-    td.sum {
-        color      : #000000;
-        background-color: #eeeeee;
-    }
-
-    td.sal {
-        color      : #000000;
-        background-color: lightyellow;
-    }
-    
-    .taL { text-align: left;  }
-    .taR { text-align: right; }
-    .taC { text-align: right; }
-
-    .headertxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        height: 110px;
-        line-height: 95%;
-    }
-
-    .datetxt { text-align: right;
-        font-family: Arial, sans-serif;
-        font-size  : 14px;
-    }
-
-    .betrefftxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        margin-top: 45px;
-    }
-
-    .fliestxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        line-height: 150%;
-    }
-</style>
-';
+    global $htmlheader, $htmlfooter;
   $html = '';
   $db = connectDB();
   $html = renderDozentenListeSem( $db );
-  $html = $htmlheader . $html;
+  $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
 }
-
-
-
-
 
 function getRenderAlleFaecher()
 {
-  $htmlheader = '
-<style type="text/css">
-   td, th { color      : #000000;
-         padding    : 6px;
-         font-family: Arial, sans-serif;
-         font-size  : 12px;
-         border-bottom: 1px solid gray;
-    }
+    global $htmlheader, $htmlfooter;
+    $header = $htmlheader;
 
-    td.head {
-        color: white;
-        font-weight: bold;
-        background-color:  darkgrey;
-    }
-
-    td.sum {
-        color      : #000000;
-        background-color: #eeeeee;
-    }
-
-    td.sal {
-        color      : #000000;
-        background-color: lightyellow;
-    }
-    
-    .taL { text-align: left;  }
-    .taR { text-align: right; }
-    .taC { text-align: center; }
-
-    .headertxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        height: 110px;
-        line-height: 95%;
-    }
-
-    .datetxt { text-align: right;
-        font-family: Arial, sans-serif;
-        font-size  : 14px;
-    }
-
-    .betrefftxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        margin-top: 45px;
-    }
-
-    .fliestxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        line-height: 150%;
-    }
-</style>
-';
   $html = '';
   $db = connectDB();
   $html = renderFaecherListe( $db );
-  $html = $htmlheader . $html;
+  $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
-  
 }
-
-
-
-
 
 function getRenderAlleDepartments()
 {
-  $htmlheader = '
-<style type="text/css">
-   td, th { color      : #000000;
-         padding    : 6px;
-         font-family: Arial, sans-serif;
-         font-size  : 12px;
-         border-bottom: 1px solid gray;
-    }
-
-    td.head {
-        color: white;
-        font-weight: bold;
-        background-color:  darkgrey;
-    }
-
-    td.sum {
-        color      : #000000;
-        background-color: #eeeeee;
-    }
-
-    td.sal {
-        color      : #000000;
-        background-color: lightyellow;
-    }
-    
-    .taL { text-align: left;  }
-    .taR { text-align: right; }
-    .taC { text-align: center; }
-
-    .headertxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        height: 110px;
-        line-height: 95%;
-    }
-
-    .datetxt { text-align: right;
-        font-family: Arial, sans-serif;
-        font-size  : 14px;
-    }
-
-    .betrefftxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        margin-top: 45px;
-    }
-
-    .fliestxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        line-height: 150%;
-    }
-</style>
-';
+    global $htmlheader, $htmlfooter;
   $html = '';
   $db = connectDB();
   $html = renderDepartmentListe( $db );
-  $html = $htmlheader . $html;
+  $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
-  echo $html;
-  
+   echo $html;
 }
 
 function getRenderAlleStudiengang()
 {
-  $htmlheader = '
-<style type="text/css">
-   td, th { color      : #000000;
-         padding    : 6px;
-         font-family: Arial, sans-serif;
-         font-size  : 12px;
-         border-bottom: 1px solid gray;
-    }
-
-    td.head {
-        color: white;
-        font-weight: bold;
-        background-color:  darkgrey;
-    }
-
-    td.sum {
-        color      : #000000;
-        background-color: #eeeeee;
-    }
-
-    td.sal {
-        color      : #000000;
-        background-color: lightyellow;
-    }
-    
-    .taL { text-align: left;  }
-    .taR { text-align: right; }
-    .taC { text-align: center; }
-
-    .headertxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        height: 110px;
-        line-height: 95%;
-    }
-
-    .datetxt { text-align: right;
-        font-family: Arial, sans-serif;
-        font-size  : 14px;
-    }
-
-    .betrefftxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        margin-top: 45px;
-    }
-
-    .fliestxt { text-align: left;
-        font-family: Arial, sans-serif;
-        font-size  : 12px;
-        line-height: 150%;
-    }
-</style>
-';
+    global $htmlheader, $htmlfooter;
   $html = '';
   $db = connectDB();
   $html = renderStudiengangListe( $db );
-  $html = $htmlheader . $html;
+    $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
   
