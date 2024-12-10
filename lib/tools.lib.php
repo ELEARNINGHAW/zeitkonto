@@ -70,7 +70,7 @@ function me( x )  // -- Make Element editable
 { x.contentEditable = "true";
 }
 
-function setV2DB( t , k, v , c , i )   // -- Set Value to DataBase
+function setV2DB( t , k, v , c , i , n = 0 )   // -- Set Value to DataBase
 { if ( v.innerHTML.length == 0 )
   { v.innerHTML    = "";
     v.style.border = "0px";
@@ -152,24 +152,46 @@ $pdf->Output($pdfName, 'I');
 
 
 function getStundenbilanz($jahr, $dozentKurz , $semester, $output = 'html')
-{
-    global $htmlheader;
+{ global $htmlheader;
   $db = connectDB();
   $html = renderStundenbilanz( $db, $dozentKurz, $jahr, $semester );
   $html = $htmlheader . $html;
   error_reporting(0 );
   
   if ( $output == 'ohne' )
-  {
-    return $html;
+  {  return $html;
   }
   else if ( $output == 'pdf' )
-  { renderPDF( $html );
+  {  renderPDF( $html );
   }
   else
   { echo $html;
   }
 }
+
+function getStandArbeitszeitkonto($jahr, $dozentKurz , $semester, $output = 'html')
+{
+    global $htmlheader;
+    $db = connectDB();
+    $html = renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester );
+    $html = $htmlheader . $html;
+    error_reporting(0 );
+
+
+    if ( $output == 'ohne' )
+    {
+        return $html;
+    }
+    else if ( $output == 'pdf' )
+    { renderPDF( $html );
+    }
+    else
+    { echo $html;
+    }
+}
+
+
+
 
 
 function getRenderAlleDozenten()

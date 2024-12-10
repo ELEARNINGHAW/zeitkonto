@@ -52,12 +52,15 @@ if ($table == 'dozent')
 
 
 
-function updateValue( $table,  $key, $value, $col, $id )
+function updateValue( $table,  $key, $value, $col, $id, $quote = true )
 {  $db = connectDB();
 
     $value = strip_tags( $value );
 
-    $sql = ' UPDATE ' .$table. ' SET ' .$key. ' = "'.$value. '" WHERE ' .$col . ' = "' .$id .'"';
+    if ($quote)  $value  = '"' .$value .'"';
+
+
+    $sql = ' UPDATE ' .$table. ' SET ' .$key. ' = '.$value. ' WHERE ' .$col . ' = "' .$id .'"';
 print_r($sql);
     if ($db->query($sql) === TRUE)
     {  echo "Record updated successfully";
