@@ -273,7 +273,8 @@ Martin Holle, Prodekan LS
 
 
 function generateLuETable( $dozent )
-{ $r = '<table  style="width: 100%;" >';
+{ $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
+<table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
               <td  style="width: 60%"                  > Titel der Veranstaltung / Entlastung </td>
               <td  style="width: 10%;" class="taC head" > Gruppe </td>
@@ -282,7 +283,7 @@ function generateLuETable( $dozent )
               <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
   
   foreach ( $dozent["aktuell"]["veranstaltungsliste"]   as $t )
-  {  $r .= '<tr> <td class="taL">' . $t[ "FachL"] . ' (' .  $t[ "Fach" ] .')  </td>
+  {  $r .= '<tr> <td class="taL" id = "'. strtr( $t[ "Fach" ], ' ', '_' ) .'" onClick = "me( this );" oninput = "showResult(this, \'' .  $t[ "Fach" ] .'\' ); "  >' . $t[ "FachL"] . ' (' .  $t[ "Fach" ] .') </td>
                  <td class="taC">' . $t[ "Studiengang"] . '</td>
                  <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>
                  

@@ -65,9 +65,70 @@ require_once('lib/TCPDF/tcpdf.php');
 </style>
 
 
-<script>
+ <script>
+
+var oldInnerHTML;
+
+ function closeResult( h )
+{   
+          document.getElementById( h ).innerHTML    = window.oldInnerHTML; 
+  var d = document.getElementById("livesearch");
+  d.style.display = "none";
+  
+  }
+ 
+ 
+function showResult( str , h )
+{ 
+ 
+  y_pos = getYPos(str);
+  x_pos = 10;
+       
+  y_pos += 30;
+ 
+  var d = document.getElementById("livesearch");
+  d.style.position = "absolute";
+  d.style.left     = x_pos+"px";
+  d.style.top      = y_pos+"px"; 
+  d.style.display  = "block";
+           
+  str = str.innerHTML;  
+  str.replace(/<\/?[^>]+(>|$)/g, "");
+  
+  if (str.length == 0)
+  { document.getElementById( "livesearch" ).innerHTML    = "";
+    document.getElementById( "livesearch" ).style.border = "0px";
+    return;
+  }
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function()
+  { if ( this.readyState == 4 && this.status == 200 )
+    { document.getElementById( "livesearch" ).innerHTML    = this.responseText   ;
+      document.getElementById( "livesearch" ).style.border = "1px solid #A5ACB2" ;
+    }
+  }
+
+  
+  xmlhttp.open( "GET" , "livesearch.php?q=" + str + "&h=" + h , true );
+  xmlhttp.send();
+}
+ 
+function  getYPos(x)
+{
+  let elem = document.querySelector( "#" + x.id );
+  let rect = elem.getBoundingClientRect();
+   
+  return  rect[ "top" ] ;
+}
+
+
 function me( x )  // -- Make Element editable
 { x.contentEditable = "true";
+  
+   str = x.innerHTML;  
+   str.replace(/<\/?[^>]+(>|$)/g, "");   
+    
+      window.oldInnerHTML = str;
 }
 
 function setV2DB( t , k, v , c , i , n = 0 )   // -- Set Value to DataBase
@@ -78,13 +139,6 @@ function setV2DB( t , k, v , c , i , n = 0 )   // -- Set Value to DataBase
   }
   var xmlhttp = new XMLHttpRequest();
 
-  /*  xmlhttp.onreadystatechange = function()
-  { if ( this.readyState == 4 && this.status == 200)
-  {
-  }
-  }
-
-  */
 
   xmlhttp.open( "GET" , "setV2DB.php?t=" + t  + "&k=" + k  + "&v=" + v.innerHTML + "&c=" + c + "&i=" + i   , true );
   xmlhttp.send();

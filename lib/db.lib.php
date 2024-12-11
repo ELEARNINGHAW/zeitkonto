@@ -264,3 +264,20 @@ function getDozentLV( $db, $dozentKurz, $jahr, $semester)
 
   return $dozentLV;
 }
+
+
+function getFaecherListeForLiveSeach( )
+{
+    $db = connectDB();
+    $faecherliste = array();
+    $sql6 = "SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
+    $result = $db -> query($sql6);
+
+    $row = $result -> fetch_all(MYSQLI_ASSOC);
+
+    foreach ($row as $r4)
+    {  $faecherliste[] = $r4;
+    }
+
+    return $faecherliste;
+}
