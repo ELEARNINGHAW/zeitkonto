@@ -111,35 +111,29 @@ renderDozentenListeSem( $db )
   $r .='<th  style="width: 5% ;"                  > Kurz     </th>' ;
   $r .='<th  style="width: 10%;" class="taC head" > Vorname  </th>' ;
   $r .='<th  style="width: 15%;" class="taC head" > Name     </th>' ;
-  $r .='<th  style="width: 5%"                   > L:E    </th>' ;
-#  $r .='<th  style="width: 10%;" class="taC head" > Ges      </th>' ;
-  $r .='<th  style="width: 5%;" class="taC head" > Status   </th>' ;
-#  $r .='<th  style="width: 15%;" class="taC head" > Mail     </th>' ;
-#  $r .='<th  style="width: 5%; " class="taC head" > Zust.    </th>' ;
-  $r .='<th  style="width: 5%; " class="taC head" > Pflicht  </th>' ;
-  $r .='<th  style="width: 5%"                    > Konto      </th>' ;
-  $r .='<th  style="width: 5%"                    > Bilanz     </th>' ;
+  $r .='<th  style="width: 5% ;" class="taC head" > Status   </th>' ;
+  $r .='<th  style="width: 5% ;" class="taC head" > Pflicht  </th>' ;
+  $r .='<th  style="width: 5% ;"                  > L:E      </th>' ;
+  $r .='<th  style="width: 5% ;"                  > Konto    </th>' ;
+  $r .='<th  style="width: 5% ;"                  > Bilanz   </th>' ;
   $r .='</tr> ' ;
   
   foreach ( $dozentenliste  as $dl )
   {
-      $r .= '<tr>';
-         $r .= '<td class="taL">' . $dl[ "Kurz"    ] . '</td>';
-         $r .= '<td class="taC">' . $dl[ "Vorname" ] . '</td>';
-         $r .= '<td class="taC">' . $dl[ "Name"    ] . '</td>';
-         $r .= '<td class="taC">';
-         $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzV" ] . '</span>:';
-         $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzE" ] . '</span>';         $r .= '</td>';
-#         $r .= '<td class="taC">' . $dl[ "Geschlecht"     ] . '</td>';
-         $r .= '<td class="taC">' . $dl[ "Status"         ] . '</td>';
-#        $r .= '<td class="taC">' . $dl[ "Mailadresse"    ] . '</td>';
-#         $r .= '<td class="taC">' . $dl[ "Mailzustellung" ] . '</td>';
-         $r .= '<td class="taC">' . number_format( $dl[ "Pflicht_weg" ], 2 ) . '</td>';
-         $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldo'     ]  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a> </td>';
-         $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldoTotal']  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a>  </td>';
-$r .= '</tr>';
+    $r .= '<tr>';
+    $r .= '<td class="taL">' . $dl[ "Kurz"    ] . '</td>';
+    $r .= '<td class="taC">' . $dl[ "Vorname" ] . '</td>';
+    $r .= '<td class="taC">' . $dl[ "Name"    ] . '</td>';
+    $r .= '<td class="taC">' . $dl[ "Status"         ] . '</td>';
+    $r .= '<td class="taC">' . number_format( $dl[ "Pflicht_weg" ], 2 ) . '</td>';
+    $r .= '<td class="taC">';
+    $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzV" ] . '</span>:';
+    $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzE" ] . '</span>';         $r .= '</td>';
+    $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldo'     ]  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a> </td>';
+    $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldoTotal']  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a>  </td>';
+    $r .= '</tr>';
   }
-    $r .= '</table>';
+  $r .= '</table>';
   mysqli_close($db);
   
   return $r;
@@ -154,19 +148,12 @@ function renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester )
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false )
 {
-  $veranstaltungsliste =  getVeranstaltungsliste( $db, $dozentKurz, $jahr, $semester );
-  $entlastungsliste    =  getEntlastungsliste(    $db, $dozentKurz, $jahr, $semester );
-  
-  $dozentLV = getDozentLV( $db, $dozentKurz, $jahr, $semester );
-
   $dozent   = getDozent( $db, $dozentKurz );
-
-  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  = $veranstaltungsliste ;
-  $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  = $entlastungsliste;
-  $dozent[ 'aktuell' ][ 'dozentLV'            ]  = $dozentLV;
+  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungsliste( $db, $dozentKurz, $jahr, $semester );
+  $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungsliste(    $db, $dozentKurz, $jahr, $semester );
+  $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungsliste( $db,  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
+  $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLV( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz( $dozent );
-
-  #if($dozent['Kurz'] == 'Big' )   deb($dozent,1);
 
   #mysqli_close($db);
 
@@ -233,6 +220,9 @@ Martin Holle, Prodekan LS
 </div>';
   
 $html .=  '<img width="300px;" alt="sign-holle" src="img/sign-holle.png">';
+
+$html .=  generateBeteiligung( $dozent );
+
 
 return $html;
 }
@@ -301,6 +291,49 @@ function generateLuETable( $dozent )
 }
 
 
+
+function generateBeteiligung( $dozent )
+{
+   # deb($dozent['aktuell']['beteiligung'],1);
+    $r = '';
+
+    $r =   '<br/<br/<br/<br/><div class="fliestxt">Anteile bei Veranstaltung mit Beteiligung</div><br/>';
+
+    foreach ( $dozent["aktuell"]["beteiligung"]   as $beteiligung )
+    {  $anteilGesamt = 0;
+        $LVSGesamt = 0;
+        #deb($beteiligung);
+        $r .= '<table  style="width: 100%;" >';
+        $r .='<tr style="background-color: #cccccc; padding:5px;">
+              <td  style="width: 60%"                   >  ' . $beteiligung[0][ "FachL"] . ' (' .  $beteiligung[0][ "Fach" ] .')  ' . $beteiligung[0][ "Studiengang"] . ' </td>
+              <td  style="width: 10%;" class="taC head" > Anteil </td>
+              <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
+
+        foreach ($beteiligung as $t )
+        {
+            $anteilGesamt += $t[ "Anteil"];
+            $LVSGesamt += $t[ "LVS"];
+        $r .= '<tr> <td class="taL" id = "'. strtr( $t[ "Fach" ], ' ', '_' ) .'" onClick = "me( this );" oninput = "showResult(this, \'' .  $t[ "Fach" ] .'\' ); "  >  '. $t['dozent'][ "Vorname" ]. '  '. $t['dozent'][ "Name" ]  .'  </td>
+                 
+                 <td class="taC">' . $t[ "Anteil"] . '% </td>
+                 <td class="taC">' . number_format( $t[ "LVS" ], 2 ) . '</td></tr> '    ;
+
+        }
+
+        $r .= '<tr><td  class="sum"> Summe der Anteile und LVS: </td>  <td class="taC sum"> ' .    $anteilGesamt . '%</td><td class="taC sum">' .  number_format($LVSGesamt , 2) . '</td></tr>' ;
+        $r .= '</table><br>';
+
+
+    }
+
+
+
+
+    return $r;
+}
+
+
+
 function generateAZKTTable( $dozent )
 {   $r = '<table  style="width: 100%;" >';
     $r .='<tr style="background-color: #cccccc; padding:5px;">
@@ -356,6 +389,7 @@ $html ='
   display: inline-block;
     font-family: Arial, sans-serif;
   font-size: 25px;
+  margin-left: 15px;
  
 }
 

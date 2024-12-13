@@ -39,7 +39,7 @@ function getArbeitszeitliste( $db, $dozentKurz, $jahr, $semester )
 }
 
 function getVeranstaltungsliste( $db, $dozentKurz, $jahr, $semester )
-{ $veranstaltungsliste = array();
+{
   
   $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
                                    . "\" AND DozentKurz = \"". $dozentKurz
@@ -48,30 +48,41 @@ function getVeranstaltungsliste( $db, $dozentKurz, $jahr, $semester )
   
   $result = $db -> query($sql1);
   $row    = $result -> fetch_all( MYSQLI_ASSOC );
-  
-  foreach ($row as $r1)
-  {  $sql2 = "SELECT * FROM `lva`  WHERE Jahr       = \"" . $jahr
-                            . "\"  AND Semester     = \"" . $semester
-                            . "\"  AND Studiengang  = \"" . $r1[ 'Studiengang' ]
-                            . "\"  AND FachKurz     = \"" . $r1[ 'Fach'        ]  ."\"";
-    
-    $result2 = $db -> query( $sql2 );
-    $row2    = $result2 -> fetch_all( MYSQLI_ASSOC );
-    $r1[ 'SWS' ] = $row2[ 0 ][ "SWS" ];
-    
-    $sql3 = "SELECT * FROM `Fach`  WHERE Kurz       = \"" .  $r1[ 'Fach'        ]  ."\"";
-    $result3 = $db -> query($sql3);
-    $row3 = $result3 -> fetch_all( MYSQLI_ASSOC );
-    
-    $r1[ 'FachL'  ] = $row3[ 0 ][ "Name" ];
-    $r1[ 'LVS'    ] = $r1[ 'K' ] *  $r1[ 'SWS' ]    ;
-    $r1[ 'Anteil' ] = ( int ) ( $r1[ 'K' ] * 100 ) ;
 
-    $veranstaltungsliste[] = $r1;
+  $veranstaltungsliste = array();
+  foreach ($row as $r1)
+
+  {
+      $veranstaltungsliste[] =  getVeranstaltung( $db, $r1, $jahr, $semester );
   }
 
 
   return $veranstaltungsliste;
+}
+
+
+
+function getVeranstaltung( $db, $r1, $jahr, $semester )
+{  #  deb($r1,1);
+     $sql2 = "SELECT * FROM `lva`  WHERE Jahr       = \"" . $jahr
+        . "\"  AND Semester     = \"" . $semester
+        . "\"  AND Studiengang  = \"" . $r1[ 'Studiengang' ]
+        . "\"  AND FachKurz     = \"" . $r1[ 'Fach'        ]  ."\"";
+
+    $result2 = $db -> query( $sql2 );
+    $row2    = $result2 -> fetch_all( MYSQLI_ASSOC );
+    $r1[ 'SWS' ] = $row2[ 0 ][ "SWS" ];
+
+    $sql3 = "SELECT * FROM `Fach`  WHERE Kurz       = \"" .  $r1[ 'Fach'        ]  ."\"";
+    $result3 = $db -> query($sql3);
+    $row3 = $result3 -> fetch_all( MYSQLI_ASSOC );
+
+    $r1[ 'FachL'  ] = $row3[ 0 ][ "Name" ];
+    $r1[ 'LVS'    ] = $r1[ 'K' ] *  $r1[ 'SWS' ]    ;
+    $r1[ 'Anteil' ] = ( int ) ( $r1[ 'K' ] * 100 ) ;
+
+    return  $r1;
+
 }
 
 function getEntlastungsliste($db,  $dozentKurz, $jahr, $semester)
@@ -98,6 +109,73 @@ function getEntlastungsliste($db,  $dozentKurz, $jahr, $semester)
   }
   return $entlastungsliste;
 }
+
+
+function getBeteiligungsliste($db,  $veranstaltungsliste )
+{
+  $beteiligungsliste = array();
+
+  foreach ($veranstaltungsliste as $veranstaltung )
+  {
+    if ($veranstaltung ['K'] < 1)
+    { $beteiligungsliste[] = getBeteiligung( $db, $veranstaltung );
+
+    }
+
+  }
+
+    /*
+    $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
+    $result = $db -> query( $sql5 );
+    $row    = $result -> fetch_all( MYSQLI_ASSOC );
+
+    foreach ( $row as $r2 )
+    { $auslastung[ $r2[ 'Grund' ] ] = $r2[ 'Text' ];
+    }
+
+    $sql4 = "SELECT * FROM `auslastung` WHERE Jahr =     \"" . $jahr
+        . "\" AND DozentKurz = \"" . $dozentKurz
+        . "\" AND Semester =   \"" . $semester
+        . "\" ORDER BY Grund";
+    $result = $db -> query( $sql4 );
+
+    $row = $result -> fetch_all( MYSQLI_ASSOC );
+    $entlastungsliste = array();
+    foreach ($row as $r3)
+    {  $r3[ 'auslastungsGrund' ] = $auslastung[ $r3[ 'Grund' ] ];
+        $entlastungsliste[] =  $r3;
+    }
+    */
+    return $beteiligungsliste;
+}
+
+
+
+function getBeteiligung($db,  $veranstaltung )
+{
+    $beteiligungAlle = array();
+
+  #  SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
+
+    $sql6 = " SELECT * FROM beteiligung WHERE Fach = \"".$veranstaltung['Fach']."\" AND Studiengang = \"" . $veranstaltung['Studiengang'] . "\"  AND Jahr = \"".$veranstaltung ['Jahr']. "\" AND Semester = \"".$veranstaltung['Semester']."\" ORDER BY DozentKurz ASC;";
+
+
+    $result = $db -> query($sql6);
+
+    $row = $result -> fetch_all(MYSQLI_ASSOC);
+
+    foreach ($row as $beteiligung)
+    {
+
+        $beteiligung['dozent']   =  getDozent($db,$beteiligung['DozentKurz'] ) ;
+
+        $beteiligungAlle[] =   getVeranstaltung($db, $beteiligung, $beteiligung['Jahr'], $beteiligung['Semester']);
+    }
+
+    return $beteiligungAlle;
+}
+
+
 
 
 
