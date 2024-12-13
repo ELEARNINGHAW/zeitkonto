@@ -54,6 +54,12 @@ if( $_GET[ 'action' ] == 'ad' )  ## -- Hauptliste -- Liste mit allen Dozierenden
   if( $_GET[ 'action' ] == 'esg' )   ## -- Basisliste mit allen Studiengängen --
   {  getRenderAlleStudiengang();
   }
+
+  if( $_GET[ 'action' ] == 'ss' )   ## -- Spash Screen  --
+  {  getRenderSplashscreen();
+
+  }
+
 }
 
 else

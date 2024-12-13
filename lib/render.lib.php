@@ -413,11 +413,38 @@ $html ='
 
 ';
 
-    $html .= '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="rechts" ></iframe>';
     $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="index.php?action=ad&jahr=2023&semester=S&"></iframe>';
+    $html .= '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="rechts" src="index.php?action=ss"                     ></iframe>';
+
     $html .= '</body></html>';
 
    echo $html;
+}
+
+
+
+
+function getRenderSplashscreen()
+{
+    $html ='
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body style="background-color:white;">
+
+<style> 
+.object-fit   
+  { width: 400px; height: 300px; margin: 4em auto;  border:1px solid green;} 
+.object-fit img { object-fit: cover; width:  100%; height: 100%;}  </style>
+<div class="object-fit" style="text-align:center;"> <img 
+src="img/splashscreen.png" alt="splashscreen"> </div>
+</body></html>';
+
+echo $html;
+
 }
 
 
