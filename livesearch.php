@@ -3,7 +3,7 @@ include_once( "lib/db.lib.php" );
 
 $q = strip_tags( $_GET[ "q" ]);
 $h = strtr( strip_tags( $_GET[ "h" ] ), " ", "_" );
-$liste = getFaecherListeForLiveSeach( );
+$liste = getFaecherListeForLiveSeachDB( );
 
 $hint  = "";
 $closer =  '<div style="text-align: right; cursor: pointer;" onclick="closeResult( \''.$h.'\' );">[ X ]</div>';

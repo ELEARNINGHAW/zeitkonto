@@ -66,4 +66,17 @@ else
 {  renderMainSide();                  ## -- Startseite mit Menu und Content-Iframes --
 }
 
+
+function checkGetInput()
+{
+    if (isset( $_GET[ 'jahr'       ]  ) ) { $jahr       =  $_GET[ 'jahr'       ] ; } else  { $jahr       =  0; }
+    if (isset( $_GET[ 'semester'   ]  ) ) { $semester   =  $_GET[ 'semester'   ] ; } else  { $semester   =  0; }
+    if (isset( $_GET[ 'dozentKurz' ]  ) ) { $dozentKurz =  $_GET[ 'dozentKurz' ] ; } else  { $dozentKurz =  0; }
+    if (isset( $_GET[ 'output'     ]  ) ) { $output     =  $_GET[ 'output'     ] ; } else  { $output     =  0; }
+
+    $_SESSION[ 'aktuell' ][ 'Jahr'     ] = $jahr;
+    $_SESSION[ 'aktuell' ][ 'Semester' ] = $semester;
+
+}
+
 ?>

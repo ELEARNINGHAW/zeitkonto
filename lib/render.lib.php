@@ -1,7 +1,7 @@
 <?php
 function renderFaecherListe( $db )
 {
-  $faecherliste = getFaecherListe( $db );
+  $faecherliste = getFaecherListeDB( $db );
   
   $r = '<table  style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -26,7 +26,7 @@ function renderFaecherListe( $db )
 
 function renderStudiengangListe( $db )
 {
-  $studiengangliste = getStudiengangListe( $db );
+  $studiengangliste = getStudiengangListeDB( $db );
   
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -49,7 +49,7 @@ function renderStudiengangListe( $db )
 
 function renderDepartmentListe( $db )
 {
-  $departmentliste = getDepartmentListe( $db );
+  $departmentliste = getDepartmentListeDB( $db );
   
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -70,7 +70,7 @@ function renderDepartmentListe( $db )
 
 function renderDozentenListe( $db )
 {
-  $dozentenliste   = getDozentenListe( $db );
+  $dozentenliste   = getDozentenListeDB( $db );
   
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -104,7 +104,7 @@ function renderDozentenListe( $db )
 function
 renderDozentenListeSem( $db )
 {
-  $dozentenliste   = getDozentenListeSem( $db );
+  $dozentenliste   = getDozentenListeSemDB( $db );
 
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">' ;
@@ -141,18 +141,18 @@ renderDozentenListeSem( $db )
 
 function renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester )
 {
-    $arbeitszeitliste =  getArbeitszeitliste( $db, $dozentKurz, $jahr, $semester );
+    $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz, $jahr, $semester );
     mysqli_close($db);
     return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false )
 {
-  $dozent   = getDozent( $db, $dozentKurz );
-  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungsliste( $db, $dozentKurz, $jahr, $semester );
-  $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungsliste(    $db, $dozentKurz, $jahr, $semester );
-  $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungsliste( $db,  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
-  $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLV( $db, $dozentKurz, $jahr, $semester );
+  $dozent   = getDozentDB( $db, $dozentKurz );
+  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
+  $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
+  $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB( $db,  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
+  $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz( $dozent );
 
   #mysqli_close($db);
@@ -194,7 +194,7 @@ function renderZeitkontoProf($dozent)
   $html = '
 <table>
 	<tr> <td style="border-bottom: 0 solid white;" >	<br /> <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div>   </td>
-       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="250px;" alt="haw-logo"   src="img/haw-logo.png"  ><br>' .  date("d.m.Y")  .' </td>
+       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="250px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.svg"  ><br>' .  date("d.m.Y")  .' </td>
 	</tr>
 	
 </table>
@@ -234,7 +234,7 @@ function renderZeitkontoTotalProf($arbeitszeitliste)
    $html = '
 <table>
 	<tr> <td style="border-bottom: 0 solid white;" >	<br /> <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div>   </td>
-       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="250px;" alt="haw-logo"   src="img/haw-logo.png"  ><br>' .  date("d.m.Y")  .' </td>
+       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="250px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  ><br>' .  date("d.m.Y")  .' </td>
 	</tr>
 	
 </table>
@@ -431,6 +431,8 @@ $html ='
 <div class="dropdown"  style="width: 49%;">
   <div class="dropbtn" id="Button1">2023 S</div>
   <div class="dropdown-content">
+    <a href="index.php?action=ad&jahr=2024&semester=S"  target="links" onclick="document.querySelector(\'#Button1\').innerHTML = \'2024 S\'; ">2024 S</a>
+    <a href="index.php?action=ad&jahr=2024&semester=W"  target="links" onclick="document.querySelector(\'#Button1\').innerHTML = \'2024 W\'; ">2024 W</a>
     <a href="index.php?action=ad&jahr=2023&semester=S"  target="links" onclick="document.querySelector(\'#Button1\').innerHTML = \'2023 S\'; ">2023 S</a>
     <a href="index.php?action=ad&jahr=2022&semester=W"  target="links" onclick="document.querySelector(\'#Button1\').innerHTML = \'2022 W\';" >2022 W</a>
     <a href="index.php?action=ad&jahr=2022&semester=S"  target="links" onclick="document.querySelector(\'#Button1\').innerHTML = \'2022 S\';" >2022 S</a>
@@ -447,7 +449,8 @@ $html ='
 
 ';
 
-    $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="index.php?action=ad&jahr=2023&semester=S&"></iframe>';
+   # $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="index.php?action=ad&jahr=2023&semester=S&"></iframe>';
+    $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="login.html"></iframe>';
     $html .= '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="rechts" src="index.php?action=ss"                     ></iframe>';
 
     $html .= '</body></html>';
@@ -471,7 +474,9 @@ function getRenderSplashscreen()
 
 <style> 
 .object-fit   
-  { width: 400px; height: 300px; margin: 4em auto;  border:1px solid green;} 
+  { width: 400px; height: 300px; margin: 4em auto;  border:1px solid green;
+  position: absolute; left: 50%; top: 50%;  -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); 
+  } 
 .object-fit img { object-fit: cover; width:  100%; height: 100%;}  </style>
 <div class="object-fit" style="text-align:center;"> <img 
 src="img/splashscreen.png" alt="splashscreen"> </div>
