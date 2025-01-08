@@ -167,8 +167,6 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   return $stundenbilanz;
 }
 
-
-
 function calcStundenbilanz($dozent)
 { $stunden = array();
   $stunden[ 'veranstaltungssumme' ] = 0;
@@ -194,7 +192,7 @@ function renderZeitkontoProf($dozent)
   $html = '
 <table>
 	<tr> <td style="border-bottom: 0 solid white;" >	<br /> <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div>   </td>
-       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="250px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.svg"  ><br>' .  date("d.m.Y")  .' </td>
+       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="200px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  ><br>' .  date("d.m.Y")  .' </td>
 	</tr>
 	
 </table>
@@ -234,18 +232,14 @@ function renderZeitkontoTotalProf($arbeitszeitliste)
    $html = '
 <table>
 	<tr> <td style="border-bottom: 0 solid white;" >	<br /> <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div>   </td>
-       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="250px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  ><br>' .  date("d.m.Y")  .' </td>
+       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="200px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  ><br>' .  date("d.m.Y")  .' </td>
 	</tr>
 	
 </table>
   <div class="betrefftxt" >aktueller Stand des Arbeitszeitkontos für das Semester '. $arbeitszeitliste["aktuell"]["Semester"]  .' '  . $arbeitszeitliste["aktuell"]["Jahr"]  .'   </div>';
-
     $html .=  '<div class="fliestxt" >' .$arbeitszeitliste["aktuell"]["Anrede"].' '.$arbeitszeitliste["aktuell"]["Name"].', <br/><br/> hiermit erhalten Sie den aktuellen Stand Ihres Zeitkontos für das zurückliegende Semester.</div><br/>' ;
-
     $html .=  generateAZKTTable( $arbeitszeitliste );
-
     $html .=  '<br/><div class="fliestxt">Der aktuelle Stand Ihres Arbeitszeitkontos beträgt  '.$arbeitszeitliste["aktuell"]["saldoTotal"].' Stunden.</div><br/>';
-
     $html .=  '<div class="fliestxt"><br/>
 Bitte beachten Sie, dass das Arbeitszeitkonto auf 36 Stunden begrenzt ist.<br/>
 Darüber hinaus geleistete Stunden können nicht in das Arbeitszeitkonto übernommen werden.<br/><br/>
@@ -254,13 +248,9 @@ Für weitere Fragen stehe ich Ihnen gerne zur Verfügung.<br/><br/>
 Mit freundlichen Grüßen<br/>
 Martin Holle, Prodekan LS
 </div>';
-
     $html .=  '<img width="300px;" alt="sign-holle" src="img/sign-holle.png">';
-
     return $html;
 }
-
-
 
 function generateLuETable( $dozent )
 { $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
@@ -289,8 +279,6 @@ function generateLuETable( $dozent )
   $r .= '</table>';
   return $r;
 }
-
-
 
 function generateBeteiligung( $dozent )
 {
@@ -322,46 +310,34 @@ function generateBeteiligung( $dozent )
 
         $r .= '<tr><td  class="sum"> Summe der Anteile und LVS: </td>  <td class="taC sum"> ' .    $anteilGesamt . '%</td><td class="taC sum">' .  number_format($LVSGesamt , 2) . '</td></tr>' ;
         $r .= '</table><br>';
-
-
     }
-
-
-
-
     return $r;
 }
 
-
-
 function generateAZKTTable( $dozent )
-{   $r = '<table  style="width: 100%;" >';
-    $r .='<tr style="background-color: #cccccc; padding:5px;">
-              <td  style="width: 20%"  class="taC head" >Semester</td>
-              <td  style="width: 15%;" class="taR head" >Stunden</td>
-              <td  style="width: 15%;" class="taR head" >Pflicht</td>
-              <td  style="width: 15%;" class="taR head" >Saldo</td>
-              <td  style="width: 15%;" class="taR head" >Summe</td>
-              <td  style="width: 20%;" class="taR head" >Kommentar</td>
-           
-              </tr> ' ;
+{ $r = '<table  style="width: 100%;" >';
+  $r .='<tr style="background-color: #cccccc; padding:5px;">
+            <td  style="width: 20%"  class="taC head" >Semester</td>
+            <td  style="width: 15%;" class="taR head" >Stunden</td>
+            <td  style="width: 15%;" class="taR head" >Pflicht</td>
+            <td  style="width: 15%;" class="taR head" >Saldo</td>
+            <td  style="width: 15%;" class="taR head" >Summe</td>
+            <td  style="width: 20%;" class="taR head" >Kommentar</td>
+          </tr> ' ;
 
-    unset( $dozent[ 'aktuell' ] );
-
-    foreach ( $dozent   as $dVL )
-    {
-        $d = $dVL['dozentLV'];
-
-        $r .= '<tr> 
-             <td class="taC">' .                $d[ "Jahr"       ]   . ' (' .  $d[ "Semester" ] .')  </td>
-             <td class="taR">' . number_format( $d[ "summeLuE"   ] ,2 ) . ' </td>
-             <td class="taR">' . number_format( $d[ "Pflicht"    ] ,2 ) . ' </td>
-             <td class="taR">' . number_format( $d[ "saldo"      ] ,2 ) . ' </td>
-             <td class="taR">' . number_format( $d[ "saldoTotal" ] ,2 )  . ' </td>
-             <td class="taR">' .                $d[ "Kommentar"  ] . ' </td>
-             </tr> '    ;
+  unset( $dozent[ 'aktuell' ] );
+  foreach ( $dozent   as $dVL )
+  {
+    $d = $dVL['dozentLV'];
+    $r .= '<tr> 
+           <td class="taC">' .                $d[ "Jahr"       ]   . ' (' .  $d[ "Semester" ] .')  </td>
+           <td class="taR">' . number_format( $d[ "summeLuE"   ] ,2 ) . ' </td>
+           <td class="taR">' . number_format( $d[ "Pflicht"    ] ,2 ) . ' </td>
+           <td class="taR">' . number_format( $d[ "saldo"      ] ,2 ) . ' </td>
+           <td class="taR">' . number_format( $d[ "saldoTotal" ] ,2 )  . ' </td>
+           <td class="taR">' .                $d[ "Kommentar"  ] . ' </td>
+           </tr> '    ;
     }
-
     $r .= '</table>';
     return $r;
 }
@@ -374,45 +350,41 @@ $html ='
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
-<style>
-
-.dropbtn {
-  font-family: Arial, sans-serif;
+.dropbtn
+{ font-family: Arial, sans-serif;
   background-color: #EFEFEF;
   color: white;
   font-size: 22px;
 }
 
-.dropdown {
-  position: relative;
+.dropdown 
+{ position: relative;
   display: inline-block;
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 25px;
   margin-left: 15px;
- 
 }
 
-.dropdown-content {
-  display: none;
+.dropdown-content 
+{ display: none;
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba( 0 , 0 , 0 , 0.2 );
   z-index: 1;
 }
 
-.dropdown-content a {
-    font-family: Arial, sans-serif;
+.dropdown-content a 
+{ font-family: Arial, sans-serif;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd; }
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown:hover .dropbtn {background-color: #EEEEEE; }
+.dropdown-content a:hover         { background-color: #ddd    ; }
+.dropdown:hover .dropdown-content { display         : block   ; }
+.dropdown:hover .dropbtn          { background-color: #EEEEEE ; }
 
 </style>
 </head>
@@ -421,14 +393,14 @@ $html ='
 <div class="dropdown" style="width: 49%;">
   <div class="dropbtn"  id="Button2" >Basis Tabellen</div>
   <div class="dropdown-content">
-    <a href="index.php?action=edoz"  target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Dozenten\'   ; ">Dozenten</a>
-    <a href="index.php?action=ef"    target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Fach\'       ; ">Fach</a>
-    <a href="index.php?action=esg"   target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Studiengang\'; ">Studiengang</a>
-    <a href="index.php?action=edep"  target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Department\' ; ">Department</a>
+    <a href="index.php?action=edoz"  target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Dozenten\'   ; ">Dozenten     </a>
+    <a href="index.php?action=ef"    target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Fach\'       ; ">Fach         </a>
+    <a href="index.php?action=esg"   target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Studiengang\'; ">Studiengang  </a>
+    <a href="index.php?action=edep"  target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Department\' ; ">Department   </a>
   </div>
 </div>
 
-<div class="dropdown"  style="width: 49%;">
+<div class="dropdown" >
   <div class="dropbtn" id="Button1">2023 S</div>
   <div class="dropdown-content">
     <a href="index.php?action=ad&jahr=2024&semester=S"  target="links" onclick="document.querySelector(\'#Button1\').innerHTML = \'2024 S\'; ">2024 S</a>
@@ -448,22 +420,15 @@ $html ='
 </div>
 
 ';
-
-   # $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="index.php?action=ad&jahr=2023&semester=S&"></iframe>';
-    $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="login.html"></iframe>';
-    $html .= '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="rechts" src="index.php?action=ss"                     ></iframe>';
-
-    $html .= '</body></html>';
-
-   echo $html;
+  $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="index.php?action=ad"></iframe>';
+  $html .= '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="rechts" src="index.php?action=ss"                     ></iframe>';
+  $html .= '</body></html>';
+  echo $html;
 }
-
-
-
 
 function getRenderSplashscreen()
 {
-    $html ='
+$html ='
 <!DOCTYPE html>
 <html>
 <head>
@@ -474,9 +439,9 @@ function getRenderSplashscreen()
 
 <style> 
 .object-fit   
-  { width: 400px; height: 300px; margin: 4em auto;  border:1px solid green;
+{ width: 400px; height: 300px; margin: 4em auto;  border:1px solid green;
   position: absolute; left: 50%; top: 50%;  -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); 
-  } 
+} 
 .object-fit img { object-fit: cover; width:  100%; height: 100%;}  </style>
 <div class="object-fit" style="text-align:center;"> <img 
 src="img/splashscreen.png" alt="splashscreen"> </div>
@@ -486,10 +451,129 @@ echo $html;
 
 }
 
-
-function deb($con, $kill = false)
-{   echo "<pre>";
-  print_r($con);
-  echo "</pre>";
-  if($kill) {die();}
+function getRenderLoginscreen()
+{
+$html ='
+<!DOCTYPE html>
+<html lang="de" >
+<head>
+<meta charset="UTF-8">
+<title>Login Form</title>
+<style>
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+*, *:before, *:after
+{ box-sizing: border-box;
 }
+
+body
+{ min-height: 100vh;
+  font-family: "Raleway", sans-serif;
+}
+
+.container
+{ position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container:hover .top:before, .container:hover .top:after, .container:hover .bottom:before, .container:hover .bottom:after, .container:active .top:before, .container:active .top:after, .container:active .bottom:before, .container:active .bottom:after
+{ margin-left: 200px;
+  transform-origin: -200px 50%;
+  transition-delay: 0s;
+}
+
+.container:hover .center, .container:active .center
+{ opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.top:before, .top:after, .bottom:before, .bottom:after
+{ content: "";
+  display: block;
+  position: absolute;
+  width: 200vmax;
+  height: 200vmax;
+  top: 50%;
+  left: 50%;
+  margin-top: -100vmax;
+  transform-origin: 0 50%;
+  transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+  z-index: 10;
+  opacity: 0.65;
+  transition-delay: 0.2s;
+}
+
+.top:before
+{ transform: rotate(45deg);
+  background: #000000;
+}
+.top:after
+{ transform: rotate(135deg);
+  background: #aaa;
+}
+
+.bottom:before
+{ transform: rotate(-45deg);
+  background: #ccc;
+}
+
+.bottom:after
+{ transform: rotate(-135deg);
+  background: #eee;
+}
+
+.center
+{ position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+  transition-delay: 0s;
+  color: #333;
+}
+
+.center input
+{ width: 100%;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 1px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body translate="no">
+  <div class="container" onclick="onclick">
+  <div class="top"></div>
+  <div class="bottom"></div>
+  <div class="center">
+    <h2>Bitte einloggen</h2>
+    <input type="email" placeholder="email"/>
+    <input type="password" placeholder="password"/>
+    <h2>&nbsp;</h2>
+  </div>
+</div>
+  
+</body>
+
+</html>
+
+';
+echo $html;
+}
+
