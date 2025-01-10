@@ -17,36 +17,34 @@ if( $_GET[ 'action' ] == 'azkt' )  ## -- aktuelle Stand des Arbeistzeitkontos ei
 }
 
 if( $_GET[ 'action' ] == 'ad' )  ## -- Hauptliste -- Liste mit allen Dozierenden --
-{ if (isset( $_GET[ 'jahr'       ]  ) ) { $jahr       =  $_GET[ 'jahr'      ] ; } else  { $jahr     =  0; }
-  if (isset( $_GET[ 'semester'   ]  ) ) { $semester   =  $_GET[ 'semester'  ] ; } else  { $semester =  0; }
-
-  $_SESSION[ 'aktuell' ][ 'Jahr'     ] = $jahr;
-  $_SESSION[ 'aktuell' ][ 'Semester' ] = $semester;
+{ $g = checkGetInput();
   getRenderAlleDozentenSem();
 }
-  if( $_GET[ 'action' ] == 'ls' )   ## -- Spash Screen  --
-  {  getRenderLoginscreen();
-  }
 
-  if( $_GET[ 'action' ] == 'ss' )   ## -- Spash Screen  --
-  {  getRenderSplashscreen();
-  }
+if( $_GET[ 'action' ] == 'ls' )   ## -- Spash Screen  --
+{  getRenderLoginscreen();
+}
 
-  if( $_GET[ 'action' ] == 'edoz' )  ## -- Basisliste mit allen Dozierenden --
-  {    getRenderAlleDozenten();
-  }
+if( $_GET[ 'action' ] == 'ss' )   ## -- Spash Screen  --
+{  getRenderSplashscreen();
+}
 
-  if( $_GET[ 'action' ] == 'ef' )    ## -- Basisliste mit allen Fächern --
-  {  getRenderAlleFaecher();
-  }
+if( $_GET[ 'action' ] == 'edoz' )  ## -- Basisliste mit allen Dozierenden --
+{    getRenderAlleDozenten();
+}
 
-  if( $_GET[ 'action' ] == 'edep' )  ## -- Basisliste mit allen Departments --
-  {  getRenderAlleDepartments();
-  }
+if( $_GET[ 'action' ] == 'ef' )    ## -- Basisliste mit allen Fächern --
+{  getRenderAlleFaecher();
+}
 
-  if( $_GET[ 'action' ] == 'esg' )   ## -- Basisliste mit allen Studiengängen --
-  {  getRenderAlleStudiengang();
-  }
+if( $_GET[ 'action' ] == 'edep' )  ## -- Basisliste mit allen Departments --
+{  getRenderAlleDepartments();
+}
+
+if( $_GET[ 'action' ] == 'esg' )   ## -- Basisliste mit allen Studiengängen --
+{  getRenderAlleStudiengang();
+}
+
 }
 
 else

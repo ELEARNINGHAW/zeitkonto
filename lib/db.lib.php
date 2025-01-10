@@ -23,8 +23,7 @@ function getArbeitszeitlisteDB($db, $dozentKurz, $jahr, $semester )
    $arbeitszeitliste[ 'aktuell' ][ "Jahr"     ] = 0;
 
    foreach ( $row as $r1 )
-   {
-      $sb =  renderStundenbilanz( $db, $dozentKurz, $r1['Jahr'], $r1['Semester'], true);
+   {  $sb =  renderStundenbilanz( $db, $dozentKurz, $r1['Jahr'], $r1['Semester'], true);
       $arbeitszeitliste[ 'aktuell' ] =  $sb[ 'dozentLV' ];
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] =  $sb;
       $saldoTotal +=  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
@@ -33,34 +32,28 @@ function getArbeitszeitlisteDB($db, $dozentKurz, $jahr, $semester )
 
    $arbeitszeitliste[ 'aktuell' ][ "saldoTotal" ] = $saldoTotal;
    $arbeitszeitliste[ 'aktuell' ] +=  getDozentDB( $db, $dozentKurz ) ;
-  #
 
    return $arbeitszeitliste;
 }
 
-function getVeranstaltungslisteDB($db, $dozentKurz, $jahr, $semester )
-{
-  
-  $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
+function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
+{ $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
                                    . "\" AND DozentKurz = \"". $dozentKurz
                                    . "\" AND Semester   = \"". $semester
                                    . "\" ORDER BY Fach";
   
-  $result = $db -> query($sql1);
+  $result = $db -> query( $sql1 );
   $row    = $result -> fetch_all( MYSQLI_ASSOC );
 
   $veranstaltungsliste = array();
-  foreach ($row as $r1)
+  foreach ( $row as $r1 )
 
-  {
-      $veranstaltungsliste[] =  getVeranstaltungDB( $db, $r1, $jahr, $semester );
+  { $veranstaltungsliste[] =  getVeranstaltungDB( $db, $r1, $jahr, $semester );
   }
 
-
+ #deb(sizeof($veranstaltungsliste));
   return $veranstaltungsliste;
 }
-
-
 
 function getVeranstaltungDB($db, $r1, $jahr, $semester )
 {  #  deb($r1,1);
@@ -241,8 +234,8 @@ function getDozentenListeSemDB( $db )
   
   foreach ($row as $r4)
   {
-
     $r4[ 'AnzV'   ] = sizeof( getVeranstaltungslisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
+
     $r4[ 'AnzE'   ] = sizeof( getEntlastungslisteDB(    $db, $r4[ 'Kurz' ], $jahr, $semester ) );
     $r4[ 'Anrede' ] = setAnrede( $r4 );
 
@@ -251,21 +244,15 @@ function getDozentenListeSemDB( $db )
     if ($r4[ 'AnzV'   ] > 0 OR   $r4[ 'AnzE'   ] > 0 )   # Liste 1: Dozenten mit Lehre oder Entlastung
     {  $tmpListe1[] = $r4;}
     else
-    { $tmpListe2[] = $r4;}                                # Liste  2: Dozenten ohne Lehre und ohne Entlastung
-    
+    {  $tmpListe2[] = $r4;}                                # Liste  2: Dozenten ohne Lehre und ohne Entlastung
   }
-  foreach ($tmpListe2 as $tl2)
+  foreach ( $tmpListe2 as $tl2 )
   { $tmpListe1[] = $tl2;                                 # Liste 2 wird an die Liste 1 angehängt
   }
   $dozentenliste = $tmpListe1;
-  
+
   return $dozentenliste;
 }
-
-
-
-
-
 
 
 function setAnrede($dozent)

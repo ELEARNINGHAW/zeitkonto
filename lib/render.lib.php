@@ -97,8 +97,7 @@ function renderDozentenListe( $db )
   return $r;
 }
 
-function
-renderDozentenListeSem( $db )
+function renderDozentenListeSem( $db )
 { $dozentenliste   = getDozentenListeSemDB( $db );
 
   $r = '<table   style="width: 100%;   position: relative;" >';
