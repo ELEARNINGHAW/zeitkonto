@@ -1,7 +1,6 @@
 <?php
 function renderFaecherListe( $db )
-{
-  $faecherliste = getFaecherListeDB( $db );
+{ $faecherliste = getFaecherListeDB( $db );
   
   $r = '<table  style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -19,14 +18,13 @@ function renderFaecherListe( $db )
                  <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'fach\'  , \'Kommentar\'  ,  this , \'Kurz\'  ,  \''.  $fl[ "Kurz"  ]. '\'   ); " >' . $fl[ "Kommentar"  ]  . '</td>
 </tr>';
   }
-    $r .= '</table>';
+  $r .= '</table>';
   mysqli_close($db);
   return $r;
 }
 
 function renderStudiengangListe( $db )
-{
-  $studiengangliste = getStudiengangListeDB( $db );
+{ $studiengangliste = getStudiengangListeDB( $db );
   
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -48,8 +46,7 @@ function renderStudiengangListe( $db )
 }
 
 function renderDepartmentListe( $db )
-{
-  $departmentliste = getDepartmentListeDB( $db );
+{ $departmentliste = getDepartmentListeDB( $db );
   
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -69,8 +66,7 @@ function renderDepartmentListe( $db )
 }
 
 function renderDozentenListe( $db )
-{
-  $dozentenliste   = getDozentenListeDB( $db );
+{ $dozentenliste   = getDozentenListeDB( $db );
   
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
@@ -103,8 +99,7 @@ function renderDozentenListe( $db )
 
 function
 renderDozentenListeSem( $db )
-{
-  $dozentenliste   = getDozentenListeSemDB( $db );
+{ $dozentenliste   = getDozentenListeSemDB( $db );
 
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">' ;
@@ -119,8 +114,7 @@ renderDozentenListeSem( $db )
   $r .='</tr> ' ;
   
   foreach ( $dozentenliste  as $dl )
-  {
-    $r .= '<tr>';
+  { $r .= '<tr>';
     $r .= '<td class="taL">' . $dl[ "Kurz"    ] . '</td>';
     $r .= '<td class="taC">' . $dl[ "Vorname" ] . '</td>';
     $r .= '<td class="taC">' . $dl[ "Name"    ] . '</td>';
@@ -140,15 +134,13 @@ renderDozentenListeSem( $db )
 }
 
 function renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester )
-{
-    $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz, $jahr, $semester );
-    mysqli_close($db);
-    return renderZeitkontoTotalProf( $arbeitszeitliste );
+{ $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz, $jahr, $semester );
+  mysqli_close($db);
+  return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false )
-{
-  $dozent   = getDozentDB( $db, $dozentKurz );
+{ $dozent   = getDozentDB( $db, $dozentKurz );
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB( $db,  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
@@ -157,8 +149,8 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
 
   #mysqli_close($db);
 
-  if ($onlyData)
-  {   $stundenbilanz = $dozent['aktuell'];
+  if ( $onlyData )
+  { $stundenbilanz = $dozent['aktuell'];
   }
 
   else
@@ -218,18 +210,14 @@ Martin Holle, Prodekan LS
 </div>';
   
 $html .=  '<img width="300px;" alt="sign-holle" src="img/sign-holle.png">';
-
 $html .=  generateBeteiligung( $dozent );
-
 
 return $html;
 }
 
-
-
 function renderZeitkontoTotalProf($arbeitszeitliste)
 {
-   $html = '
+$html = '
 <table>
 	<tr> <td style="border-bottom: 0 solid white;" >	<br /> <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div>   </td>
        <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="200px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  ><br>' .  date("d.m.Y")  .' </td>
@@ -448,7 +436,6 @@ src="img/splashscreen.png" alt="splashscreen"> </div>
 </body></html>';
 
 echo $html;
-
 }
 
 function getRenderLoginscreen()
@@ -568,12 +555,8 @@ body
     <h2>&nbsp;</h2>
   </div>
 </div>
-  
 </body>
-
-</html>
-
+/html>
 ';
 echo $html;
 }
-
