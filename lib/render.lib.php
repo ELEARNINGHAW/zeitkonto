@@ -45,6 +45,27 @@ function renderStudiengangListe( $db )
   return $r;
 }
 
+
+function renderEntlastungsgruendeListe( $db )
+{ $entlastungsliste = getEntlastungsgruendeListeDB( $db );
+    $r = '<table   style="width: 100%;   position: relative;" >';
+    $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
+          <th  style="width: 25%;" class="taC head" > Grund      </th>
+          <th  style="width: 50%;" class="taC head" > Text      </th>
+         </tr> ' ;
+
+    foreach ( $entlastungsliste  as $dl )
+    { $r .= '<tr>
+             <td class="taC"   >' . $dl[ "Grund"      ] . ' </td>
+             <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'auslastungsgrund\'  , \'Text\'  ,  this , \'Grund\'  ,  \''.  $dl[ "Grund"  ]. '\'           );   " >' . $dl[ "Text"  ]    .  '</td>
+           </tr>';
+    }
+    $r .= '</table>';
+    mysqli_close($db);
+    return $r;
+}
+
+
 function renderDepartmentListe( $db )
 { $departmentliste = getDepartmentListeDB( $db );
   
@@ -97,6 +118,95 @@ function renderDozentenListe( $db )
   return $r;
 }
 
+
+function renderLoading()
+{
+echo "<style>
+body
+{ margin:0;
+  padding:0;
+  background:#262626;
+}
+.ring
+{ position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:150px;
+  height:150px;
+  background:transparent;
+  border:3px solid #3c3c3c;
+  border-radius:50%;
+  text-align:center;
+  line-height:150px;
+  font-family:sans-serif;
+  font-size:20px;
+  color:#fff000;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  text-shadow:0 0 10px #fff000;
+  box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+.ring:before
+{ content:'';
+  position:absolute;
+  top:-3px;
+  left:-3px;
+  width:100%;
+  height:100%;
+  border:3px solid transparent;
+  border-top:3px solid #fff000;
+  border-right:3px solid #fff000;
+  border-radius:50%;
+  animation:animateC 2s linear infinite;
+}
+span
+{ display:block;
+  position:absolute;
+  top:calc(50% - 2px);
+  left:50%;
+  width:50%;
+  height:4px;
+  background:transparent;
+  transform-origin:left;
+  animation:animate 2s linear infinite;
+}
+span:before
+{ content:'';
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#fff000;
+  top:-6px;
+  right:-8px;
+  box-shadow:0 0 20px #fff000;
+}
+@keyframes animateC
+{ 0%
+  { transform:rotate(0deg);
+  }
+  100%
+  { transform:rotate(360deg);
+  }
+}
+@keyframes animate
+{ 0%
+  { transform:rotate(45deg);
+  }
+  100%
+  { transform:rotate(405deg);
+  }
+}
+</style>
+";
+ echo'<div class="ring">Loading
+ <span></span>
+</div>';
+
+echo '<script language="javascript" type="text/javascript"> document.location="index.php?action=lad"; </script>';
+}
+
 function renderDozentenListeSem( $db )
 { $dozentenliste   = getDozentenListeSemDB( $db );
 
@@ -122,8 +232,8 @@ function renderDozentenListeSem( $db )
     $r .= '<td class="taC">';
     $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzV" ] . '</span>:';
     $r .= '<span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center; padding: 3px;">' . $dl[ "AnzE" ] . '</span>';         $r .= '</td>';
-    $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldo'     ]  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a> </td>';
-    $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldoTotal']  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "Jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'Semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a>  </td>';
+    $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldo'     ]  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=sb&jahr='   . $_SESSION[ 'aktuell' ][ "jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a> </td>';
+    $r .= '<td class="taR"><a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=html"><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">' .  number_format(  $dl['aktuell']['saldoTotal']  ,2 ) . '</span></a> <a style="text-decoration: none;"  target="rechts" href="?action=azkt&jahr=' . $_SESSION[ 'aktuell' ][ "jahr" ] . '&semester=' . $_SESSION[ 'aktuell' ][ 'semester' ]  . '&dozentKurz=' . $dl[ "Kurz" ] . '&output=pdf" ><span style="width:100%; height:100%; background-color:#EEEEEE; text-decoration: none; text-align: center;">p</span></a>  </td>';
     $r .= '</tr>';
   }
   $r .= '</table>';
@@ -133,7 +243,7 @@ function renderDozentenListeSem( $db )
 }
 
 function renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester )
-{ $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz, $jahr, $semester );
+{ $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz  );
   mysqli_close($db);
   return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
@@ -145,8 +255,6 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB( $db,  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
   $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz( $dozent );
-
-  #mysqli_close($db);
 
   if ( $onlyData )
   { $stundenbilanz = $dozent['aktuell'];
@@ -180,14 +288,14 @@ function calcStundenbilanz($dozent)
 
 function renderZeitkontoProf($dozent)
 {
-  $html = '
-<table>
-	<tr> <td style="border-bottom: 0 solid white;" >	<br /> <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div>   </td>
-       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="200px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  ><br>' .  date("d.m.Y")  .' </td>
-	</tr>
-	
-</table>
-  <div class="betrefftxt" >aktuelle Stundenbilanz für das Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .'   </div>';
+$html = '
+<table style="width: 100%; height: 50px;  border-spacing: 0"><tr>
+ <td style="border-bottom: 0 solid white; padding: 0;" > <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div><br>' .  date("d.m.Y")  .'   </td>
+ <td style="text-align: right ; border-bottom: 0 solid white; padding: 0; ">  <img width="160px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  > </td>
+</tr></table>
+<br>
+<br> 
+<div class="betrefftxt" >aktuelle Stundenbilanz für das Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .'   </div>';
 
 $html .=  '<div class="fliestxt" >' .$dozent["Anrede"].' '.$dozent["Name"].', <br/><br/> hiermit erhalten Sie die aktuelle Stundenbilanz für das zurückliegende Semester.</div><br/>' ;
 $html .= '<table   style="width: 100%;"  >
@@ -217,12 +325,12 @@ return $html;
 function renderZeitkontoTotalProf($arbeitszeitliste)
 {
 $html = '
-<table>
-	<tr> <td style="border-bottom: 0 solid white;" >	<br /> <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div>   </td>
-       <td style="text-align: right ; border-bottom: 0 solid white; ">  <img width="200px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  ><br>' .  date("d.m.Y")  .' </td>
-	</tr>
-	
-</table>
+<table style="width: 100%; height: 50px;  border-spacing: 0"><tr>
+ <td style="border-bottom: 0 solid white; padding: 0;" > <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div><br>' .  date("d.m.Y")  .'   </td>
+ <td style="text-align: right ; border-bottom: 0 solid white; padding: 0; ">  <img width="160px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  > </td>
+</tr></table>
+<br>
+<br> 
   <div class="betrefftxt" >aktueller Stand des Arbeitszeitkontos für das Semester '. $arbeitszeitliste["aktuell"]["Semester"]  .' '  . $arbeitszeitliste["aktuell"]["Jahr"]  .'   </div>';
     $html .=  '<div class="fliestxt" >' .$arbeitszeitliste["aktuell"]["Anrede"].' '.$arbeitszeitliste["aktuell"]["Name"].', <br/><br/> hiermit erhalten Sie den aktuellen Stand Ihres Zeitkontos für das zurückliegende Semester.</div><br/>' ;
     $html .=  generateAZKTTable( $arbeitszeitliste );
@@ -269,15 +377,12 @@ function generateLuETable( $dozent )
 
 function generateBeteiligung( $dozent )
 {
-   # deb($dozent['aktuell']['beteiligung'],1);
-    $r = '';
-
     $r =   '<br/<br/<br/<br/><div class="fliestxt">Anteile bei Veranstaltung mit Beteiligung</div><br/>';
 
     foreach ( $dozent["aktuell"]["beteiligung"]   as $beteiligung )
     {  $anteilGesamt = 0;
         $LVSGesamt = 0;
-        #deb($beteiligung);
+
         $r .= '<table  style="width: 100%;" >';
         $r .='<tr style="background-color: #cccccc; padding:5px;">
               <td  style="width: 60%"                   >  ' . $beteiligung[0][ "FachL"] . ' (' .  $beteiligung[0][ "Fach" ] .')  ' . $beteiligung[0][ "Studiengang"] . ' </td>
@@ -304,12 +409,12 @@ function generateBeteiligung( $dozent )
 function generateAZKTTable( $dozent )
 { $r = '<table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
-            <td  style="width: 20%"  class="taC head" >Semester</td>
-            <td  style="width: 15%;" class="taR head" >Stunden</td>
-            <td  style="width: 15%;" class="taR head" >Pflicht</td>
-            <td  style="width: 15%;" class="taR head" >Saldo</td>
-            <td  style="width: 15%;" class="taR head" >Summe</td>
-            <td  style="width: 20%;" class="taR head" >Kommentar</td>
+            <td  style="width: 20%"  class="taC head" >Semester  </td>
+            <td  style="width: 15%;" class="taR head" >Stunden   </td>
+            <td  style="width: 15%;" class="taR head" >Pflicht   </td>
+            <td  style="width: 15%;" class="taR head" >Saldo     </td>
+            <td  style="width: 15%;" class="taR head" >Summe     </td>
+            <td  style="width: 20%;" class="taR head" >Kommentar </td>
           </tr> ' ;
 
   unset( $dozent[ 'aktuell' ] );
@@ -329,6 +434,13 @@ function generateAZKTTable( $dozent )
     return $r;
 }
 
+
+function init()
+{ $_SESSION[ 'aktuell' ][ 'jahr'     ] = 2023;
+  $_SESSION[ 'aktuell' ][ 'semester' ] = 'S';
+  renderMainSide();
+}
+
 function renderMainSide()
 {
 $html ='
@@ -340,7 +452,7 @@ $html ='
 .dropbtn
 { font-family: Arial, sans-serif;
   background-color: #EFEFEF;
-  color: white;
+  color: black;
   font-size: 22px;
 }
 
@@ -384,6 +496,7 @@ $html ='
     <a href="index.php?action=ef"    target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Fach\'       ; ">Fach         </a>
     <a href="index.php?action=esg"   target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Studiengang\'; ">Studiengang  </a>
     <a href="index.php?action=edep"  target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Department\' ; ">Department   </a>
+    <a href="index.php?action=eeg"   target="rechts"  onclick="document.querySelector(\'#Button2\').innerHTML = \'Entlastung\' ; ">Entlastung   </a>
   </div>
 </div>
 
@@ -407,8 +520,9 @@ $html ='
 </div>
 
 ';
-  $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="links" src="index.php?action=ad"></iframe>';
-  $html .= '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"   name="rechts" src="index.php?action=ss"                     ></iframe>';
+  $html .= '<iframe style="position: absolute; top:40px; left:10px; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"  name="rechts" src="index.php?action=ss"></iframe>';
+  $html .= '<iframe style="position: absolute; top:40px; left: 50%; height: calc(100% - 50px) ; width: calc(50% - 20px); border: 1px black solid;"  name="links"  src="index.php?action=ad"></iframe>';
+
   $html .= '</body></html>';
   echo $html;
 }
@@ -427,7 +541,7 @@ $html ='
 <style> 
 .object-fit   
 { width: 400px; height: 300px; margin: 4em auto;  border:1px solid green;
-  position: absolute; left: 50%; top: 50%;  -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); 
+  position: absolute; left: 50%; top: 40%;  -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); 
 } 
 .object-fit img { object-fit: cover; width:  100%; height: 100%;}  </style>
 <div class="object-fit" style="text-align:center;"> <img 

@@ -9,21 +9,31 @@ function connectDB()
   return ($db);
 }
 
-function getArbeitszeitlisteDB($db, $dozentKurz, $jahr, $semester )
-{  $arbeitszeitliste = array();
-   $saldoTotal = 0;
-   $sql1   = "SELECT DISTINCT  Jahr, Semester  FROM `beteiligung` WHERE  DozentKurz = \"". $dozentKurz
+function checkInput($name, $value)
+{
+  if     ( $name == 'dozentKurz' )  { if( strlen( $value ) > 7 )    die("ERROR: Malformed SQL statement: 001-". strlen( $value ));   }
+  else if( $name == 'jahr'       )  { if( strlen( $value ) > 4 )    die("ERROR: Malformed SQL statement: 002-". strlen( $value ));   }
+  else if( $name == 'semester'   )  { if( strlen( $value ) > 1 )    die("ERROR: Malformed SQL statement: 003-". strlen( $value ));   }
+}
+
+
+function getArbeitszeitlisteDB( $db, $dozentKurz  )
+{
+  checkInput("dozentKurz", $dozentKurz);
+  $arbeitszeitliste = array();
+  $saldoTotal = 0;
+  $sql1   = "SELECT DISTINCT  Jahr, Semester  FROM `beteiligung` WHERE  DozentKurz = \"". $dozentKurz
         . "\"  ORDER by Jahr ASC, Semester ASC ";
 
    $result = $db -> query( $sql1 );
    $row    = $result -> fetch_all( MYSQLI_ASSOC );
 
    $arbeitszeitliste[ 'aktuell' ][ "saldo"    ] = 0;
-   $arbeitszeitliste[ 'aktuell' ][ "Semester" ] = 0;
-   $arbeitszeitliste[ 'aktuell' ][ "Jahr"     ] = 0;
+   $arbeitszeitliste[ 'aktuell' ][ "semester" ] = 0;
+   $arbeitszeitliste[ 'aktuell' ][ "jahr"     ] = 0;
 
    foreach ( $row as $r1 )
-   {  $sb =  renderStundenbilanz( $db, $dozentKurz, $r1['Jahr'], $r1['Semester'], true);
+   {  $sb =  renderStundenbilanz( $db , $dozentKurz , $r1[ 'Jahr' ], $r1[ 'Semester' ] , true );
       $arbeitszeitliste[ 'aktuell' ] =  $sb[ 'dozentLV' ];
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] =  $sb;
       $saldoTotal +=  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
@@ -37,7 +47,11 @@ function getArbeitszeitlisteDB($db, $dozentKurz, $jahr, $semester )
 }
 
 function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
-{ $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
+{checkInput("dozentKurz" , $dozentKurz );
+ checkInput("jahr"       , $jahr       );
+ checkInput("smester"    , $semester   );
+
+ $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
                                    . "\" AND DozentKurz = \"". $dozentKurz
                                    . "\" AND Semester   = \"". $semester
                                    . "\" ORDER BY Fach";
@@ -51,13 +65,15 @@ function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
   { $veranstaltungsliste[] =  getVeranstaltungDB( $db, $r1, $jahr, $semester );
   }
 
- #deb(sizeof($veranstaltungsliste));
   return $veranstaltungsliste;
 }
 
-function getVeranstaltungDB($db, $r1, $jahr, $semester )
-{  #  deb($r1,1);
-     $sql2 = "SELECT * FROM `lva`  WHERE Jahr       = \"" . $jahr
+function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
+{
+    checkInput("jahr"       , $jahr       );
+    checkInput("smester"    , $semester   );
+
+    $sql2 = "SELECT * FROM `lva`  WHERE Jahr       = \"" . $jahr
         . "\"  AND Semester     = \"" . $semester
         . "\"  AND Studiengang  = \"" . $r1[ 'Studiengang' ]
         . "\"  AND FachKurz     = \"" . $r1[ 'Fach'        ]  ."\"";
@@ -78,8 +94,12 @@ function getVeranstaltungDB($db, $r1, $jahr, $semester )
 
 }
 
-function getEntlastungslisteDB($db, $dozentKurz, $jahr, $semester)
+function getEntlastungslisteDB( $db , $dozentKurz , $jahr , $semester )
 {
+ checkInput("dozentKurz" , $dozentKurz );
+ checkInput("jahr"       , $jahr       );
+ checkInput("smester"    , $semester   );
+
   $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
   $result = $db -> query( $sql5 );
   $row    = $result -> fetch_all( MYSQLI_ASSOC );
@@ -105,58 +125,40 @@ function getEntlastungslisteDB($db, $dozentKurz, $jahr, $semester)
 
 
 function getBeteiligungslisteDB($db, $veranstaltungsliste )
-{
-  $beteiligungsliste = array();
-
+{ $beteiligungsliste = array();
   foreach ($veranstaltungsliste as $veranstaltung )
-  {
-    #if ($veranstaltung ['K'] < 1)
-    { $beteiligungsliste[] = getBeteiligungDB( $db, $veranstaltung );
+  { { $beteiligungsliste[] = getBeteiligungDB( $db, $veranstaltung );
     }
-
   }
-    return $beteiligungsliste;
+  return $beteiligungsliste;
 }
 
 
 
 function getBeteiligungDB($db, $veranstaltung )
-{
-    $beteiligungAlle = array();
-
-  #  SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
+{   $beteiligungAlle = array();
 
     $sql6 = " SELECT * FROM beteiligung WHERE Fach = \"".$veranstaltung['Fach']."\" AND Studiengang = \"" . $veranstaltung['Studiengang'] . "\"  AND Jahr = \"".$veranstaltung ['Jahr']. "\" AND Semester = \"".$veranstaltung['Semester']."\" ORDER BY DozentKurz ASC;";
+    $result = $db -> query( $sql6 );
 
+    $row = $result -> fetch_all( MYSQLI_ASSOC );
 
-    $result = $db -> query($sql6);
-
-    $row = $result -> fetch_all(MYSQLI_ASSOC);
-
-    foreach ($row as $beteiligung)
-    {
-
-        $beteiligung['dozent']   =  getDozentDB($db,$beteiligung['DozentKurz'] ) ;
-
-        $beteiligungAlle[] =   getVeranstaltungDB($db, $beteiligung, $beteiligung['Jahr'], $beteiligung['Semester']);
+    foreach ( $row as $beteiligung )
+    { $beteiligung[ 'dozent' ]  = getDozentDB( $db , $beteiligung[ 'DozentKurz' ] ) ;
+      $beteiligungAlle[ ]       = getVeranstaltungDB($db , $beteiligung, $beteiligung[ 'Jahr' ], $beteiligung[ 'Semester' ] );
     }
 
     return $beteiligungAlle;
 }
 
-
-
-
-
-function getFaecherListeDB($db )
-{
-  $faecherliste = array();
+function getFaecherListeDB( $db )
+{ $faecherliste = array();
   $sql6 = "SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
-  $result = $db -> query($sql6);
+  $result = $db -> query( $sql6 );
   
-  $row = $result -> fetch_all(MYSQLI_ASSOC);
+  $row = $result -> fetch_all( MYSQLI_ASSOC );
   
-  foreach ($row as $r4)
+  foreach ( $row as $r4 )
   {  $faecherliste[] = $r4;
   }
 
@@ -181,6 +183,23 @@ function getStudiengangListeDB($db )
   }
   
   return $studiengangliste;
+}
+
+
+
+function getEntlastungsgruendeListeDB($db )
+{
+    $entlastungsliste = array();
+    $sql6 = "SELECT * FROM `auslastungsgrund` ORDER BY Grund  ASC , Grund  ";
+    $result = $db -> query($sql6);
+
+    $row = $result -> fetch_all(MYSQLI_ASSOC);
+
+    foreach ($row as $r4)
+    {  $entlastungsliste[] = $r4;
+    }
+
+    return $entlastungsliste;
 }
 
 
@@ -222,16 +241,16 @@ function getDozentenListeDB($db )
 }
 
 function getDozentenListeSemDB( $db )
-{ $jahr     =  $_SESSION[ 'aktuell' ][ 'Jahr'     ] ;
-  $semester =  $_SESSION[ 'aktuell' ][ 'Semester' ] ;
-  
+{ $jahr     =  $_SESSION[ 'aktuell' ][ 'jahr'     ] ;
+  $semester =  $_SESSION[ 'aktuell' ][ 'semester' ] ;
+  #deb($_SESSION,1);
   $dozentenliste = array();
   
   $sql6 = "SELECT * FROM `dozent` ORDER BY Status DESC, Name  ";
   $result = $db -> query( $sql6 );
   
   $row = $result -> fetch_all( MYSQLI_ASSOC );
-  
+
   foreach ($row as $r4)
   {
     $r4[ 'AnzV'   ] = sizeof( getVeranstaltungslisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
@@ -239,7 +258,7 @@ function getDozentenListeSemDB( $db )
     $r4[ 'AnzE'   ] = sizeof( getEntlastungslisteDB(    $db, $r4[ 'Kurz' ], $jahr, $semester ) );
     $r4[ 'Anrede' ] = setAnrede( $r4 );
 
-    $r4[ 'aktuell' ] =   getArbeitszeitlisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester )[ 'aktuell' ];   ;
+    $r4[ 'aktuell' ] =   getArbeitszeitlisteDB( $db, $r4[ 'Kurz' ] )[ 'aktuell' ];   ;
 
     if ($r4[ 'AnzV'   ] > 0 OR   $r4[ 'AnzE'   ] > 0 )   # Liste 1: Dozenten mit Lehre oder Entlastung
     {  $tmpListe1[] = $r4;}
@@ -274,7 +293,10 @@ function setAnrede($dozent)
 
 
 function getDozentDB($db, $dozentKurz)
-{ $sql6 = "SELECT * FROM `dozent` WHERE  Kurz =\"". $dozentKurz ."\"";
+{
+  checkInput("dozentKurz" , $dozentKurz );
+
+  $sql6 = "SELECT * FROM `dozent` WHERE  Kurz =\"". $dozentKurz ."\"";
   $result = $db -> query($sql6);
   
   $row = $result -> fetch_all(MYSQLI_ASSOC);
@@ -287,15 +309,17 @@ function getDozentDB($db, $dozentKurz)
 
 
 function getDozentLVDB($db, $dozentKurz, $jahr, $semester)
-{  $sql7 = "SELECT * FROM `lehrverpflichtung` WHERE Jahr = \"" . $jahr . "\" AND DozKurz = \"". $dozentKurz ."\"  AND Semester = \"". $semester ."\"";
+{  checkInput("dozentKurz" , $dozentKurz );
+   checkInput("jahr"       , $jahr       );
+   checkInput("smester"    , $semester   );
+
+   $sql7 = "SELECT * FROM `lehrverpflichtung` WHERE Jahr = \"" . $jahr . "\" AND DozKurz = \"". $dozentKurz ."\"  AND Semester = \"". $semester ."\"";
    $result = $db -> query($sql7);
    $row = $result -> fetch_all(MYSQLI_ASSOC);
 
   foreach ($row as $r7)
-  {
-    $dozentLV = $r7;
+  { $dozentLV = $r7;
   }
-
 
   if ( !isset( $dozentLV [ 'DozKurz'        ] ) ) { $dozentLV [ 'DozKurz'        ] = $dozentKurz ;}
   if ( !isset( $dozentLV [ 'Status'         ] ) ) { $dozentLV [ 'Status'         ] = null        ;}
@@ -310,19 +334,17 @@ function getDozentLVDB($db, $dozentKurz, $jahr, $semester)
   return $dozentLV;
 }
 
-
 function getFaecherListeForLiveSeachDB( )
-{
-    $db = connectDB();
-    $faecherliste = array();
-    $sql6 = "SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
-    $result = $db -> query($sql6);
+{ $db = connectDB();
+  $faecherliste = array();
+  $sql6 = "SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
+  $result = $db -> query($sql6);
 
-    $row = $result -> fetch_all(MYSQLI_ASSOC);
+  $row = $result -> fetch_all(MYSQLI_ASSOC);
 
-    foreach ($row as $r4)
-    {  $faecherliste[] = $r4;
-    }
+  foreach ($row as $r4)
+  {  $faecherliste[] = $r4;
+  }
 
-    return $faecherliste;
+  return $faecherliste;
 }

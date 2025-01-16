@@ -16,68 +16,54 @@ if (isset( $_GET[ 'i' ]  ) ) { $id       =  $_GET[ 'i'  ] ; } else  { $id     = 
  * @return null
  */
 function getValue($table, $key, $value, $col, $id)
-{
-    return updateValue($table, $key, $value, $col, $id);
+{ return updateValue($table, $key, $value, $col, $id);
 }
 
 if ($col !=0 AND $table != 0 AND $key != 0  AND  $id != 0 )
 {
-
-
 if ($table == 'studiengang')
-{
-    getValue($table, $key, $value, $col, $id);
+{  getValue($table, $key, $value, $col, $id);
 }
 
-
 if ($table == 'fach')
-{
-    getValue($table, $key, $value, $col, $id);
+{ getValue($table, $key, $value, $col, $id);
 }
 
 if ($table == 'department')
-{
-    getValue($table, $key, $value, $col, $id);
+{  getValue($table, $key, $value, $col, $id);
 }
 
 if ($table == 'dozent')
-{
-    getValue($table, $key, $value, $col, $id);
+{  getValue($table, $key, $value, $col, $id);
 }
 
-
-
-
+if ($table == 'auslastungsgrund')
+{  getValue($table, $key, $value, $col, $id);
 }
 
+}
 
 
 function updateValue( $table,  $key, $value, $col, $id, $quote = true )
 {  $db = connectDB();
+   $value = strip_tags( $value );
+   if ( $quote )  $value  = '"' .$value .'"';
+   $sql = ' UPDATE ' .$table. ' SET ' .$key. ' = '.$value. ' WHERE ' .$col . ' = "' .$id .'"';
 
-    $value = strip_tags( $value );
-
-    if ($quote)  $value  = '"' .$value .'"';
-
-
-    $sql = ' UPDATE ' .$table. ' SET ' .$key. ' = '.$value. ' WHERE ' .$col . ' = "' .$id .'"';
-print_r($sql);
-    if ($db->query($sql) === TRUE)
-    {  echo "Record updated successfully";
-    }
-    else
-    { echo "Error updating record: " . $db->error;
-    }
-    $db->close();
+   if ($db->query($sql) === TRUE)
+   {  echo "Record updated successfully";
+   }
+   else
+   { echo "Error updating record: " . $db->error;
+   }
+   $db->close();
 }
-
-
 
 function connectDB()
 { $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
-    if ($db -> connect_errno)
-    { echo "Failed to connect to MySQL: " . $db->connect_error;
-        exit();
-    }
-    return ($db);
+  if ($db -> connect_errno)
+  { echo "Failed to connect to MySQL: " . $db->connect_error;
+     exit();
+  }
+  return ($db);
 }

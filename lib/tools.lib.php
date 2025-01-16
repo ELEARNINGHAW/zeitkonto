@@ -15,6 +15,7 @@ td, th
   font-family: Arial, sans-serif;
   font-size  : 12px;
   border-bottom: 1px solid gray;
+      vertical-align: top;
 }
 
 td.head 
@@ -41,7 +42,7 @@ td.sal
 { text-align: left;
   font-family: Arial, sans-serif;
   font-size  : 12px;
-  height: 110px;
+  height: 50px;
   line-height: 95%;
 }
 
@@ -233,7 +234,7 @@ function getStandArbeitszeitkonto($jahr, $dozentKurz , $semester, $output = 'htm
 function getRenderAlleDozenten()
 { global $htmlheader, $htmlfooter;
   $html = '';
-  $db = connectDB();
+  $db   = connectDB();
   $html = renderDozentenListe( $db );
   $html = $htmlheader . $html . $htmlfooter;
   echo $html;
@@ -242,7 +243,7 @@ function getRenderAlleDozenten()
 function getRenderAlleDozentenSem()
 { global $htmlheader, $htmlfooter;
   $html = '';
-  $db = connectDB();
+  $db   = connectDB();
   $html = renderDozentenListeSem( $db );
   $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
@@ -281,20 +282,26 @@ function getRenderAlleStudiengang()
     $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
-  
+}
+
+function getRenderAlleEntlastungsgruenden()
+{
+    global $htmlheader, $htmlfooter;
+    $html = '';
+    $db = connectDB();
+    $html = renderEntlastungsgruendeListe( $db );
+    $html = $htmlheader . $html . $htmlfooter;
+#  error_reporting(0 );
+    echo $html;
 }
 
 
 function checkGetInput()
 {
-    if (isset( $_GET[ 'jahr'       ]  ) ) { $g[ 'jahr'       ]  =  $_GET[ 'jahr'       ] ; } else  { $g[ 'jahr'       ]  =  0; }
-    if (isset( $_GET[ 'semester'   ]  ) ) { $g[ 'semester'   ]  =  $_GET[ 'semester'   ] ; } else  { $g[ 'semester'   ]  =  0; }
+    if (isset( $_GET[ 'jahr'       ]  ) ) { $g[ 'jahr'       ]  =  $_GET[ 'jahr'       ] ; $_SESSION[ 'aktuell' ][ 'jahr'     ] = $g[ 'jahr'        ];} #else  { $g[ 'jahr'       ]  =  0; }
+    if (isset( $_GET[ 'semester'   ]  ) ) { $g[ 'semester'   ]  =  $_GET[ 'semester'   ] ; $_SESSION[ 'aktuell' ][ 'semester' ] = $g[ 'semester'    ];} #else  { $g[ 'semester'   ]  =  0; }
     if (isset( $_GET[ 'dozentKurz' ]  ) ) { $g[ 'dozentKurz' ]  =  $_GET[ 'dozentKurz' ] ; } else  { $g[ 'dozentKurz' ]  =  0; }
     if (isset( $_GET[ 'output'     ]  ) ) { $g[ 'output'     ]  =  $_GET[ 'output'     ] ; } else  { $g[ 'output'     ]  =  0; }
-
-    $_SESSION[ 'aktuell' ][ 'Jahr'     ] = $g[ 'jahr'        ];
-    $_SESSION[ 'aktuell' ][ 'Semester' ] = $g[ 'semester'    ];
-
     return $g;
 }
 
