@@ -213,10 +213,10 @@ function getStundenbilanz( $jahr, $dozentKurz , $semester, $output = 'html' )
   }
 }
 
-function getStandArbeitszeitkonto( $jahr, $dozentKurz , $semester, $output = 'html' )
+function getStandArbeitszeitkonto(   $dozentKurz , $output = 'html' )
 { global $htmlheader;
   $db = connectDB();
-  $html = renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester );
+  $html = renderArbeitszeitkonto( $db, $dozentKurz );
   $html = $htmlheader . $html;
   error_reporting(0 );
 
