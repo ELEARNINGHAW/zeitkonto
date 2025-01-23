@@ -195,7 +195,7 @@ $pdf->Output($pdfName, 'I');
 }
 
 
-function getStundenbilanz($jahr, $dozentKurz , $semester, $output = 'html')
+function getStundenbilanz( $jahr, $dozentKurz , $semester, $output = 'html' )
 { global $htmlheader;
   $db = connectDB();
   $html = renderStundenbilanz( $db, $dozentKurz, $jahr, $semester );
@@ -213,7 +213,7 @@ function getStundenbilanz($jahr, $dozentKurz , $semester, $output = 'html')
   }
 }
 
-function getStandArbeitszeitkonto($jahr, $dozentKurz , $semester, $output = 'html')
+function getStandArbeitszeitkonto( $jahr, $dozentKurz , $semester, $output = 'html' )
 { global $htmlheader;
   $db = connectDB();
   $html = renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester );

@@ -31,18 +31,28 @@ function getArbeitszeitlisteDB( $db, $dozentKurz  )
    $arbeitszeitliste[ 'aktuell' ][ "saldo"    ] = 0;
    $arbeitszeitliste[ 'aktuell' ][ "semester" ] = 0;
    $arbeitszeitliste[ 'aktuell' ][ "jahr"     ] = 0;
-
+    $overflow = '';
    foreach ( $row as $r1 )
    {  $sb =  renderStundenbilanz( $db , $dozentKurz , $r1[ 'Jahr' ], $r1[ 'Semester' ] , true );
       $arbeitszeitliste[ 'aktuell' ] =  $sb[ 'dozentLV' ];
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] =  $sb;
-      $saldoTotal +=  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
+      $saldo =  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
+      $saldoTotal +=  $saldo;
+
+
+      if ( $saldoTotal > 36 )
+      {
+        $overflow = $saldoTotal - 36 ;
+        $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "Verfallene LVS: ". number_format($overflow,1);
+         $saldoTotal = 36;
+      }
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldoTotal" ] = $saldoTotal;
    }
 
+
    $arbeitszeitliste[ 'aktuell' ][ "saldoTotal" ] = $saldoTotal;
    $arbeitszeitliste[ 'aktuell' ] +=  getDozentDB( $db, $dozentKurz ) ;
-
+    #  deb($arbeitszeitliste,1);
    return $arbeitszeitliste;
 }
 
