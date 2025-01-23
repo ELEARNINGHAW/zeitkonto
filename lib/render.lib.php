@@ -209,7 +209,7 @@ echo '<script language="javascript" type="text/javascript"> document.location="i
 
 function renderDozentenListeSem( $db )
 { $dozentenliste   = getDozentenListeSemDB( $db );
-
+   # deb($dozentenliste,1);
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">' ;
   $r .='<th  style="width: 5% ;"                  > Kurz     </th>' ;
@@ -218,8 +218,8 @@ function renderDozentenListeSem( $db )
   $r .='<th  style="width: 5% ;" class="taC head" > Status   </th>' ;
   $r .='<th  style="width: 5% ;" class="taC head" > Pflicht  </th>' ;
   $r .='<th  style="width: 5% ;"                  > L:E      </th>' ;
-  $r .='<th  style="width: 5% ;"                  > Konto    </th>' ;
   $r .='<th  style="width: 5% ;"                  > Bilanz   </th>' ;
+  $r .='<th  style="width: 5% ;"                  > Konto    </th>' ;
   $r .='</tr> ' ;
   
   foreach ( $dozentenliste  as $dl )
@@ -256,6 +256,8 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz( $dozent );
 
+ #deb($dozent[ 'aktuell' ] );
+
   if ( $onlyData )
   { $stundenbilanz = $dozent['aktuell'];
   }
@@ -273,11 +275,12 @@ function calcStundenbilanz($dozent)
   $stunden[ 'saldo'               ] = 0;
 
   foreach ($dozent['aktuell']['veranstaltungsliste'] as $vl )
-  { $stunden[ 'veranstaltungssumme' ]  += $vl['LVS'];
+  {
+      $stunden[ 'veranstaltungssumme' ]  += ( $vl['LVS'] *  $vl['T']  *$vl['B'] );
   }
   
   foreach ($dozent['aktuell']['entlastungsliste'] as $vl )
-  {  $stunden[ 'entlastungsumme' ]  += $vl['LVS'];
+  {  $stunden[ 'entlastungsumme' ]  += ( $vl['LVS']  );
   }
 
   $stunden[ 'summeLuE' ] = $stunden[ 'entlastungsumme' ]  +  $stunden[ 'veranstaltungssumme' ];
@@ -297,6 +300,7 @@ $html = '
 <br> 
 <div class="betrefftxt" >aktuelle Stundenbilanz für das Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .'   </div>';
 
+
 $html .=  '<div class="fliestxt" >' .$dozent["Anrede"].' '.$dozent["Name"].', <br/><br/> hiermit erhalten Sie die aktuelle Stundenbilanz für das zurückliegende Semester.</div><br/>' ;
 $html .= '<table   style="width: 100%;"  >
 <tr style="background-color: #cccccc;"   >
@@ -306,9 +310,12 @@ $html .= '<table   style="width: 100%;"  >
 <tr><td class="taL"    >Ihre Lehrverpflichtung:                        </td><td class="taC"     >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'Pflicht'  ] , 2 ) .'</td></tr>
 <tr><td class="taL sal">Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:      </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</td></tr>
 </table>';
-  
+
+
 $html .=  '<br/><div class="fliestxt"> Wir haben im Einzelnen für Sie folgende Leistungen notiert:</div><br/>';
+
 $html .=  generateLuETable( $dozent );
+
 $html .=  '<div class="fliestxt"><br/>
 Ihr Überstundenkonto der letzten Jahre oder Ihr Arbeitszeitkonto wird Ihnen gesondert zugestellt.<br/>
 Für weitere Fragen stehe ich Ihnen gerne zur Verfügung.<br/><br/>
@@ -352,6 +359,9 @@ function generateLuETable( $dozent )
 <table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
               <td  style="width: 60%"                  > Titel der Veranstaltung / Entlastung </td>
+              <td  style="width: 3%; " class="taC head" > T </td>
+              <td  style="width: 3%; " class="taC head" > B </td>
+              <td  style="width: 3%; " class="taC head" > K </td>
               <td  style="width: 10%;" class="taC head" > Gruppe </td>
               <td  style="width: 10%;" class="taC head" > SWS </td>
               <td  style="width: 10%;" class="taC head" > Anteil </td>
@@ -359,18 +369,22 @@ function generateLuETable( $dozent )
   
   foreach ( $dozent["aktuell"]["veranstaltungsliste"]   as $t )
   {  $r .= '<tr> <td class="taL" id = "'. strtr( $t[ "Fach" ], ' ', '_' ) .'" onClick = "me( this );" oninput = "showResult(this, \'' .  $t[ "Fach" ] .'\' ); "  >' . $t[ "FachL"] . ' (' .  $t[ "Fach" ] .') </td>
-                 <td class="taC">' . $t[ "Studiengang"] . '</td>
-                 <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>
-                 
-                 <td class="taC">' . $t[ "Anteil"] . '% </td>
-                 <td class="taC">' . number_format( $t[ "LVS" ], 2 ) . '</td></tr> '    ;
+                 <td class="taC">' . $t[ "T"] . '                     </td>
+                 <td class="taC">' . $t[ "B"] . '                     </td>
+                 <td class="taC">' . $t[ "K"] . '                     </td>
+                 <td class="taC">' . $t[ "Studiengang"] . '                     </td>
+     
+     
+                 <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>                 
+                 <td class="taC">' . $t[ "Anteil"] . '%                         </td>
+                 <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
   }
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
-  { $r .= '<tr> <td colspan="4">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
+  { $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
   }
   
-  $r .= '<tr><td colspan="4" class="sum"> Summe der Lehrveranstaltungen und Entlastungen: </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "summeLuE" ]  , 2) . '</td></tr>' ;
+  $r .= '<tr><td colspan="7" class="sum"> Summe der Lehrveranstaltungen und Entlastungen: </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "summeLuE" ]  , 2) . '</td></tr>' ;
   $r .= '</table>';
   return $r;
 }
