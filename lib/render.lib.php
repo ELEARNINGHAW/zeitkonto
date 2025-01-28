@@ -259,7 +259,7 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
  #deb($dozent[ 'aktuell' ] );
 
   if ( $onlyData )
-  { $stundenbilanz = $dozent['aktuell'];
+  { $stundenbilanz = $dozent[ 'aktuell' ];
   }
 
   else
@@ -268,7 +268,7 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   return $stundenbilanz;
 }
 
-function calcStundenbilanz($dozent)
+function calcStundenbilanz( $dozent )
 { $stunden = array();
   $stunden[ 'veranstaltungssumme' ] = 0;
   $stunden[ 'entlastungsumme'     ] = 0;
@@ -358,7 +358,7 @@ function generateLuETable( $dozent )
 { $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
 <table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
-              <td  style="width: 60%"                  > Titel der Veranstaltung / Entlastung </td>
+              <td  style="width: 60%"                  > Titel der Veranstaltung </td>
               <td  style="width: 3%; " class="taC head" > T </td>
               <td  style="width: 3%; " class="taC head" > B </td>
               <td  style="width: 3%; " class="taC head" > K </td>
@@ -379,6 +379,11 @@ function generateLuETable( $dozent )
                  <td class="taC">' . $t[ "Anteil"] . '%                         </td>
                  <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
   }
+
+    $r .='<tr style="background-color: #cccccc; padding:5px;">
+              <td  colspan="7"  style="width: 60%"                  > Titel der Entlastung </td>
+
+              <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
   { $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
