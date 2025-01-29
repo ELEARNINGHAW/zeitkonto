@@ -43,7 +43,7 @@ function getArbeitszeitlisteDB( $db, $dozentKurz  )
       if ( $saldoTotal > 36 )
       {
         $overflow = $saldoTotal - 36 ;
-        $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "Verfallene LVS: ". number_format($overflow,1);
+        $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "LVS verfallen: ". number_format($overflow,1);
          $saldoTotal = 36;
       }
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldoTotal" ] = $saldoTotal;

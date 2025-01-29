@@ -25,7 +25,7 @@ else if( $_GET[ 'action' ] == 'sb' )  ## -- aktuelle Stundenbilanz eines Doziere
 
 else if( $_GET[ 'action' ] == 'azkt' )  ## -- aktueller Stand des Arbeistzeitkontos eines Dozierenden --
 { $g = checkGetInput();
-  getStandArbeitszeitkonto(  $g['jahr'], $g['dozentKurz'] , $g['semester'], $g['output']  );
+  getStandArbeitszeitkonto( $g['dozentKurz'] , $g['output'] );
 }
 
 else if( $_GET[ 'action' ] == 'ls' )   ## -- Spash Screen  --

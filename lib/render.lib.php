@@ -242,7 +242,7 @@ function renderDozentenListeSem( $db )
   return $r;
 }
 
-function renderArbeitszeitkonto( $db, $dozentKurz, $jahr, $semester )
+function renderArbeitszeitkonto( $db, $dozentKurz )
 { $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz  );
   mysqli_close($db);
   return renderZeitkontoTotalProf( $arbeitszeitliste );
@@ -259,7 +259,7 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
  #deb($dozent[ 'aktuell' ] );
 
   if ( $onlyData )
-  { $stundenbilanz = $dozent['aktuell'];
+  { $stundenbilanz = $dozent[ 'aktuell' ];
   }
 
   else
@@ -268,7 +268,7 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   return $stundenbilanz;
 }
 
-function calcStundenbilanz($dozent)
+function calcStundenbilanz( $dozent )
 { $stunden = array();
   $stunden[ 'veranstaltungssumme' ] = 0;
   $stunden[ 'entlastungsumme'     ] = 0;
@@ -308,7 +308,7 @@ $html .= '<table   style="width: 100%;"  >
 <td style="width: 10%;" class="taC head" > LVS </td></tr>
 <tr><td class="taL sum">Summe der Lehrveranstaltungen und Entlastungen:</td><td class="taC sum" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'summeLuE' ] , 2 ) .'</td></tr>
 <tr><td class="taL"    >Ihre Lehrverpflichtung:                        </td><td class="taC"     >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'Pflicht'  ] , 2 ) .'</td></tr>
-<tr><td class="taL sal">Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:      </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</td></tr>
+<tr><td class="taL sal"><a href="index.php?action=azkt&dozentKurz='. $dozent["aktuell"]["dozentLV"]["DozKurz"]  .'&output=html"> Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:      </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</a></td></tr>
 </table>';
 
 
@@ -358,7 +358,7 @@ function generateLuETable( $dozent )
 { $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
 <table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
-              <td  style="width: 60%"                  > Titel der Veranstaltung / Entlastung </td>
+              <td  style="width: 60%"                  > Titel der Veranstaltung </td>
               <td  style="width: 3%; " class="taC head" > T </td>
               <td  style="width: 3%; " class="taC head" > B </td>
               <td  style="width: 3%; " class="taC head" > K </td>
@@ -379,6 +379,11 @@ function generateLuETable( $dozent )
                  <td class="taC">' . $t[ "Anteil"] . '%                         </td>
                  <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
   }
+
+    $r .='<tr style="background-color: #cccccc; padding:5px;">
+              <td  colspan="7"  style="width: 60%"                  > Titel der Entlastung </td>
+
+              <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
   { $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
@@ -432,11 +437,13 @@ function generateAZKTTable( $dozent )
           </tr> ' ;
 
   unset( $dozent[ 'aktuell' ] );
+
+
   foreach ( $dozent   as $dVL )
-  {
+  { #deb( $dVL,1);
     $d = $dVL['dozentLV'];
     $r .= '<tr> 
-           <td class="taC">' .                $d[ "Jahr"       ]   . ' (' .  $d[ "Semester" ] .')  </td>
+           <td class="taC"><a href="http://localhost/zeitkonto/index.php?action=sb&jahr='. $d[ "Jahr"  ] . '&semester='.  $d[ "Semester" ] .'&dozentKurz='. $d[ "DozKurz"  ] . '&output=html">' .   $d[ "Jahr"   ]   . ' (' .  $d[ "Semester" ] .') </a> </td>
            <td class="taR">' . number_format( $d[ "summeLuE"   ] ,2 ) . ' </td>
            <td class="taR">' . number_format( $d[ "Pflicht"    ] ,2 ) . ' </td>
            <td class="taR">' . number_format( $d[ "saldo"      ] ,2 ) . ' </td>
