@@ -50,20 +50,19 @@ function updateValue( $table,  $key, $value, $col, $id, $quote = true )
    if ( $quote )  $value  = '"' .$value .'"';
    $sql = ' UPDATE ' .$table. ' SET ' .$key. ' = '.$value. ' WHERE ' .$col . ' = "' .$id .'"';
 
-   if ($db->query($sql) === TRUE)
-   {  echo "Record updated successfully";
-   }
-   else
-   { echo "Error updating record: " . $db->error;
-   }
+   if ($db->query($sql) === TRUE) { $e = "Record updated successfully";            }
+   else                           { $e =  "Error updating record: " . $db->error;  }
+
    $db->close();
+   echo $e;
+   return $e;
 }
 
 function connectDB()
 { $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
   if ($db -> connect_errno)
   { echo "Failed to connect to MySQL: " . $db->connect_error;
-     exit();
+    exit();
   }
   return ($db);
 }

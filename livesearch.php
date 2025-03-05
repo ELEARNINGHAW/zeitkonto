@@ -12,8 +12,8 @@ if ( strlen( $q ) > 0 )
 {
 foreach ( $liste as $li )
 {  if ( stristr( $li[ 'Name' ], $q ) OR stristr( $li[ 'Kurz' ], $q ) )
-   { if     ( $hint == "" ) { $hint =                   $li[ 'Name' ].' ('.$li[ 'Kurz' ]. ')' ; }
-     else                   { $hint =  $hint . "<br />".$li[ 'Name' ].' ('.$li[ 'Kurz' ]. ')' ; }
+   { if     ( $hint == "" ) { $hint =               "<a href='x.php?v=".$li[ "Kurz" ]. "'>".$li[ 'Name' ].' ('.$li[ 'Kurz' ]. ')'."</a>" ; }
+     else                   { $hint =  $hint . "<br/><a href='x.php?v=".$li[ "Kurz" ]. "'>".$li[ 'Name' ].' ('.$li[ 'Kurz' ]. ')'."</a>" ; }
    }
 }
 }

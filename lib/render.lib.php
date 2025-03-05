@@ -30,7 +30,7 @@ function renderStudiengangListe( $db )
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
           <th  style="width: 25%;" class="taC head" > Kurz      </th>
           <th  style="width: 50%;" class="taC head" > Name      </th>
-          <th  style="width: 25%;" class="taC head" > DepKurz      </th>
+          <th  style="width: 25%;" class="taC head" > DepKurz   </th>
          </tr> ' ;
   
   foreach ( $studiengangliste  as $dl )
@@ -358,31 +358,28 @@ function generateLuETable( $dozent )
 { $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
 <table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
-              <td  style="width: 60%"                  > Titel der Veranstaltung </td>
-              <td  style="width: 3%; " class="taC head" > T </td>
-              <td  style="width: 3%; " class="taC head" > B </td>
-              <td  style="width: 3%; " class="taC head" > K </td>
-              <td  style="width: 10%;" class="taC head" > Gruppe </td>
-              <td  style="width: 10%;" class="taC head" > SWS </td>
-              <td  style="width: 10%;" class="taC head" > Anteil </td>
-              <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
+        <td  style="width: 60%"           > Titel der Veranstaltung </td>
+        <td  style="width: 3%; " class="taC head" > T      </td>
+        <td  style="width: 3%; " class="taC head" > B      </td>
+        <td  style="width: 3%; " class="taC head" > K      </td>
+        <td  style="width: 10%;" class="taC head" > Gruppe </td>
+        <td  style="width: 10%;" class="taC head" > SWS    </td>
+        <td  style="width: 10%;" class="taC head" > Anteil </td>
+        <td  style="width: 10%;" class="taC head" > LVS    </td></tr> ' ;
   
   foreach ( $dozent["aktuell"]["veranstaltungsliste"]   as $t )
   {  $r .= '<tr> <td class="taL" id = "'. strtr( $t[ "Fach" ], ' ', '_' ) .'" onClick = "me( this );" oninput = "showResult(this, \'' .  $t[ "Fach" ] .'\' ); "  >' . $t[ "FachL"] . ' (' .  $t[ "Fach" ] .') </td>
-                 <td class="taC">' . $t[ "T"] . '                     </td>
-                 <td class="taC">' . $t[ "B"] . '                     </td>
-                 <td class="taC">' . $t[ "K"] . '                     </td>
-                 <td class="taC">' . $t[ "Studiengang"] . '                     </td>
-     
-     
-                 <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>                 
-                 <td class="taC">' . $t[ "Anteil"] . '%                         </td>
-                 <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
+            <td class="taC">' . $t[ "T"] . '                               </td>
+            <td class="taC">' . $t[ "B"] . '                               </td>
+            <td class="taC">' . $t[ "K"] . '                               </td>
+            <td class="taC">' . $t[ "Studiengang"] . '                     </td>   
+            <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>                 
+            <td class="taC">' . $t[ "Anteil"] . '%                         </td>
+            <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
   }
 
     $r .='<tr style="background-color: #cccccc; padding:5px;">
               <td  colspan="7"  style="width: 60%"                  > Titel der Entlastung </td>
-
               <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
