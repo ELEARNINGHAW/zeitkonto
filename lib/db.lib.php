@@ -1,23 +1,38 @@
 <?php
-
+$db1 = null;
 function connectDB()
 { $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
   if ($db -> connect_errno)
   { echo "Failed to connect to MySQL: " . $db->connect_error;
     exit();
   }
+
   return ($db);
 }
 
-function checkInput($name, $value)
-{ if     ( $name == 'dozentKurz' )  { if( strlen( $value ) > 7 )    die("ERROR: Malformed SQL statement: 001-". strlen( $value ));   }
-  else if( $name == 'jahr'       )  { if( strlen( $value ) > 4 )    die("ERROR: Malformed SQL statement: 002-". strlen( $value ));   }
-  else if( $name == 'semester'   )  { if( strlen( $value ) > 1 )    die("ERROR: Malformed SQL statement: 003-". strlen( $value ));   }
+function checkInput($db,  $name, $value)
+{ if     ( $name == 'dozentKurz'       )  { if( strlen( $value ) > 7  )    die("ERROR: Malformed SQL statement: 001-". strlen( $value ));   }
+  else if( $name == 'jahr'             )  { if( strlen( $value ) > 4  )    die("ERROR: Malformed SQL statement: 002-". strlen( $value ));   }
+  else if( $name == 'semester'         )  { if( strlen( $value ) > 1  )    die("ERROR: Malformed SQL statement: 003-". strlen( $value ));   }
+  else if( $name == 'name'             )  { if( strlen( $value ) > 25 )    die("ERROR: Malformed SQL statement: 003-". strlen( $value ));   }
+  else if( $name == 'vorname'          )  { if( strlen( $value ) > 25 )    die("ERROR: Malformed SQL statement: 004-". strlen( $value ));   }
+  else if( $name == 'pflicht_weg'      )  { if( strlen( $value ) > 5  )    die("ERROR: Malformed SQL statement: 005-". strlen( $value ));   }
+  else if( $name == 'status'           )  { if( strlen( $value ) > 1  )    die("ERROR: Malformed SQL statement: 006-". strlen( $value ));   }
+  else if( $name == 'kurz'             )  { if( strlen( $value ) > 5  )    die("ERROR: Malformed SQL statement: 007-". strlen( $value ));   }
+  else if( $name == 'geschlecht'       )  { if( strlen( $value ) > 1  )    die("ERROR: Malformed SQL statement: 008-". strlen( $value ));   }
+  else if( $name == 'professur'        )  { if( strlen( $value ) > 1  )    die("ERROR: Malformed SQL statement: 009-". strlen( $value ));   }
+  else if( $name == 'anrede'           )  { if( strlen( $value ) > 10 )    die("ERROR: Malformed SQL statement: 010-". strlen( $value ));   }
+  else if( $name == 'mailadresse'      )  { if( strlen( $value ) > 50 )    die("ERROR: Malformed SQL statement: 011-". strlen( $value ));   }
+  else if( $name == 'mailzustellung'   )  { if( strlen( $value ) > 1  )    die("ERROR: Malformed SQL statement: 012-". strlen( $value ));   }
+  else if( $name == 'department'       )  { if( strlen( $value ) > 10 )    die("ERROR: Malformed SQL statement: 013-". strlen( $value ));   }
+  else if( $name == 'zeitkonto'        )  { if( strlen( $value ) > 1  )    die("ERROR: Malformed SQL statement: 014-". strlen( $value ));   }
+
+  return mysqli_real_escape_string( $db,   $value );
 }
 
 
 function getArbeitszeitlisteDB( $db, $dozentKurz  )
-{ checkInput("dozentKurz", $dozentKurz);
+{ $dozentKurz = checkInput($db, "dozentKurz", $dozentKurz );
   $arbeitszeitliste = array();
   $saldoTotal = 0;
   $sql1   = "SELECT DISTINCT  Jahr, Semester  FROM `beteiligung` WHERE  DozentKurz = \"". $dozentKurz
@@ -37,11 +52,10 @@ function getArbeitszeitlisteDB( $db, $dozentKurz  )
       $saldo =  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
       $saldoTotal +=  $saldo;
 
-
       if ( $saldoTotal > 36 )
       { $overflow = $saldoTotal - 36 ;
         $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "LVS verfallen: ". number_format($overflow,1);
-         $saldoTotal = 36;
+        $saldoTotal = 36;
       }
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldoTotal" ] = $saldoTotal;
    }
@@ -54,9 +68,9 @@ function getArbeitszeitlisteDB( $db, $dozentKurz  )
 }
 
 function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
-{ checkInput("dozentKurz" , $dozentKurz );
-  checkInput("jahr"       , $jahr       );
-  checkInput("smester"    , $semester   );
+{ $dozentKurz = checkInput($db, "dozentKurz" , $dozentKurz );
+  $jahr       = checkInput($db, "jahr"       , $jahr       );
+  $semester   = checkInput($db, "smester"    , $semester   );
 
   $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
                                    . "\" AND DozentKurz = \"". $dozentKurz
@@ -76,8 +90,8 @@ function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
 }
 
 function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
-{ checkInput("jahr"       , $jahr       );
-  checkInput("smester"    , $semester   );
+{ $jahr     = checkInput($db, "jahr"       , $jahr       );
+  $semester = checkInput($db, "smester"    , $semester   );
 
   $sql2 = "SELECT * FROM `lva`  WHERE Jahr       = \"" . $jahr
         . "\"  AND Semester     = \"" . $semester
@@ -100,9 +114,9 @@ function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
 }
 
 function getEntlastungslisteDB( $db , $dozentKurz , $jahr , $semester )
-{ checkInput("dozentKurz" , $dozentKurz );
-  checkInput("jahr"       , $jahr       );
-  checkInput("smester"    , $semester   );
+{ $dozentKurz = checkInput($db, "dozentKurz" , $dozentKurz );
+  $jahr       = checkInput($db, "jahr"       , $jahr       );
+  $semester   = checkInput($db, "smester"    , $semester   );
 
   $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
   $result = $db -> query( $sql5 );
@@ -279,7 +293,7 @@ function setAnrede($dozent)
 }
 
 function getDozentDB($db, $dozentKurz)
-{ checkInput("dozentKurz" , $dozentKurz );
+{ $dozentKurz  = checkInput($db, "dozentKurz" , $dozentKurz );
 
   $sql6 = "SELECT * FROM `dozent` WHERE  Kurz =\"". $dozentKurz ."\"";
   $result = $db -> query($sql6);
@@ -293,9 +307,9 @@ function getDozentDB($db, $dozentKurz)
 }
 
 function getDozentLVDB($db, $dozentKurz, $jahr, $semester)
-{  checkInput("dozentKurz" , $dozentKurz );
-   checkInput("jahr"       , $jahr       );
-   checkInput("smester"    , $semester   );
+{  $dozentKurz  = checkInput( $db, "dozentKurz" , $dozentKurz );
+   $jahr        = checkInput( $db, "jahr"       , $jahr       );
+   $semester    = checkInput( $db, "smester"    , $semester   );
 
    $sql7 = "SELECT * FROM `lehrverpflichtung` WHERE Jahr = \"" . $jahr . "\" AND DozKurz = \"". $dozentKurz ."\"  AND Semester = \"". $semester ."\"";
    $result = $db -> query($sql7);

@@ -203,10 +203,15 @@ $pdf->Output($pdfName, 'I');
 }
 
 
-function getStundenbilanz( $jahr, $dozentKurz , $semester, $output = 'html' )
+function getStundenbilanz(   )
 { global $htmlheader;
+
+  $g = checkGetInput();
+
+  if( !isset( $output ) ) { $output =  $g[ 'output' ] ; }
+
   $db = connectDB();
-  $html = renderStundenbilanz( $db, $dozentKurz, $jahr, $semester );
+  $html = renderStundenbilanz( $db, $g['dozentKurz'], $g['jahr'], $g['semester'] );
   $html = $htmlheader . $html;
   error_reporting(0 );
   
@@ -215,22 +220,19 @@ function getStundenbilanz( $jahr, $dozentKurz , $semester, $output = 'html' )
   else                            { echo $html;          }
 }
 
-function getStandArbeitszeitkonto(   $dozentKurz , $output = 'html' )
-{ global $htmlheader;
+function getStandArbeitszeitkonto(   $output = 'html' )
+{
+    $g = checkGetInput();
+   # $g['dozentKurz'], $g['jahr'], $g['semester']
+    global $htmlheader;
   $db = connectDB();
-  $html = renderArbeitszeitkonto( $db, $dozentKurz );
+  $html = renderArbeitszeitkonto( $db, $g['dozentKurz'] );
   $html = $htmlheader . $html;
   error_reporting(0 );
 
-  if ( $output == 'ohne' )
-  {  return $html;
-  }
-  else if ( $output == 'pdf' )
-  { renderPDF( $html );
-  }
-  else
-  { echo $html;
-  }
+  if ( $output == 'ohne' )      { return $html;       }
+  else if ( $output == 'pdf' )  { renderPDF( $html ); }
+  else                          { echo $html;         }
 }
 
 function getRenderAlleDozenten()
@@ -243,7 +245,8 @@ function getRenderAlleDozenten()
 }
 
 function getRenderAlleDozentenSem()
-{ global $htmlheader, $htmlfooter;
+{ $g = checkGetInput();
+  global $htmlheader, $htmlfooter;
   $html = '';
   $db   = connectDB();
   $html = renderDozentenListeSem( $db );

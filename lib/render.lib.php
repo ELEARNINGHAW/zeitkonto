@@ -88,8 +88,8 @@ function renderDepartmentListe( $db )
 
 function renderDozentenListe( $db )
 { $dozentenliste   = getDozentenListeDB( $db );
-  
-  $r = '<table   style="width: 100%;   position: relative;" >';
+
+    $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
           <th  style="width: 5%"                  > Kurz    </th>
           <th  style="width: 10%;" class="taC head" > Vorname </th>
@@ -100,8 +100,12 @@ function renderDozentenListe( $db )
           <th  style="width: 5%; " class="taC head" > Zust.   </th>
           <th  style="width: 5%;" class="taC head" > Pflicht </th>
          </tr> ' ;
- 
-  foreach ( $dozentenliste  as $dl )
+
+
+
+
+
+    foreach ( $dozentenliste  as $dl )
   { $r .= '<tr>
              <td class="taL">' . $dl[ "Kurz" ] . ' </td>
              <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Vorname\'         ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'    );   " >' . $dl[ "Vorname"                     ] .  '</td>
@@ -113,14 +117,56 @@ function renderDozentenListe( $db )
              <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Pflicht_weg\'     ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\', 0 );   " >' .  number_format( $dl[ "Pflicht_weg" ], 2 ) .  '</td>
             </tr>';
   }
+
+
+
     $r .= '</table>';
-  mysqli_close($db);
+
+
+    $r .= '<table   style="width: 100%;   position: relative;" >';
+    $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
+          <th  style="width: 5%"                  > Kurz    </th>
+          <th  style="width: 10%;" class="taC head" > Vorname </th>
+          <th  style="width: 10%;" class="taC head" > Name    </th>
+          <th  style="width: 5%;" class="taC head" > Ges     </th>
+          <th  style="width: 10%;" class="taC head" > Status  </th>
+          <th  style="width: 10%;" class="taC head" > Mail    </th>
+          <th  style="width: 5%; " class="taC head" > Zust.   </th>
+          <th  style="width: 5%; " class="taC head" > Prof   </th>
+          <th  style="width: 5%; " class="taC head" > Department    </th>
+          <th  style="width: 5%; " class="taC head" > Zeitkonto  </th>          
+          <th  style="width: 10%;" class="taC head" > Pflicht </th>
+         </tr> ' ;
+
+
+
+    $r .= '<tr>
+<form  action = "setV2Db.php">
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="kurz">           </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="vorname">        </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="name">           </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="geschlecht">     </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="status">         </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="mailadresse">    </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="mailzustellung"> </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="professur">      </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="department">     </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="zeitkonto">      </td>          
+             <td class="taL"  name=""  ><input type="text" style="width:40%;"  name="pflicht_weg">    <input type="hidden"  name="action" value="sado"> <input type="submit"  style="width:40%"; value="save"> </td>
+ </form> </tr> ';
+
+
+
+
+    mysqli_close($db);
   return $r;
 }
 
 
 function renderLoading()
 {
+    $g = checkGetInput();
+
 echo "<style>
 body
 { margin:0;
