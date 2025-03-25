@@ -44,7 +44,7 @@ else if( $_GET[ 'action' ] == 'eeg'  )    ## -- Basisliste mit allen Entlastungs
 }
 
 else if( $_GET[ 'action' ] == 'ad'   )    ## -- Login Spinwheel  --
-{ renderLoading();
+{ getRenderLoading();
 }
 
 else if( $_GET[ 'action' ] == 'ls'   )    ## -- Login Screen  --
