@@ -79,21 +79,21 @@ function closeResult( h )
 }
  
 function showResult( str , h )
-{ y_pos = getYPos(str);
+{ y_pos = getYPos( str );
   x_pos = 10;
        
   y_pos += 30;
  
-  var d = document.getElementById("livesearch");
+  var d = document.getElementById( "livesearch" );
   d.style.position = "absolute";
-  d.style.left     = x_pos+"px";
-  d.style.top      = y_pos+"px"; 
+  d.style.left     = x_pos + "px";
+  d.style.top      = y_pos + "px"; 
   d.style.display  = "block";
            
   str = str.innerHTML;  
-  str.replace(/<\/?[^>]+(>|$)/g, "");
+  str.replace( /<\/?[^>]+(>|$)/g, "" );
   
-  if (str.length == 0)
+  if ( str.length == 0 )
   { document.getElementById( "livesearch" ).innerHTML    = "";
     document.getElementById( "livesearch" ).style.border = "0px";
     return;
@@ -117,6 +117,14 @@ function  getYPos(x)
 }
 
 function me( x )  // -- Make Element editable
+{ x.contentEditable = "true";
+  
+  str = x.innerHTML;  
+  str.replace(/<\/?[^>]+(>|$)/g, "");   
+  window.oldInnerHTML = str;
+}
+
+function me2( x )  // -- Make Element editable
 { x.contentEditable = "true";
   
   str = x.innerHTML;  
@@ -195,40 +203,36 @@ $pdf->Output($pdfName, 'I');
 }
 
 
-function getStundenbilanz( $jahr, $dozentKurz , $semester, $output = 'html' )
+function getStundenbilanz(   )
 { global $htmlheader;
+
+  $g = checkGetInput();
+
+  if( !isset( $output ) ) { $output =  $g[ 'output' ] ; }
+
   $db = connectDB();
-  $html = renderStundenbilanz( $db, $dozentKurz, $jahr, $semester );
+  $html = renderStundenbilanz( $db, $g['dozentKurz'], $g['jahr'], $g['semester'] );
   $html = $htmlheader . $html;
   error_reporting(0 );
   
-  if ( $output == 'ohne' )
-  {  return $html;
-  }
-  else if ( $output == 'pdf' )
-  {  renderPDF( $html );
-  }
-  else
-  { echo $html;
-  }
+  if       ( $output == 'ohne' )  { return $html;        }
+  else if  ( $output == 'pdf'  )  { renderPDF( $html );  }
+  else                            { echo $html;          }
 }
 
-function getStandArbeitszeitkonto(   $dozentKurz , $output = 'html' )
-{ global $htmlheader;
+function getStandArbeitszeitkonto(   $output = 'html' )
+{
+    $g = checkGetInput();
+   # $g['dozentKurz'], $g['jahr'], $g['semester']
+    global $htmlheader;
   $db = connectDB();
-  $html = renderArbeitszeitkonto( $db, $dozentKurz );
+  $html = renderArbeitszeitkonto( $db, $g['dozentKurz'] );
   $html = $htmlheader . $html;
   error_reporting(0 );
 
-  if ( $output == 'ohne' )
-  {  return $html;
-  }
-  else if ( $output == 'pdf' )
-  { renderPDF( $html );
-  }
-  else
-  { echo $html;
-  }
+  if ( $output == 'ohne' )      { return $html;       }
+  else if ( $output == 'pdf' )  { renderPDF( $html ); }
+  else                          { echo $html;         }
 }
 
 function getRenderAlleDozenten()
@@ -241,7 +245,8 @@ function getRenderAlleDozenten()
 }
 
 function getRenderAlleDozentenSem()
-{ global $htmlheader, $htmlfooter;
+{ $g = checkGetInput();
+  global $htmlheader, $htmlfooter;
   $html = '';
   $db   = connectDB();
   $html = renderDozentenListeSem( $db );
@@ -251,8 +256,7 @@ function getRenderAlleDozentenSem()
 }
 
 function getRenderAlleFaecher()
-{
-  global $htmlheader, $htmlfooter;
+{ global $htmlheader, $htmlfooter;
   $header = $htmlheader;
   $html = '';
   $db = connectDB();
@@ -263,8 +267,7 @@ function getRenderAlleFaecher()
 }
 
 function getRenderAlleDepartments()
-{
-    global $htmlheader, $htmlfooter;
+{ global $htmlheader, $htmlfooter;
   $html = '';
   $db = connectDB();
   $html = renderDepartmentListe( $db );
@@ -274,37 +277,32 @@ function getRenderAlleDepartments()
 }
 
 function getRenderAlleStudiengang()
-{
-    global $htmlheader, $htmlfooter;
+{ global $htmlheader, $htmlfooter;
   $html = '';
   $db = connectDB();
   $html = renderStudiengangListe( $db );
-    $html = $htmlheader . $html . $htmlfooter;
+  $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
 }
 
 function getRenderAlleEntlastungsgruenden()
-{
-    global $htmlheader, $htmlfooter;
-    $html = '';
-    $db = connectDB();
-    $html = renderEntlastungsgruendeListe( $db );
-    $html = $htmlheader . $html . $htmlfooter;
-#  error_reporting(0 );
-    echo $html;
+{ global $htmlheader, $htmlfooter;
+  $html = '';
+  $db = connectDB();
+  $html = renderEntlastungsgruendeListe( $db );
+  $html = $htmlheader . $html . $htmlfooter;
+# error_reporting(0 );
+  echo $html;
 }
-
 
 function checkGetInput()
-{
-    if (isset( $_GET[ 'jahr'       ]  ) ) { $g[ 'jahr'       ]  =  $_GET[ 'jahr'       ] ; $_SESSION[ 'aktuell' ][ 'jahr'     ] = $g[ 'jahr'        ];} #else  { $g[ 'jahr'       ]  =  0; }
-    if (isset( $_GET[ 'semester'   ]  ) ) { $g[ 'semester'   ]  =  $_GET[ 'semester'   ] ; $_SESSION[ 'aktuell' ][ 'semester' ] = $g[ 'semester'    ];} #else  { $g[ 'semester'   ]  =  0; }
-    if (isset( $_GET[ 'dozentKurz' ]  ) ) { $g[ 'dozentKurz' ]  =  $_GET[ 'dozentKurz' ] ; } else  { $g[ 'dozentKurz' ]  =  0; }
-    if (isset( $_GET[ 'output'     ]  ) ) { $g[ 'output'     ]  =  $_GET[ 'output'     ] ; } else  { $g[ 'output'     ]  =  0; }
-    return $g;
+{ if (isset( $_GET[ 'jahr'       ]  ) ) { $g[ 'jahr'       ]  =  $_GET[ 'jahr'       ] ; $_SESSION[ 'aktuell' ][ 'jahr'     ] = $g[ 'jahr'        ];} #else  { $g[ 'jahr'       ]  =  0; }
+  if (isset( $_GET[ 'semester'   ]  ) ) { $g[ 'semester'   ]  =  $_GET[ 'semester'   ] ; $_SESSION[ 'aktuell' ][ 'semester' ] = $g[ 'semester'    ];} #else  { $g[ 'semester'   ]  =  0; }
+  if (isset( $_GET[ 'dozentKurz' ]  ) ) { $g[ 'dozentKurz' ]  =  $_GET[ 'dozentKurz' ] ; } else  { $g[ 'dozentKurz' ]  =  0; }
+  if (isset( $_GET[ 'output'     ]  ) ) { $g[ 'output'     ]  =  $_GET[ 'output'     ] ; } else  { $g[ 'output'     ]  =  0; }
+  return $g;
 }
-
 
 function deb($con, $kill = false)
 { echo "<pre>";
@@ -312,6 +310,5 @@ function deb($con, $kill = false)
     echo "</pre>";
     if($kill) {die();}
 }
-
 
 ?>

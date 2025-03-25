@@ -43,7 +43,7 @@ function getArbeitszeitlisteDB( $db, $dozentKurz  )
       if ( $saldoTotal > 36 )
       {
         $overflow = $saldoTotal - 36 ;
-        $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "LVS cut: ". number_format($overflow,1);
+        $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "LVS verfallen: ". number_format($overflow,1);
          $saldoTotal = 36;
       }
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldoTotal" ] = $saldoTotal;
@@ -152,12 +152,12 @@ function getBeteiligungDB($db, $veranstaltung )
     $result = $db -> query( $sql6 );
 
     $row = $result -> fetch_all( MYSQLI_ASSOC );
-   # deb($row);
+
     foreach ( $row as $beteiligung )
     { $beteiligung[ 'dozent' ]  = getDozentDB( $db , $beteiligung[ 'DozentKurz' ] ) ;
       $beteiligungAlle[ ]       = getVeranstaltungDB($db , $beteiligung, $beteiligung[ 'Jahr' ], $beteiligung[ 'Semester' ] );
     }
-#deb($beteiligungAlle);
+
     return $beteiligungAlle;
 }
 

@@ -30,7 +30,7 @@ function renderStudiengangListe( $db )
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
           <th  style="width: 25%;" class="taC head" > Kurz      </th>
           <th  style="width: 50%;" class="taC head" > Name      </th>
-          <th  style="width: 25%;" class="taC head" > DepKurz      </th>
+          <th  style="width: 25%;" class="taC head" > DepKurz   </th>
          </tr> ' ;
   
   foreach ( $studiengangliste  as $dl )
@@ -88,8 +88,8 @@ function renderDepartmentListe( $db )
 
 function renderDozentenListe( $db )
 { $dozentenliste   = getDozentenListeDB( $db );
-  
-  $r = '<table   style="width: 100%;   position: relative;" >';
+
+    $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
           <th  style="width: 5%"                  > Kurz    </th>
           <th  style="width: 10%;" class="taC head" > Vorname </th>
@@ -100,8 +100,12 @@ function renderDozentenListe( $db )
           <th  style="width: 5%; " class="taC head" > Zust.   </th>
           <th  style="width: 5%;" class="taC head" > Pflicht </th>
          </tr> ' ;
- 
-  foreach ( $dozentenliste  as $dl )
+
+
+
+
+
+    foreach ( $dozentenliste  as $dl )
   { $r .= '<tr>
              <td class="taL">' . $dl[ "Kurz" ] . ' </td>
              <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Vorname\'         ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\'    );   " >' . $dl[ "Vorname"                     ] .  '</td>
@@ -113,14 +117,56 @@ function renderDozentenListe( $db )
              <td class="taL" onClick = "me( this );" oninput = "setV2DB(  \'dozent\'  , \'Pflicht_weg\'     ,  this , \'Kurz\'  ,  \''.  $dl[ "Kurz"  ]. '\', 0 );   " >' .  number_format( $dl[ "Pflicht_weg" ], 2 ) .  '</td>
             </tr>';
   }
+
+
+
     $r .= '</table>';
-  mysqli_close($db);
+
+
+    $r .= '<table   style="width: 100%;   position: relative;" >';
+    $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">
+          <th  style="width: 5%"                  > Kurz    </th>
+          <th  style="width: 10%;" class="taC head" > Vorname </th>
+          <th  style="width: 10%;" class="taC head" > Name    </th>
+          <th  style="width: 5%;" class="taC head" > Ges     </th>
+          <th  style="width: 10%;" class="taC head" > Status  </th>
+          <th  style="width: 10%;" class="taC head" > Mail    </th>
+          <th  style="width: 5%; " class="taC head" > Zust.   </th>
+          <th  style="width: 5%; " class="taC head" > Prof   </th>
+          <th  style="width: 5%; " class="taC head" > Department    </th>
+          <th  style="width: 5%; " class="taC head" > Zeitkonto  </th>          
+          <th  style="width: 10%;" class="taC head" > Pflicht </th>
+         </tr> ' ;
+
+
+
+    $r .= '<tr>
+<form  action = "setV2Db.php">
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="kurz">           </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="vorname">        </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="name">           </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="geschlecht">     </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="status">         </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="mailadresse">    </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="mailzustellung"> </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="professur">      </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="department">     </td>
+             <td class="taL"  name=""  ><input type="text" style="width:100%;" name="zeitkonto">      </td>          
+             <td class="taL"  name=""  ><input type="text" style="width:40%;"  name="pflicht_weg">    <input type="hidden"  name="action" value="sado"> <input type="submit"  style="width:40%"; value="save"> </td>
+ </form> </tr> ';
+
+
+
+
+    mysqli_close($db);
   return $r;
 }
 
 
 function getRenderLoading()
 {
+    $g = checkGetInput();
+
 echo "<style>
 body
 { margin:0;
@@ -359,31 +405,28 @@ function generateLuETable( $dozent )
 { $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
 <table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
-              <td  style="width: 60%"                  > Titel der Veranstaltung </td>
-              <td  style="width: 3%; " class="taC head" > T </td>
-              <td  style="width: 3%; " class="taC head" > B </td>
-              <td  style="width: 3%; " class="taC head" > K </td>
-              <td  style="width: 10%;" class="taC head" > Gruppe </td>
-              <td  style="width: 10%;" class="taC head" > SWS </td>
-              <td  style="width: 10%;" class="taC head" > Anteil </td>
-              <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
+        <td  style="width: 60%"           > Titel der Veranstaltung </td>
+        <td  style="width: 3%; " class="taC head" > T      </td>
+        <td  style="width: 3%; " class="taC head" > B      </td>
+        <td  style="width: 3%; " class="taC head" > K      </td>
+        <td  style="width: 10%;" class="taC head" > Gruppe </td>
+        <td  style="width: 10%;" class="taC head" > SWS    </td>
+        <td  style="width: 10%;" class="taC head" > Anteil </td>
+        <td  style="width: 10%;" class="taC head" > LVS    </td></tr> ' ;
   
   foreach ( $dozent["aktuell"]["veranstaltungsliste"]   as $t )
   {  $r .= '<tr> <td class="taL" id = "'. strtr( $t[ "Fach" ], ' ', '_' ) .'" onClick = "me( this );" oninput = "showResult(this, \'' .  $t[ "Fach" ] .'\' ); "  >' . $t[ "FachL"] . ' (' .  $t[ "Fach" ] .') </td>
-                 <td class="taC">' . $t[ "T"] . '                     </td>
-                 <td class="taC">' . $t[ "B"] . '                     </td>
-                 <td class="taC">' . $t[ "K"] . '                     </td>
-                 <td class="taC">' . $t[ "Studiengang"] . '                     </td>
-     
-     
-                 <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>                 
-                 <td class="taC">' . $t[ "Anteil"] . '%                         </td>
-                 <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
+            <td class="taC">' . $t[ "T"] . '                               </td>
+            <td class="taC">' . $t[ "B"] . '                               </td>
+            <td class="taC">' . $t[ "K"] . '                               </td>
+            <td class="taC">' . $t[ "Studiengang"] . '                     </td>   
+            <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>                 
+            <td class="taC">' . $t[ "Anteil"] . '%                         </td>
+            <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
   }
 
     $r .='<tr style="background-color: #cccccc; padding:5px;">
               <td  colspan="7"  style="width: 60%"                  > Titel der Entlastung </td>
-
               <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
