@@ -10,12 +10,12 @@ if ( isset( $_GET[ 'action'      ]  ) )
 
 if( $_GET[ 'action' ] == 'ad' )  ## -- Hauptliste -- Liste mit allen Dozierenden --
 { $g = checkGetInput();
-     renderLoading();
+  getRenderLoading();
 }
 
 if( $_GET[ 'action' ] == 'lad' )  ## -- Hauptliste -- Liste mit allen Dozierenden --
 { $g = checkGetInput();
-    getRenderAlleDozentenSem();
+  getRenderAlleDozentenSem();
 }
 
 else if( $_GET[ 'action' ] == 'sb' )  ## -- aktuelle Stundenbilanz eines Dozierenden --

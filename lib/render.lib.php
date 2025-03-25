@@ -119,7 +119,7 @@ function renderDozentenListe( $db )
 }
 
 
-function renderLoading()
+function getRenderLoading()
 {
 echo "<style>
 body
@@ -250,13 +250,14 @@ function renderArbeitszeitkonto( $db, $dozentKurz )
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false )
 { $dozent   = getDozentDB( $db, $dozentKurz );
+
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
-  $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB( $db,  $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
-  $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB( $db, $dozentKurz, $jahr, $semester );
-  $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz( $dozent );
+  $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB(            $db, $dozentKurz, $jahr, $semester );
+  $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB(   $db, $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
+  $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz(        $dozent );
 
- #deb($dozent[ 'aktuell' ] );
+ #deb($dozent[ 'aktuell' ] ,1);
 
   if ( $onlyData )
   { $stundenbilanz = $dozent[ 'aktuell' ];

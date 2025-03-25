@@ -152,12 +152,12 @@ function getBeteiligungDB($db, $veranstaltung )
     $result = $db -> query( $sql6 );
 
     $row = $result -> fetch_all( MYSQLI_ASSOC );
-
+   # deb($row);
     foreach ( $row as $beteiligung )
     { $beteiligung[ 'dozent' ]  = getDozentDB( $db , $beteiligung[ 'DozentKurz' ] ) ;
       $beteiligungAlle[ ]       = getVeranstaltungDB($db , $beteiligung, $beteiligung[ 'Jahr' ], $beteiligung[ 'Semester' ] );
     }
-
+#deb($beteiligungAlle);
     return $beteiligungAlle;
 }
 
