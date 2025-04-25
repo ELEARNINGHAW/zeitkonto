@@ -1,11 +1,12 @@
 <?php
 
 require_once('lib/TCPDF/tcpdf.php');
-$htmlheader = '
-<html>
+$htmlheader = '<!doctype html>
+<html> 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
+
 <title> title </title>
 
 <style type="text/css">
@@ -95,7 +96,7 @@ function showResult( str , h )
   
   if ( str.length == 0 )
   { document.getElementById( "livesearch" ).innerHTML    = "";
-    document.getElementById( "livesearch" ).style.border = "0px";
+    document.getElementById( "livesearch" ).style.border = "0";
     return;
   }
   var xmlhttp = new XMLHttpRequest();
@@ -135,7 +136,7 @@ function me2( x )  // -- Make Element editable
 function setV2DB( t , k, v , c , i , n = 0 )   // -- Set Value to DataBase
 { if ( v.innerHTML.length == 0 )
   { v.innerHTML    = "";
-    v.style.border = "0px";
+    v.style.border = "0";
     return;
   }
   var xmlhttp = new XMLHttpRequest();
@@ -156,8 +157,12 @@ $htmlfooter = '
 
 function renderPDF($html)
 {
+ ini_set('display_errors', '1');
+ ini_set('display_startup_errors', '1');
+ error_reporting(E_ALL);
+
  $pdfName = "DAS PDF";
- 
+
  $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // Dokumenteninformationen
@@ -203,18 +208,20 @@ $pdf->Output($pdfName, 'I');
 }
 
 
-function getStundenbilanz(   )
-{ global $htmlheader;
+function getStundenbilanz( )
+{ global $htmlheader, $htmlfooter;
 
   $g = checkGetInput();
 
   if( !isset( $output ) ) { $output =  $g[ 'output' ] ; }
 
-  $db = connectDB();
-  $html = renderStundenbilanz( $db, $g['dozentKurz'], $g['jahr'], $g['semester'] );
-  $html = $htmlheader . $html;
+  $db   = connectDB();
+  $html = renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] );
+  $html = $htmlheader . $html  . $htmlfooter;;
   error_reporting(0 );
-  
+
+  #deb($html,1);
+  #  $html = "<html><body><h1>Hallo</h1></body></html>";
   if       ( $output == 'ohne' )  { return $html;        }
   else if  ( $output == 'pdf'  )  { renderPDF( $html );  }
   else                            { echo $html;          }

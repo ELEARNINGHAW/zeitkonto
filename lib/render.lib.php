@@ -341,7 +341,7 @@ function renderZeitkontoProf($dozent)
 $html = '
 <table style="width: 100%; height: 50px;  border-spacing: 0"><tr>
  <td style="border-bottom: 0 solid white; padding: 0;" > <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div><br>' .  date("d.m.Y")  .'   </td>
- <td style="text-align: right ; border-bottom: 0 solid white; padding: 0; ">  <img width="160px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  > </td>
+ <td style="text-align: right ; border-bottom: 0 solid white; padding: 0; ">  <img width="160;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  > </td>
 </tr></table>
 <br>
 <br> 
@@ -355,7 +355,9 @@ $html .= '<table   style="width: 100%;"  >
 <td style="width: 10%;" class="taC head" > LVS </td></tr>
 <tr><td class="taL sum">Summe der Lehrveranstaltungen und Entlastungen:</td><td class="taC sum" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'summeLuE' ] , 2 ) .'</td></tr>
 <tr><td class="taL"    >Ihre Lehrverpflichtung:                        </td><td class="taC"     >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'Pflicht'  ] , 2 ) .'</td></tr>
-<tr><td class="taL sal"><a href="index.php?action=azkt&dozentKurz='. $dozent["aktuell"]["dozentLV"]["DozKurz"]  .'&output=html"> Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:      </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</a></td></tr>
+<!--tr><td class="taL sal"><a href="index.php?action=azkt&dozentKurz='. $dozent["aktuell"]["dozentLV"]["DozKurz"]  .'&output=html">Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:</a> </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</td></tr-->
+<tr><td class="taL sal">Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:</td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</td></tr>
+
 </table>';
 
 
@@ -370,7 +372,7 @@ Mit freundlichen Grüßen<br/>
 Martin Holle, Prodekan LS
 </div>';
   
-$html .=  '<img width="300px;" alt="sign-holle" src="img/sign-holle.png">';
+$html .=  '<img width="300;" alt="sign-holle" src="img/sign-holle.png">';
 $html .=  generateBeteiligung( $dozent );
 
 return $html;
@@ -381,7 +383,7 @@ function renderZeitkontoTotalProf($arbeitszeitliste)
 $html = '
 <table style="width: 100%; height: 50px;  border-spacing: 0"><tr>
  <td style="border-bottom: 0 solid white; padding: 0;" > <div class="headertxt">Hochschule für Angewandte Wissenschaften<br/>Fakultät Life Sciences<br/>Dekanat</div><br>' .  date("d.m.Y")  .'   </td>
- <td style="text-align: right ; border-bottom: 0 solid white; padding: 0; ">  <img width="160px;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  > </td>
+ <td style="text-align: right ; border-bottom: 0 solid white; padding: 0; ">  <img width="160;" alt="haw-logo"   src="img/HAW_Marke_grau_RGB.png"  > </td>
 </tr></table>
 <br>
 <br> 
@@ -397,7 +399,7 @@ Für weitere Fragen stehe ich Ihnen gerne zur Verfügung.<br/><br/>
 Mit freundlichen Grüßen<br/>
 Martin Holle, Prodekan LS
 </div>';
-    $html .=  '<img width="300px;" alt="sign-holle" src="img/sign-holle.png">';
+    $html .=  '<img width="300;" alt="sign-holle" src="img/sign-holle.png">';
     return $html;
 }
 
@@ -405,10 +407,10 @@ function generateLuETable( $dozent )
 { $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
 <table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
-        <td  style="width: 60%"           > Titel der Veranstaltung </td>
-        <td  style="width: 3%; " class="taC head" > T      </td>
-        <td  style="width: 3%; " class="taC head" > B      </td>
-        <td  style="width: 3%; " class="taC head" > K      </td>
+        <td  style="width: 50%"           > Titel der Veranstaltung </td>
+        <td  style="width: 5%; " class="taC head" > T      </td>
+        <td  style="width: 5%; " class="taC head" > B      </td>
+        <!-- td  style="width: 3%; " class="taC head" > K      </td -->
         <td  style="width: 10%;" class="taC head" > Gruppe </td>
         <td  style="width: 10%;" class="taC head" > SWS    </td>
         <td  style="width: 10%;" class="taC head" > Anteil </td>
@@ -417,17 +419,20 @@ function generateLuETable( $dozent )
   foreach ( $dozent["aktuell"]["veranstaltungsliste"]   as $t )
   {  $r .= '<tr> <td class="taL" id = "'. strtr( $t[ "Fach" ], ' ', '_' ) .'" onClick = "me( this );" oninput = "showResult(this, \'' .  $t[ "Fach" ] .'\' ); "  >' . $t[ "FachL"] . ' (' .  $t[ "Fach" ] .') </td>
             <td class="taC">' . $t[ "T"] . '                               </td>
-            <td class="taC">' . $t[ "B"] . '                               </td>
-            <td class="taC">' . $t[ "K"] . '                               </td>
+            <td class="taC">' . number_format( $t[ "B" ], 1 )  . '                               </td>
+            <!-- td class="taC">' . $t[ "K"] . '                               </td-->
             <td class="taC">' . $t[ "Studiengang"] . '                     </td>   
             <td class="taC">' . number_format( $t[ "SWS" ], 2 ) . '</td>                 
             <td class="taC">' . $t[ "Anteil"] . '%                         </td>
             <td class="taC">' . number_format( ($t[ "LVS" ] * $t[ "T" ] * $t[ "B" ]  ), 2 ) . '</td></tr> '    ;
   }
 
-    $r .='<tr style="background-color: #cccccc; padding:5px;">
-              <td  colspan="7"  style="width: 60%"                  > Titel der Entlastung </td>
-              <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
+  $r .='</table>';
+  $r .='<br/><br/><table  style="width: 100%;" >';
+
+  $r .='<tr style="background-color: #cccccc; padding:5px;">
+        <td  colspan="7"  style="width: 90%"                  > Titel der Entlastung </td>
+        <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
   { $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
@@ -435,16 +440,18 @@ function generateLuETable( $dozent )
   
   $r .= '<tr><td colspan="7" class="sum"> Summe der Lehrveranstaltungen und Entlastungen: </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "summeLuE" ]  , 2) . '</td></tr>' ;
   $r .= '</table>';
+
   return $r;
 }
 
 function generateBeteiligung( $dozent )
 {
-    $r =   '<br/<br/<br/<br/><div class="fliestxt">Anteile bei Veranstaltung mit Beteiligung</div><br/>';
+  $r =  '<div style="page-break-before:always;"></div>';
+  $r .=  '<div  class="fliestxt">Anteile bei Veranstaltung mit Beteiligung</div><br/>';
 
-    foreach ( $dozent["aktuell"]["beteiligung"]   as $beteiligung )
-    {  $anteilGesamt = 0;
-        $LVSGesamt = 0;
+  foreach ( $dozent["aktuell"]["beteiligung"]   as $beteiligung )
+  {  $anteilGesamt = 0;
+     $LVSGesamt = 0;
 
         $r .= '<table  style="width: 100%;" >';
         $r .='<tr style="background-color: #cccccc; padding:5px;">
