@@ -1,47 +1,47 @@
 ﻿Name Lehrende/r;Semester;Name LV/Praktikum;Kürzel;Studiengruppe;LVS;Gruppen;Anteil(%);Betreuung;Teilnehmer;LVS Prof;LVS Kontrolle;Prof-Kontrolle;Kommentar
-Werner;Sose 24;Biochemie 2;B2;3B;4,00;1,0;100;1,00;45;4,00;4,00;0,00;
+Andrä;Sose 24;Biochemie 2;BC2;3B;4,00;1,0;100;1,00;45;4,00;4,00;0,00;
 Andrä;Sose 24;Bioassays;Bas;S2P;2,00;1,0;50;1,00;20;1,00;1,00;0,00;
 Andrä;Sose 24;Biochemical Analytics;BCA;S2P;2,00;1,0;100;1,00;20;2,00;2,00;0,00;
-Andrä;Sose 24;Biochemie Praktikum;BCP;3B;2,00;2,0;100;1,00;14;4,00;4,00;0,00;
+Andrä;Sose 24;Biochemie Praktikum;BC P;3B;2,00;2,0;100;1,00;14;4,00;4,00;0,00;
 Andrä;Sose 24;Organische Chemie Praktikum;OCP;2B;2,00;1,0;100;0,30;12;0,60;0,60;0,00;
 Andrä;WiSe 23/24;Biochemie 2;BC2;3B;4,00;1,0;100;1,00;45;4,00;4,00;0,00;
-Andrä;WiSe 23/24;Biochemie Praktikum;BCP;3B;2,00;2,0;100;1,00;14;4,00;4,00;0,00;
-Andrä;WiSe 23/24;Organische Chemie Praktikum;OCP;2B;2,00;1,0;100;0,30;12;0,60;0,60;0,00;
+Andrä;WiSe 23/24;Biochemie Praktikum;BC P;3B;2,00;2,0;100;1,00;14;4,00;4,00;0,00;
+Andrä;WiSe 23/24;Organische Chemie Praktikum;OC P;2B;2,00;1,0;100;0,30;12;0,60;0,60;0,00;
 Andrä;WiSe 23/24;Seminar Pharmcycle;Pha Cy;4B/5B/6B;2,00;1,0;25;1,00;30;0,50;0,50;0,00;
 Andrä;WiSe 23/24;Einführung Pharmakologie;Eph a;5B;2,00;1,0;40;1,00;25;0,80;0,80;0,00;
-Andrä;WiSe 24/25;Biochemie 2;B2;3B;4,00;1,0;100;1,00;45;4,00;4,00;0,00;
-Andrä;WiSe 24/25;Biochemie Praktikum;BCP;3B;2,00;2,0;100;1,00;14;4,00;4,00;0,00;
-Andrä;WiSe 24/25;Organische Chemie Praktikum;OCP;2B;2,00;1,0;100;0,30;12;0,60;0,60;0,00;
+Andrä;WiSe 24/25;Biochemie 2;BC2;3B;4,00;1,0;100;1,00;45;4,00;4,00;0,00;
+Andrä;WiSe 24/25;Biochemie Praktikum;BC P;3B;2,00;2,0;100;1,00;14;4,00;4,00;0,00;
+Andrä;WiSe 24/25;Organische Chemie Praktikum;OC P;2B;2,00;1,0;100;0,30;12;0,60;0,60;0,00;
 Andrä;WiSe 24/25;Seminar Pharmcycle;Pha Cy;48/58/68;2,00;1,0;25;1,00;25;0,50;0,50;0,00;
-Andräe;Sose 24;Technik in der Produktentwicklung ;TProE ;OSSP2 ;4,00;1,0;31,25;1,00;20;1,25;1,25;0,00;
-Andräe;Sose 24;Großküchen- und Reinigungstechnik ;GKR ;OSSP3 ;4,00;1,0;100;1,00;5;4,00;4,00;0,00;
-Andräe;Sose 24;Haushaltstechnik ;HT ;3O ;2,50;1,0;100;1,00;50;2,50;2,50;0,00;
-Andräe;Sose 24;Mathematik und Physik ;MP ;2O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
-Andräe;Sose 24;Ökotrophologie 2 ;OET2 ;3O ;4,00;1,0;6,25;1,00;60;0,25;0,25;0,00;
-Andräe;Sose 24;Nachhaltige Lebensmittel- und Energiewirtschaft;NLEW ;WO ;4,00;1,0;93,75;1,00;15;3,75;3,75;0,00;1 Termin wurde von einer Gastdozentin (Dr, Ulrike Eberle) durchgeführt 
-Andräe;Sose 24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
-Andräe;Sose 24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;3,0;100;0,30;30;1,35;1,35;0,00;
-Andräe;Sose 24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
-Andräe;Sose 24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;3,0;100;0,30;30;1,35;1,35;0,00;
-Andräe;WiSe 23/24;Technik in der Produktentwicklung ;TProE ;OSSP2 ;4,00;1,0;31,25;1,00;20;1,25;1,25;0,00;
-Andräe;WiSe 23/24;Großküchen- und Reinigungstechnik;GKR ;OSSP3 ;0,50;1,0;100;1,00;1;0,50;0,50;0,00;Modul wurde im WiSe 23/24 aufgrund einer geringer Teilnehmendenzahl im reduzierten Umfang mit Betreuung einer Hausarbeit als Prüfungsleistung durchgeführt 
-Andräe;WiSe 23/24;Haushaltstechnik ;HT ;3O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
-Andräe;WiSe 23/24;Mathematik und Physik ;MP ;2O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
-Andräe;WiSe 23/24;Ökotrophologie 2;OET2 ;3O ;4,00;1,0;12,5;1,00;60;0,50;0,50;0,00;Koordination ÖT2 mit Christoph Wegmann 
-Andräe;WiSe 23/24;Produktbewertung und Messtechnik ;PBM ;WO ;4,00;0,0;100;0,00;0;0,00;0,00;0,00;Modul hat im WiSe 23/24 mangels Teilnehmenden nicht stattgefunden 
-Andräe;WiSe 23/24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
-Andräe;WiSe 23/24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;3,0;100;0,30;45;1,35;1,35;0,00;
-Andräe;WiSe 23/24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
-Andräe;WiSe 23/24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;2,0;100;0,30;30;0,90;0,90;0,00;
-Andräe;WiSe 24/25;Technik in der Produktentwicklung ;TProE ;OSSP2 ;4,00;1,0;33,25;1,00;15;1,33;1,33;0,00;
-Andräe;WiSe 24/25;Großküchen- und Reinigungstechnik ;GKR ;OSSP3 ;4,00;1,0;100;1,00;5;4,00;4,00;0,00;
-Andräe;WiSe 24/25;Haushaltstechnik ;HT ;3O ;2,50;1,0;100;1,00;50;2,50;2,50;0,00;
-Andräe;WiSe 24/25;Mathematik und Physik ;MP ;2O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
-Andräe;WiSe 24/25;Ökotrophologie 2 ;OET2 ;3O ;4,00;1,0;6,25;1,00;60;0,25;0,25;0,00;
-Andräe;WiSe 24/25;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;2,0;100;1,00;30;3,00;3,00;0,00;
-Andräe;WiSe 24/25;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;2,0;100;0,30;30;0,90;0,90;0,00;
-Andräe;WiSe 24/25;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
-Andräe;WiSe 24/25;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;3,0;100;0,30;30;1,35;1,35;0,00;
+Andreä;Sose 24;Technik in der Produktentwicklung ;TProE ;OSSP2 ;4,00;1,0;31,25;1,00;20;1,25;1,25;0,00;
+Andreä;Sose 24;Großküchen- und Reinigungstechnik ;GKR ;OSSP3 ;4,00;1,0;100;1,00;5;4,00;4,00;0,00;
+Andreä;Sose 24;Haushaltstechnik ;HT ;3O ;2,50;1,0;100;1,00;50;2,50;2,50;0,00;
+Andreä;Sose 24;Mathematik und Physik ;MP ;2O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
+Andreä;Sose 24;Ökotrophologie 2 ;OET2 ;3O ;4,00;1,0;6,25;1,00;60;0,25;0,25;0,00;
+Andreä;Sose 24;Nachhaltige Lebensmittel- und Energiewirtschaft;NLEW ;WO ;4,00;1,0;93,75;1,00;15;3,75;3,75;0,00;1 Termin wurde von einer Gastdozentin (Dr, Ulrike Eberle) durchgeführt 
+Andreä;Sose 24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
+Andreä;Sose 24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;3,0;100;0,30;30;1,35;1,35;0,00;
+Andreä;Sose 24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
+Andreä;Sose 24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;3,0;100;0,30;30;1,35;1,35;0,00;
+Andreä;WiSe 23/24;Technik in der Produktentwicklung ;TProE ;OSSP2 ;4,00;1,0;31,25;1,00;20;1,25;1,25;0,00;
+Andreä;WiSe 23/24;Großküchen- und Reinigungstechnik;GKR ;OSSP3 ;0,50;1,0;100;1,00;1;0,50;0,50;0,00;Modul wurde im WiSe 23/24 aufgrund einer geringer Teilnehmendenzahl im reduzierten Umfang mit Betreuung einer Hausarbeit als Prüfungsleistung durchgeführt 
+Andreä;WiSe 23/24;Haushaltstechnik ;HT ;3O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
+Andreä;WiSe 23/24;Mathematik und Physik ;MP ;2O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
+Andreä;WiSe 23/24;Ökotrophologie 2;OET2 ;3O ;4,00;1,0;12,5;1,00;60;0,50;0,50;0,00;Koordination ÖT2 mit Christoph Wegmann 
+Andreä;WiSe 23/24;Produktbewertung und Messtechnik ;PBM ;WO ;4,00;0,0;100;0,00;0;0,00;0,00;0,00;Modul hat im WiSe 23/24 mangels Teilnehmenden nicht stattgefunden 
+Andreä;WiSe 23/24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
+Andreä;WiSe 23/24;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;3,0;100;0,30;45;1,35;1,35;0,00;
+Andreä;WiSe 23/24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
+Andreä;WiSe 23/24;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;2,0;100;0,30;30;0,90;0,90;0,00;
+Andreä;WiSe 24/25;Technik in der Produktentwicklung ;TProE ;OSSP2 ;4,00;1,0;33,25;1,00;15;1,33;1,33;0,00;
+Andreä;WiSe 24/25;Großküchen- und Reinigungstechnik ;GKR ;OSSP3 ;4,00;1,0;100;1,00;5;4,00;4,00;0,00;
+Andreä;WiSe 24/25;Haushaltstechnik ;HT ;3O ;2,50;1,0;100;1,00;50;2,50;2,50;0,00;
+Andreä;WiSe 24/25;Mathematik und Physik ;MP ;2O ;2,50;1,0;100;1,00;60;2,50;2,50;0,00;
+Andreä;WiSe 24/25;Ökotrophologie 2 ;OET2 ;3O ;4,00;1,0;6,25;1,00;60;0,25;0,25;0,00;
+Andreä;WiSe 24/25;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;2,0;100;1,00;30;3,00;3,00;0,00;
+Andreä;WiSe 24/25;Mathematik und Physik Praktikum ;MP P ;2O ;1,50;2,0;100;0,30;30;0,90;0,90;0,00;
+Andreä;WiSe 24/25;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;1,0;100;1,00;15;1,50;1,50;0,00;
+Andreä;WiSe 24/25;Haushaltstechnik Praktikum ;HT P ;3O ;1,50;3,0;100;0,30;30;1,35;1,35;0,00;
 BauerA;Sose 24;Lebensmittelsensorik ;LSen ;OSSP2 ;4,00;1,0;100;1,00;13;4,00;4,00;0,00;
 BauerA;Sose 24;Lebensmittelsensorik ;LSen ;OSSP2 ;4,00;1,0;93,8;1,00;8;3,75;3,75;0,00;
 BauerA;Sose 24;Produktentwicklung ;ProE ;OSSP2 ;4,00;1,3;100;1,00;20;5,00;5,00;0,00;Gruppenteilung bei den Labor-Praxisterminen
@@ -133,19 +133,19 @@ Beyer;WiSe 24/25;Interdisziplinäres Seminar über nachhaltige Konzepte zur Redu
 Beyer;WiSe 24/25;3-D Anlagentechnik Praktikum ;3DAp P ;4V ;2,00;1,0;100;0,30;;0,60;0,60;0,00;
 Beyer;WiSe 24/25;CAD-Praktikum ;CAD P ;3V, WMb ;2,00;1,0;100;0,30;;0,60;0,60;0,00;
 Beyer;WiSe 24/25;Technische Zeichnen ;Tz P ;5U ;2,00;1,0;30;1,00;;0,60;0,60;0,00;
-Bischop;Sose 24;;;;;;;;;;0,00;0,00;AU
-Bischop;WiSe 23/24;Einführung Medizintechnik ;EMtA ;1M ;1,00;1,0;100;1,00;;1,00;1,00;0,00;
-Bischop;WiSe 23/24;Physik 1 ;Phy1 ;1M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
-Bischop;WiSe 23/24;Physik 2 ;Phy2 ;1M ;2,00;1,0;100;1,00;;2,00;2,00;0,00;
-Bischop;WiSe 23/24;Technische Mechanik 1 ;TM1 ;2M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
-Bischop;WiSe 23/24;Biomechanik ;BMech ;4M ;4,00;1,0;50;1,00;;2,00;2,00;0,00;
-Bischop;WiSe 23/24;Modelling Medical Systems ;M_MMS ;S1AwM ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
-Bischop;WiSe 24/25;Einführung Medizintechnik ;EMtA ;1M ;1,00;1,0;100;1,00;;1,00;1,00;0,00;
-Bischop;WiSe 24/25;Physik 1 ;Phy1 ;1M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
-Bischop;WiSe 24/25;Physik 2 ;Phy2 ;1M ;2,00;1,0;100;1,00;;2,00;2,00;0,00;
-Bischop;WiSe 24/25;Technische Mechanik 1 ;TM1 ;2M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
-Bischop;WiSe 24/25;Biomechanik ;BMech ;4M ;4,00;1,0;50;1,00;;2,00;2,00;0,00;
-Bischop;WiSe 24/25;Modelling Medical Systems ;M_MMS ;S1AwM ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
+Bishop;Sose 24;;;;;;;;;;0,00;0,00;AU
+Bishop;WiSe 23/24;Einführung Medizintechnik ;EMtA ;1M ;1,00;1,0;100;1,00;;1,00;1,00;0,00;
+Bishop;WiSe 23/24;Physik 1 ;Phy1 ;1M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
+Bishop;WiSe 23/24;Physik 2 ;Phy2 ;1M ;2,00;1,0;100;1,00;;2,00;2,00;0,00;
+Bishop;WiSe 23/24;Technische Mechanik 1 ;TM1 ;2M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
+Bishop;WiSe 23/24;Biomechanik ;BMech ;4M ;4,00;1,0;50;1,00;;2,00;2,00;0,00;
+Bishop;WiSe 23/24;Modelling Medical Systems ;M_MMS ;S1AwM ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
+Bishop;WiSe 24/25;Einführung Medizintechnik ;EMtA ;1M ;1,00;1,0;100;1,00;;1,00;1,00;0,00;
+Bishop;WiSe 24/25;Physik 1 ;Phy1 ;1M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
+Bishop;WiSe 24/25;Physik 2 ;Phy2 ;1M ;2,00;1,0;100;1,00;;2,00;2,00;0,00;
+Bishop;WiSe 24/25;Technische Mechanik 1 ;TM1 ;2M ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
+Bishop;WiSe 24/25;Biomechanik ;BMech ;4M ;4,00;1,0;50;1,00;;2,00;2,00;0,00;
+Bishop;WiSe 24/25;Modelling Medical Systems ;M_MMS ;S1AwM ;4,00;1,0;100;1,00;;4,00;4,00;0,00;
 Buchcik;Sose 24;Ernährungsverhalten / Eating Behaviour;Ever;OSSP1;4,00;1,0;50;1,00;48;2,00;2,00;0,00;
 Buchcik;Sose 24;Grundlagen der Ernährung und PHN;PHE;2G;4,00;1,0;50;1,00;39;2,00;2,00;0,00;
 Buchcik;Sose 24;Gesundheitsförderung und Gesundheitsverhaltensforschung;;MHS;4,00;1,0;50;1,00;11;2,00;2,00;0,00;
@@ -228,22 +228,22 @@ Flothow;WiSe 24/25;Betriebliches Gesundheitsmanagement ;BGM ;ÖT ;4,00;1,0;10
 Flothow;WiSe 24/25;Ökotrophologie 2 ;ÖT2;ÖT ;4,00;1,0;7,5;1,00;65;0,30;0,30;0,00;
 Frank;Sose 24;Data Acquisition and Processing + Praktikum;DaC, DaC P;SwM/S1E;4,00;1,0;50;1,00;40;2,00;2,00;0,00;
 Frank;Sose 24;Elektronik;EL;3U;4,00;1,0;100;1,00;20;4,00;4,00;0,00;
-Frank;Sose 24;Informatik 1*;lnf1;1U/1V;3,00;1,0;100;1,00;60;3,00;3,00;0,00;Betreuung von 2 Praktikumsgruppen in Info 1, je 1 SWS
-Frank;Sose 24;Informatik 2;lnf2;3U/2V;2,00;1,0;100;1,00;40;2,00;2,00;0,00;
-Frank;Sose 24;Informatik 2 Praktikum (2 Teilgruppen);lnf2 P;3U/2V;2,00;2,0;100;1,00;24;4,00;4,00;0,00;
-Frank;Sose 24;Informatik 3;lnf3;su;2,00;1,0;100;1,00;10;2,00;2,00;0,00;
+Frank;Sose 24;Informatik 1*;Inf1;1U/1V;3,00;1,0;100;1,00;60;3,00;3,00;0,00;Betreuung von 2 Praktikumsgruppen in Info 1, je 1 SWS
+Frank;Sose 24;Informatik 2;Inf2;3U/2V;2,00;1,0;100;1,00;40;2,00;2,00;0,00;
+Frank;Sose 24;Informatik 2 Praktikum (2 Teilgruppen);Inf2 P;3U/2V;2,00;2,0;100;1,00;24;4,00;4,00;0,00;
+Frank;Sose 24;Informatik 3;Inf3;su;2,00;1,0;100;1,00;10;2,00;2,00;0,00;
 Frank;WiSe 23/24;Data Acquisition and Processing Praktikum*;DaC/DaC P;SwM/S1E;4,00;1,0;50;1,00;40;2,00;2,00;0,00;
 Frank;WiSe 23/24;Elektronik;EL;3U;4,00;1,0;100;1,00;20;4,00;4,00;0,00;
-Frank;WiSe 23/24;Informatik 1;lnf1;1U/1V;2,00;1,0;100;1,00;60;2,00;2,00;0,00;
-Frank;WiSe 23/24;Informatik 2;lnf2;3U/2V;2,00;1,0;100;1,00;40;2,00;2,00;0,00;
-Frank;WiSe 23/24;Informatik·2 Praktikum (1 Teilgruppe);lnf2 P;3U/2V;2,00;1,0;100;1,00;24;2,00;2,00;0,00;
+Frank;WiSe 23/24;Informatik 1;Inf1;1U/1V;2,00;1,0;100;1,00;60;2,00;2,00;0,00;
+Frank;WiSe 23/24;Informatik 2;Inf2;3U/2V;2,00;1,0;100;1,00;40;2,00;2,00;0,00;
+Frank;WiSe 23/24;Informatik·2 Praktikum (1 Teilgruppe);Inf2 P;3U/2V;2,00;1,0;100;1,00;24;2,00;2,00;0,00;
 Frank;WiSe 24/25;Data Acquisition and Processing + Praktikum;DaC, DaC P;SwM/S1E;4,00;1,0;50;1,00;40;2,00;2,00;0,00;
 Frank;WiSe 24/25;Elektronik;EL;3U;4,00;1,0;100;1,00;20;4,00;4,00;0,00;
-Frank;WiSe 24/25;Informatik 1;lnf1;1U/1V;2,00;1,0;100;1,00;60;2,00;2,00;0,00;
-Frank;WiSe 24/25;Informatik 2;lnf2;3U/2V;2,00;1,0;100;1,00;40;2,00;2,00;0,00;
-Frank;WiSe 24/25;Informatik 2 Praktikum (1 Teilgruppe);lnf2 P;3U/2V;2,00;1,0;100;1,00;24;2,00;2,00;0,00;
-Frank;WiSe 24/25;Informatik 3;lnf3;SU;2,00;1,0;100;1,00;10;2,00;2,00;0,00;
-Frank;WiSe 24/25;Messtechnik***';MsT;SU;2,00;1,0;100;1,00;10;2,00;2,00;0,00;Ich habe die 4 Stündige Veranstaltung MsT vom Kollegen Mühlberger ungefähr zur Hälfte des Semesters übernommen
+Frank;WiSe 24/25;Informatik 1;Inf1;1U/1V;2,00;1,0;100;1,00;60;2,00;2,00;0,00;
+Frank;WiSe 24/25;Informatik 2;Inf2;3U/2V;2,00;1,0;100;1,00;40;2,00;2,00;0,00;
+Frank;WiSe 24/25;Informatik 2 Praktikum (1 Teilgruppe);Inf2 P;3U/2V;2,00;1,0;100;1,00;24;2,00;2,00;0,00;
+Frank;WiSe 24/25;Informatik 3;Inf3;SU;2,00;1,0;100;1,00;10;2,00;2,00;0,00;
+Frank;WiSe 24/25;Messtechnik;MsT;SU;2,00;1,0;100;1,00;10;2,00;2,00;0,00;Ich habe die 4 Stündige Veranstaltung MsT vom Kollegen Mühlberger ungefähr zur Hälfte des Semesters übernommen
 Freudenthal;Sose 24;Konstruktion/CAD (Vorl, Für VT und MT) ;KCAD ;3VWM ;4,00;1,0;100;1,00;20;4,00;4,00;0,00;
 Freudenthal;Sose 24;Strömungslehre ;SL ;4C ;2,00;1,0;100;1,00;25;2,00;2,00;0,00;
 Freudenthal;Sose 24;Strömungslehre ;SL ;3M ;2,00;1,0;100;1,00;25;2,00;2,00;0,00;
@@ -563,8 +563,8 @@ Lunkenbein;Sose 24;Mikrobiologie und Toxikologie der Lebensmittel ;MTL ;3O ;3
 Lunkenbein;Sose 24;Grundlagen Chemie Praktikum ;GCP ;1O ;1,00;2,0;100;1,00;Je14;2,00;2,00;0,00;
 Lunkenbein;Sose 24;Grundlagen Chemie Praktikum ;GCP ;1O ;1,00;1,0;100;0,30;28;0,30;0,30;0,00;
 Lunkenbein;Sose 24;Organische Chemie und Biochemie ;OCB ;2O ;3,00;1,0;100;1,00;50;3,00;3,00;0,00;
-Lunkenbein;Sose 24;Organische Chemie und Biochemie Praktikum ;OCBP ;2O ;1,00;1,0;100;0,30;50;0,30;0,30;0,00;
-Lunkenbein;Sose 24;Organische Chemie und Biochemie Praktikum ;OCBP ;2O ;1,00;1,0;100;1,00;14;1,00;1,00;0,00;
+Lunkenbein;Sose 24;Organische Chemie und Biochemie Praktikum ;OCB P ;2O ;1,00;1,0;100;0,30;50;0,30;0,30;0,00;
+Lunkenbein;Sose 24;Organische Chemie und Biochemie Praktikum ;OCB P ;2O ;1,00;1,0;100;1,00;14;1,00;1,00;0,00;
 Lunkenbein;WiSe 23/24;Ökotrophologie 2 ;OET2 ;3O ;4,00;1,0;7,5;1,00;40;0,30;0,30;0,00;
 Lunkenbein;WiSe 23/24;Lebensmittelchemie, Einführung ;LC ;3O ;3,00;1,0;100;1,00;50;3,00;3,00;0,00;
 Lunkenbein;WiSe 23/24;Lebensmittelchemie, Praktikum ;LCP ;3O ;1,00;4,0;100;1,00;Je14;4,00;4,00;0,00;
