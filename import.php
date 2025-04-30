@@ -1,119 +1,268 @@
-7
 <?php
-$row = 0;
-if ( ( $handle = fopen("Zeitkontenerfassung.csv", "r" ) ) !== FALSE )
-{ while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )
-  {  $num = count( $data );
-     # echo "<p> $num Felder in Zeile $row: <br /></p>\n";
-     if ( ++$row > 1 )
-     {
-        $zeitkonto[ $row ] = $data;
-        $dozent[ $row ] = $data[ 0 ];
-        $fach[   $row ] = $data[ 3 ];
-      }
-   }
-   fclose( $handle );
-   # checkDozent( $dozent );
-   checkFach( $zeitkonto );
-}
+
+#$facher = importFachCSV( "Zeitkontenerfassung.csv" );
+#deb($facher);
+
+#$entlastung = importEntlastungCSV( 'entlastung.csv' );
+
+#$projekte   = importAbschlussarbeitenCSV( 'abschlussW23.csv' , 'W23' );
+
+$projekte   = importAbschlussarbeitenCSV( 'abschlussS24.csv' , 'S24' );
+
 
 function checkDozent( $dozenten )
 { $db = connectDB();
   foreach ( $dozenten as $dozent )
-  {  $dozent = trim(strip_tags( $dozent ) , "   ");
-     $sql = "SELECT COUNT(*) AS C FROM LOWER(`dozent`) WHERE Name LIKE LOWER('".$dozent."')";
+  { $dozent = trim(strip_tags( $dozent ) , "   ");
+    $sql = "SELECT COUNT(*) AS C FROM dozent WHERE Name LIKE LOWER('".$dozent."')";
 
-     foreach ($db->query($sql) as $row)
-    {  if ( $row['C'] == 0 )
-       {  $d[$dozent] = $dozent;
-       }
-   }
-}
-
-deb($d);
+    foreach ($db->query($sql) as $row)
+    { if ( $row['C'] == 0 )
+      {  $d[$dozent] = $dozent;
+      }
+    }
+  }
 $db->close();
 }
 
-function checkFach( $zeitkonten )
-{  $db = connectDB();
-   foreach ( $zeitkonten as $zk )
-   {  $fachKurz = trim( strip_tags( $zk[3] ) , "   ");
-      $sl = strlen($fachKurz);
+function getAlleDozenten( )
+{ $db = connectDB();
+  $sql = "SELECT *  FROM dozent ";
 
-      if ( $sl > 0  AND $fachKurz[ $sl - 1  ] == 'P'  AND ( $fachKurz[ $sl - 2  ] != ' ' )   AND ( $sl > 2  ) )
-      {  $fachKurz[ strlen($fachKurz) - 1  ] = ' ';
-         $fachKurz[ strlen($fachKurz)   ] = 'P';
+  foreach ($db->query($sql) as $row)
+  { $dozenten[ $row['Name']] =  $row ;
+  }
+  $db->close();
+  return $dozenten;
+}
 
+function getDozentKurzName( $dozent )
+{ $db = connectDB();
+  $kurz = '';
+  $dozent = trim(strip_tags( $dozent ) , "   ");
+  $sql = "SELECT Kurz AS K FROM dozent WHERE Name LIKE LOWER('".$dozent."')";
+
+  foreach ($db->query($sql) as $row)
+  {  $kurz =  $row['K'] ;
+  }
+  $db->close();
+  return $kurz;
+}
+
+function getKurzNameDB( $db, $fachName )
+{ $a[ 'k-base' ] ='';
+   { $sql = "SELECT `Kurz` FROM `fach` WHERE Name LIKE '" .$fachName. "'";
+     $res2 = $db -> query( $sql );
+     foreach ( $res2 as $r )  {  $a['k-base'] =  $r[ 'Kurz' ] ; }
+    }
+    return  $a['k-base'];
+}
+
+function getFachNameDB( $db,  $fachKurz )
+{ $a[ 'n-base' ] ='';
+  { $sql1 = "SELECT `Name` FROM `fach` WHERE LOWER( Kurz ) LIKE LOWER( '" .$fachKurz. "' )";
+    $res1 = $db -> query( $sql1 );
+    foreach ( $res1 as $r )  {  $a[ 'n-base' ] =  $r[ 'Name' ] ; }
+  }
+  return  $a[ 'n-base' ];
+}
+
+function importFachCSV( $filename )
+{ $row = 0;
+  if ( ( $handle = fopen( $filename, "r" ) ) !== FALSE )
+  { while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )
+     { $zk = null;
+       if ( ++$row > 1 )
+       { $zk[ trim( $h[ 0  ] )] = trim( $data[ 0  ]) ;
+         $zk[ $h[ 1  ] ] = $data[ 1  ];
+         $zk[ $h[ 2  ] ] = $data[ 2  ];
+         $zk[ $h[ 3  ] ] = $data[ 3  ];
+         $zk[ $h[ 4  ] ] = $data[ 4  ];
+         $zk[ $h[ 5  ] ] = $data[ 5  ];
+         $zk[ $h[ 6  ] ] = $data[ 6  ];
+         $zk[ $h[ 7  ] ] = $data[ 7  ];
+         $zk[ $h[ 8  ] ] = $data[ 8  ];
+         $zk[ $h[ 9  ] ] = $data[ 9  ];
+         $zk[ $h[ 10 ] ] = $data[ 10 ];
+         $zk[ $h[ 11 ] ] = $data[ 11 ];
+         $zk[ $h[ 12 ] ] = $data[ 12 ];
+         $zk[ $h[ 13 ] ] = $data[ 13 ];
+
+         $zeitkonten[] = $zk;
+
+         $dozent[ $row ] = $data[ 0 ];
+         $fach[   $row ] = $data[ 3 ];
       }
-      $zk[3] = $fachKurz;
+      else{  $h = $data; }
+    }
+   fclose( $handle );
+  }
 
-      $fachName = trim( strip_tags( $zk[2] ) , "   #+*'");
+  $dozenten =  getAlleDozenten( );
 
-      $zk[ 2 ] = $fachName;
+  $db = connectDB();
+  foreach ( $zeitkonten as $zk )
+  {
+    $zk[ 'LV-Name' ] =  trim( strip_tags( $zk[ 'LV-Name' ] ) , "   #+*'" );  ## unültige Zeichen aus Datum entfernen
+    $zk[ 'LV-Kurz' ] =  trim( strip_tags( $zk[ 'LV-Kurz' ] ) , "   "     );
 
-      $sql1 = "SELECT COUNT( * ) AS C1 FROM `fach` WHERE LOWER(Kurz) LIKE LOWER('".$fachKurz."')";
-      $sql2 = "SELECT COUNT( * ) AS C2 FROM `fach` WHERE LOWER(Name) LIKE LOWER('".$fachName."')";
+    $b[ 'doz'    ] = $zk[ 'Doz-Name' ] ;
+    $b[ 'k-xlsx' ] = $zk[ 'LV-Kurz'  ];
+    $b[ 'k-base' ] = getKurzNameDB( $db , $zk[ 'LV-Name' ] );
+    $b[ 'n-xlsx' ] = $zk[ 'LV-Name' ];
+    $b[ 'n-base' ] = getFachNameDB( $db , $zk[ 'LV-Kurz' ] );
 
-      $b['doz'] = $zk[0];
+    if ( $b[ 'n-base' ] != '' AND $b[ 'k-base' ] == '' )       ##  DB Fachname vorhanden aber KEIN DB Kurzname
+    { $b[ 'k-base' ] =  getKurzNameDB( $db ,$b[ 'n-base' ] );  ##  DB Kurzname ermittelt aus DB Fachname
+    }
 
-      $res1 = $db -> query( $sql1 );   foreach ( $res1 as $r )  { $c1 = $r[ 'C1' ]; }  $zk[ 'k' ] = $c1;
-      $a['n-base'] ='';
-      #if( $c1 > 0 )
-      { $sql1 = "SELECT `Name` FROM `fach` WHERE LOWER(Kurz) LIKE LOWER('".$fachKurz."')";
-       # deb($sql1);
-        $res1= $db -> query( $sql1 );
-        foreach ( $res1 as $r )  {  $a['n-base'] =  $r['Name'] ; }
-      }
+    if ( $b[ 'k-base' ] != '' AND $b[ 'n-base' ] == '' )       ##  DB Kurzname vorhanden aber KEIN DB Fachname
+    { $b[ 'n-base' ] =  getFachNameDB( $db ,$b[ 'k-base' ] );  ##  DB Fachname ermittelt aus DB Kurzname
+    }
 
+    $zk[ 'sem' ] = redefSemester( $zk[ 'Semester' ] );
+    $zk[ 'imp' ] = $b;
+    $zk[ 'doz' ] = $dozenten[ $zk[ 'Doz-Name' ] ];
 
-      $a['k-base'] ='';
-      $res2 = $db -> query( $sql2 );   foreach ( $res2 as $r )  { $c2 = $r[ 'C2' ]; }  $zk[ 'n' ] = $c2;
-      #if( $c2 > 0 )
-      { $sql = "SELECT `Kurz` FROM `fach` WHERE Name LIKE '".$zk[2]."'";
-        $res2 = $db -> query( $sql );
-        foreach ( $res2 as $r )  {  $a['k-base'] =  $r['Kurz'] ; }
-      }
+    if ( $b[ 'k-base' ] != '' AND $b[ 'n-base' ] != '' )        ## Fehlerhafte und Fehlerfreie Datensätze trennen
+    {  $g1[] = $zk['imp'];
+    }
+    else
+    {  $g2[] = $zk['imp'];
+    }
+    $f[] = $zk;
+  }
 
-      $b[ 'k-xlsx' ] = $zk[ 3 ];
-      $b[ 'k-base' ] = ''      ;
-      if ( isset( $a[ 'k-base' ] ) ) { $b[ 'k-base'] = $a[ 'k-base' ]; }
-      $b[ 'n-xlsx' ] = $zk[ 2 ];
-      $b[ 'n-base' ] = ''      ;
-      if ( isset( $a[ 'n-base' ] ) ) { $b[ 'n-base'] = $a[ 'n-base' ]; }
-
-      $zk[ 13 ] = $b;
-
-
-      $f[ $zk[ 3 ] ] = $zk;
-
-   }
-
-   # deb($z);
-    deb( $f );
-    $db->close();
+  # deb( $g1 );
+  # deb( $g2 );
+  # deb($f);
+    return $f;
+    #$db->close();
 }
 
 
 
+
+function importEntlastungCSV( $filename )
+{ $row = 0;
+  if ( ( $handle = fopen( $filename, "r" ) ) !== FALSE )
+  { while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )
+  { $zk = null;
+    if ( ++$row > 1 )
+    { $zk[ trim( $h[ 0  ] ) ] = trim( $data[ 0  ]) ;
+      $zk[ trim( $h[ 1  ] ) ] = $data[ 1  ];
+      $zk[ trim( $h[ 2  ] ) ] = $data[ 2  ];
+      $zk[ trim( $h[ 3  ] ) ] = $data[ 3  ];
+      $zk[ trim( $h[ 4  ] ) ] = $data[ 4  ];
+      $zk[ trim( $h[ 5  ] ) ] = $data[ 5  ];
+ #     $zk[ $h[ 6  ] ] = $data[ 6  ];
+ #     $zk[ $h[ 7  ] ] = $data[ 7  ];
+ #     $zk[ $h[ 8  ] ] = $data[ 8  ];
+ #     $zk[ $h[ 9  ] ] = $data[ 9  ];
+ #     $zk[ $h[ 10 ] ] = $data[ 10 ];
+ #     $zk[ $h[ 11 ] ] = $data[ 11 ];
+ #     $zk[ $h[ 12 ] ] = $data[ 12 ];
+ #     $zk[ $h[ 13 ] ] = $data[ 13 ];
+
+      $zeitkonten[] = $zk;
+
+ #     $dozent[ $row ] = $data[ 0 ];
+ #     $fach[   $row ] = $data[ 3 ];
+    }
+    else{  $h = $data; }
+  }
+    fclose( $handle );
+  }
+  deb($zeitkonten,1);
+
+}
+
+
+function importAbschlussarbeitenCSV( $filename,$sem )
+{ $row = 0;
+  if ( ( $handle = fopen( $filename, "r" ) ) !== FALSE )
+  { while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )
+  { $zk = null;
+    if ( ++$row > 1 )
+    { $zk[ trim( $h[ 0  ] ) ] = trim( $data[ 0  ]) ;
+      $zk[ trim( $h[ 1  ] ) ] = $data[ 1  ];
+      $zk[ trim( $h[ 2  ] ) ] = $data[ 2  ];
+      $zk[ trim( $h[ 3  ] ) ] = $data[ 3  ];
+      $zk[ trim( $h[ 4  ] ) ] = $data[ 4  ];
+      $zk[ trim( $h[ 5  ] ) ] = $data[ 5  ];
+      $zk[ $h[ 6 ] ] = $data[ 6 ];
+      $zk[ $h[ 7 ] ] = $data[ 7 ];
+      #     $zk[ $h[ 8  ] ] = $data[ 8  ];
+      #     $zk[ $h[ 9  ] ] = $data[ 9  ];
+      #     $zk[ $h[ 10 ] ] = $data[ 10 ];
+      #     $zk[ $h[ 11 ] ] = $data[ 11 ];
+      #     $zk[ $h[ 12 ] ] = $data[ 12 ];
+      #     $zk[ $h[ 13 ] ] = $data[ 13 ];
+
+      $zeitkonten[] = $zk;
+
+      #     $dozent[ $row ] = $data[ 0 ];
+      #     $fach[   $row ] = $data[ 3 ];
+
+      if ( $data[ 2 ] != '' )
+      { $curDoz = $data[ 2  ];
+        $t[ trim( $h[ 2 ] ) ] = $data[ 2  ];
+        $t[ trim( $h[ 1 ] ) ] = $data[ 1  ];
+        $t[ 'Sem' ] = $sem;
+      }
+
+
+
+      $t[ trim( $h[ 7  ] ) ] = $data[ 7  ];
+
+      $d[   $curDoz  ] =  $t;
+
+
+
+
+    }
+    else{  $h = $data; }
+  }
+    fclose( $handle );
+  }
+
+  deb($d);
+  deb( $zeitkonten,1 );
+
+}
+
+
+
+
+function redefSemester( $sem )
+{ if ( stristr($sem, 'WiSe' ) )   { $s[ 's' ] = 'W';  }
+  if ( stristr($sem, 'SoSe' ) )   { $s[ 's' ] = 'S';  }
+  $s[ 'j' ] = substr( $sem, 5, 2 );
+  return $s;
+}
 
 function connectDB()
 { $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
-    if ($db -> connect_errno)
-    { echo "Failed to connect to MySQL: " . $db->connect_error;
-        exit();
-    }
-    return ($db);
+  if ($db -> connect_errno)
+  { echo "Failed to connect to MySQL: " . $db->connect_error;
+    exit();
+  }
+  return ($db);
 }
 
+function setP2Praktikum ( $fachKurz )
+{ $sl = strlen( $fachKurz );
+  if ( $sl > 0  AND $fachKurz[ $sl - 1  ] == 'P'  AND ( $fachKurz[ $sl - 2  ] != ' ' )   AND ( $sl > 2  ) )  ## Kurznamen mit P als letzer Buchstabe wird as Praktikum definiert und bekommt ein Leerzeichen als vorletztes Zeichen
+  { $fachKurz[ strlen( $fachKurz ) - 1  ] = ' ';
+    $fachKurz[ strlen( $fachKurz )      ] = 'P';
+  }
+  return $fachKurz;
+}
 
-function deb($con, $kill = false)
+function deb( $con, $kill = false )
 { echo "<pre>";
-    print_r($con);
-    echo "</pre>";
-    if($kill) {die();}
+  print_r( $con );
+  echo "</pre>";
+  if($kill) {die(); }
 }
-
-
-
-
 ?>

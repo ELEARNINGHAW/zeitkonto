@@ -1,0 +1,444 @@
+﻿Professor, Dozent;Text24;Text26;Student/in Nachname;Student/in Name;Lehrentlastung weil;SummevonLehrentlastung SWS;
+Frau Prof. Dr.;Sybille;Adam;;;;;
+;;;Freudenberg;Tom Linus;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Kläwke;Danny-Mike;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Woidtke;Jan-Garlef;Lehramt Staatsexamen o. MA Erstbetreuer  (bei 1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,8
+Dr.;Adedeji;Adekunle;;;;;
+;;;Kaltenbach;Stella;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Richter;Jeongwon;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,2
+Herr Prof. Dr.;Jörg;Andrä;;;;;
+;;;Greiner;Theresa;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Jahn;Christopher;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Jashari;Sara;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1
+;;;;;;;+0,1 aus SoSe 2023 (Nehrmann, Anna)
+Herr Prof. Dr.;Jörg;Andreä;;;;;
+;;;Bastin;Katja;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Steinke;Kimberley;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,5
+;;;;;;;-0,1 aus SoSe 2023  (Nehrmann, Anna)
+Herr Prof. Dr.;Birger;Anspach;;;;;
+;;;Rytlewski;Joel;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Schneider;Thomas;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,8
+Frau Prof. Dr.;Andrea;Bauer;;;;;
+;;;Ehrenburg;Daniel;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Körnschild;Lisa;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Madejewski;Thomas;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,9
+Prof. Dr.;Margret;Bauera;;;;;
+;;;Simethy;Gary;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Tanas;Chantal;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1
+Frau;Wiebke;Bendt;;;;;
+;;;Shanshal;Aida;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Tecle;Haidet;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,2
+Herr Prof. Dr.;Julien;Béthune;;;;;
+;;;Aguilar Espinosa;Renata Valeria;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Berg;Sonja;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Cetin;Zeynep;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Dittmers;Jaqueline;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Fard Joo Hini;Mina;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Favre;Clemens;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Fayyaz;Arezou;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Heeramun;Jeshna;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Müller;Tim;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Ocana Alms;Carolina Teresa;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Paulsen;Laura;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Sachau;Jana;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Stach;Daniel;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Velazco Stock;Nicole;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;4,2
+Herr Prof. Dr.;Falk;Beyer;;;;;
+;;;Deuter;Carolin;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Dobri;Andrea;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Kharote;Anirudha;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Steenpaß;Markus;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Steinbiß;Lara Christin;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;2,3
+Herr Prof.;Nicholas;Bishop;;;;;
+;;;Beranek;Alice;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Bommer;Hendrik;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1
+Frau Prof. Dr.;Johanna;Buchcik;;;;;
+;;;Callsen;Gina Marie;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Fleyder;Anastasia;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Habisch;Sophie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Jamrosy;Cara-Sophie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Kaltenbach;Stella;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Peters;Eva-Lotta;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Prieto Aguiar;Malena;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Richter;Jeongwon;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Saini;Anshu;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Schoof;Wenke;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Twisselmann;Carla;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;van den Akker;Mieke;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;3,6
+Frau Prof. Dr.;Anja;Carlsohn;;;;;
+;;;Abzhandadze;Tamar;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Bothe;Pia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Callsen;Gina Marie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Castle;Stan;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Kalies;Nina;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Kopf;Vanessa;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Premprasert;Ketsarin;Lehramt Staatsexamen o. MA Erstbetreuer  (bei 1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Rashied;Hassina;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Starke;Levin;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Ulferts;Vanessa;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Yildirim;Harun;Lehramt Bachelor Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;2,4
+Prof. Dr.;Serhat Sezai;Çiçek;;;;;
+;;;Jashari;Sara;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,1
+Frau Prof. Dr.;Gesine;Cornelissen;;;;;
+;;;Oelbracht;Jonas;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Pielström;Lennart;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Weber;Sophia;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,8
+Herr Prof. Dr.;Bernd;Flick;;;;;
+;;;Heine;Tjorben;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Medag;Florian;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,3
+Frau Prof. Dr.;Carolin;Floeter;;;;;
+;;;Anthon;John;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Janssen Nieto;Lucas;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Schuster;Julia Carlotta;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,9
+Herr Prof. Dr.;Carsten;Frank;;;;;
+;;;Fensky;Ferris;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Pesch;Leanne;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Sauer;Jannik;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,1
+Herr Prof. Dr.;Kai;Freudenthal;;;;;
+;;;Heine;Tjorben;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Johnsen;Henrik;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Korolihina;Ewa;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,7
+Herr Prof. Dr.;Martin;Geweke;;;;;
+;;;Eiselen;Hannah Farina Lisa;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Jürgens;Lennart;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Söhl;Luca;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,9
+Herr Prof. Dr. Dr.;Michael;Haufs;;;;;
+;;;Alzabin;Sara;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Jamrosy;Cara-Sophie;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Karcher;Annika;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Peters;Eva-Lotta;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Rashbud;Hadia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Schäffer;Sidney;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Schlüpmann;Sarah Wambui;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Schoen;Alison;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Shanshal;Aida;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,7
+Frau Prof. Dr.;Susanne;Heise;;;;;
+;;;Walcker;Lena;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,3
+Frau Dipl. Ges. Wirt.;Nina;Hielscher;;;;;
+;;;Ende;Milva;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Richert;Rike Susann;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,2
+Herr Prof. Dr.-Ing.;Marc;Hölling;;;;;
+;;;Hilker;Timo;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Hofmann;Anita;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Langowski;Maximilian;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Paunas;Paul-Danut;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Wolgast;Nils;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,7
+Herr Prof. Dr.;Frank;Hörmann;;;;;
+;;;Kasig;Anna Celine;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Laumann;Stephan;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Omet;Lucas;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Rauber;Richard Konrad Hermann;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Sattler;Tjard Benz;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,5
+Herr Prof. Dr.;Christian;Kaiser;;;;;
+;;;Dobrowolski;Mateusz;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Groscurth;Lars Simon;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Gutknecht;Fabian;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Heim;Marie Christin;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Knecht;Mauritis;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Oelbracht;Jonas;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Weber;Sophia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;2
+Herr Prof. Dr.;Timon;Kampschulte;;;;;
+;;;Butin;Laurens;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Janning;Fabian;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Laela;Assyiah Nur;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Martens;Vivien;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Neumann;Lennart;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Schumann;Inka;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Woltmann;Liora;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;2,3
+Herr Prof. Dr.;Bernd;Kellner;;;;;
+;;;Baasch;Charleen;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Dimmer;Julia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Hilsendegen;Katharina Sandra Erika;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Hulak;Oliwia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Köster;Natalie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Lucks;Silvan;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Pfleger;Aline;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Preuß;Philipp;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Rohwoldt;Talitha;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Sharif Deljooei;Aryan;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Sierck;Saskia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Wiebusch;Max;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;3,6
+Herr M.Sc.;Moritz;Kielmann;;;;;
+;;;Wortmann;Hendrik;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,1
+Prof. Dr.;André;Klussmann;;;;;
+;;;Ahmed;Shorouk;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Hannemann;Meike;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Heeren;Lena Marie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Tkocz;Nina;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,2
+Frau Prof. Dr.;Bettina;Knappe;;;;;
+;;;Klingenberg;Sarah;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,3
+Frau M.Sc.;Christina;Krabbe;;;;;
+;;;Haas;Anna;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Jünemann;Sophie;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Reisener;Anna;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,3
+Dipl. Gesundheitswirtin;Natalie;Krämer;;;;;
+;;;Jürgens;Betty;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Konjer;Zoe;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Rashied;Hassina;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Twisselmann;Lina;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,4
+Herr Prof. Dr.;Dominik;Kunz;;;;;
+;;;Dunna;Lolith;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,5
+Herr Prof. Dr.;Walter;Leal;;;;;
+;;;Ahmed;Shorouk;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Benfer;Franziska;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Deveza-Grau;Mary Anne;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Feily;Anita;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Richert;Rike Susann;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Wolf;Anna Lena;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,5
+Herr Prof. Dr.;Gerwald;Lichtenberg;;;;;
+;;;Klobe;Antonia;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Miranda Hernández;Nícolas;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1
+Herr Prof. Dr.;Karsten;Loer;;;;;
+;;;Förster;Lars Frederic;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Möller;Jan Henrik;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Preuß;Philipp;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Viehe;Nele;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,1
+Herr Prof. Dr.;Jürgen;Lorenz;;;;;
+;;;Abzhandadze;Tamar;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Ascanio Hecker;Damian Ulyses Johannes;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Stubbe;Virginia;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,4
+Herr Prof. Dr.;Stefan;Lunkenbein;;;;;
+;;;Demirel;Murat;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Knautz;Miriam;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Meretz;Viktoria;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Schmick;Paula;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,8
+Herr Prof. Dr.;Stephan;Meyerding;;;;;
+;;;Buse;Saskia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Hagen;Male Pauline;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Hubrich;Charlotte;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Runge;Nele-Sophie;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Saeed;Farah;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Schlotmann;Alexandra;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Sharma;Annika;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,4
+Herr Prof. Dr.;Holger;Mühlberger;;;;;
+;;;Al Hafi;Roxanda;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Al Hafi;Risanda;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Djakkani;Ferdina;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Fiege;Jan;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Kandhari;Amber Akash;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Music;Vivijana;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,8
+Frau Prof. Dr.;Petra;Naujoks;;;;;
+;;;Berendsen;Sebastian;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Bothe;Pia;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Castle;Stan;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Kalies;Nina;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,6
+Herr Prof. Dr.;Stephan;Noll;;;;;
+;;;Durak;Ebru-Yasemin;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Fard Joo Hini;Mina;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Shetty;Simran;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Sinanovic;Alan Leon;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Yusufzay;Gazal;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,6
+Herr Dipl.-Ges. Wirt;Gunnar;Paetzelt;;;;;
+;;;Ahmadi;Sanam;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Habisch;Sophie;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Hannemann;Meike;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Rashbud;Hadia;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Twisselmann;Carla;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Welzel;Leonie;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,6
+Frau Prof. Dr.;Birgit K.;Peters;;;;;
+;;;Henke;Linnea;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Heyng;Rabea;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Khoshkam;Mina;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Klimpel;Klara;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Richer;Marit;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Weißenborn;Maja;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,8
+Frau Prof. Dr.;Ulrike;Pfannes;;;;;
+;;;Biß;Jessica;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Golombek;Nathalie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Roloff;Birgit;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Schmidt;Jacob;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1
+Herr Prof. Dr.;Wolf;Polenz;;;;;
+;;;Bartzsch;Thea;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Häusler;Marie Julie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Sterly;Julika;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,7
+Herr Prof. Dr.;Ralf;Reintjes;;;;;
+;;;Asiimwe;Jeniffer;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Feily;Anita;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Ramadas Krishnaprasad;Lakshya;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Sonde;Laxminarayan;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,7
+Frau Prof. Dr.;Nina;Riedel;;;;;
+;;;Burkardt;Charline;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Demirel;Murat;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Freudenberg;Tom Linus;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Ilkbahar;Irem;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Kläwke;Danny-Mike;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Kopf;Vanessa;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Stubbe;Virginia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Ulferts;Vanessa;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,5
+Frau Prof. Dr.;Katharina;Riehn;;;;;
+;;;Anna;Haas;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Haase;Isabell;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Hopfner;Julia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Jünemann;Sophie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Knautz;Miriam;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Meretz;Viktoria;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Reisener;Anna;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Schmidt;Jacob;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Tröster;Antonia Isabell;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,8
+Herr Prof. Dr.;Markus;Riemenschneider;;;;;
+;;;Hajjar;Saria;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Stein;Anni Gerda Petra;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,6
+Herr Prof. Dr.;Bernd;Sadlowsky;;;;;
+;;;Berendsen;Sebastian;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Ehlers;John-Hendrik;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Nyamen;Alexandre;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Schaaf;Marvin;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1
+Frau Dr.;Karolin;Schacht;;;;;
+;;;Ehrenburg;Daniel;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Madejewski;Thomas;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Rose;Lara;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,5
+Herr Prof. Dr.;Hans;Schäfers;;;;;
+;;;Chilumula;Rohith;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Freitag;Hanna Luise;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Harloff;Lasse;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Oelkers;Hannah;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Pagel;Valerian;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;2
+Herr Prof. Dr.;Thomas;Schiemann;;;;;
+;;;Borsdorf;Lara;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Norden;Jan Linus;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Wallrodt;Moritz;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,7
+Frau Prof. Dr.;Zita;Schillmöller;;;;;
+;;;Dobler;Valeriia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Faramarzi Nakhtyary;Samaneh;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Jürgens;Betty;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Konjer;Zoe;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Mores;Tosca;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Tecle;Haidet;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Twisselmann;Lina;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,7
+Herr Prof. Dr.;Marc;Schütte;;;;;
+;;;Früchtenicht;Marvin;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Gutermuth;Markus;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Lorenz;Björn;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,9
+Frau Prof. Dr.; Anika;Sievers;;;;;
+;;;Hermes;Benedikt Jurand;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Menner;Kai;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Peters;Jakob Leander;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,8
+Herr Prof. Dr.;Rainer;Stank;;;;;
+;;;Ingle;Pooja Rangnath;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Patil;Bhushan Pravin;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1
+Frau Dr.;Claudia;Terschüren;;;;;
+;;;Häusler;Marie Julie;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,1
+Herr Prof. Dr.;Sebastian;Thiem;;;;;
+;;;Schilling;Kolja;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Schrörs;Vincent;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,8
+Prof. Dr.-Ing;Sebastian;Timmerberg;;;;;
+;;;Chilumula;Rohith;Masterthesis: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Kucewicz;Alicja;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Lavorenti;Stéfane;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Weigel Gargiulo;Gaston;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Zibell;Lotta;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,5
+Herr Prof. Dr.;Boris;Tolg;;;;;
+;;;Kelder;Thade;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,3
+Herr Prof.;Udo;van Stevendaal;;;;;
+;;;Becker;Veronika;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Bölcke;Timo Stephan;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Grasshoff;Pia;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Khalaf;Ali;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Kinzl;Bernhardt Rüdiger;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Leich;Mattis;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Magunna;Julius;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Medag;Florian;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Mielke;Lena;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Music;Vivijana;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Norden;Jan Linus;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Rauber;Richard Konrad Hermann;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Schultze;Katharina Anna-Maria;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;von Lehe;Marcel;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Winter;Philipp;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Zilikens;Sarina;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;;;;Summe von SummevonLehrentlastung SWS:;5,8
+Herr Prof. Dr.;Christoph;Wegmann;;;;;
+;;;Bei Der Kellen;Lea;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
+;;;Buse;Saskia;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Haase;Isabell;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Hagen;Male Pauline;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Henke;Linnea;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Heyng;Rabea;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;Hubrich;Charlotte;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Khoshkam;Mina;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Klimpel;Klara;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Richter;Marit;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Saeed;Farah;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Sharma;Annika;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Weißenborn;Maja;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
+;;;;;;Summe von SummevonLehrentlastung SWS:;3
+Prof. Dr:;Meike;Wilke;;;;;
+;;;Ascanio Hecker;Damian Ulyses Johannes;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Borsdorf;Lara;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
+;;;Bosshard;Jasmin Katja;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,1
+Frau Prof. Dr.;Sabine;Wöhlke;;;;;
+;;;Alzabin;Sara;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;0,2
+Herr Prof. Dr.;York;Zöllner;;;;;
+;;;Böttcher;Marie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Ende;Milva;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Harmes;Paula;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
+;;;Karcher;Annika;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Schlüpmann;Sarah Wambui;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;Welzel;Leonie;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
+;;;;;;Summe von SummevonLehrentlastung SWS:;1,4
+;;;;;;SummevonLehrentlastung SWS Gesamtsumme Summe:;81,5
