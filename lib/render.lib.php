@@ -246,7 +246,7 @@ span:before
 }
 </style>
 ";
- echo'<div class="ring">Loading
+ echo'<div class="ring">RECALC
  <span></span>
 </div>';
 
@@ -294,8 +294,10 @@ function renderArbeitszeitkonto( $db, $dozentKurz )
   return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
 
-function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false )
-{ $dozent   = getDozentDB( $db, $dozentKurz );
+function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false , $output = 'html' )
+{
+
+    $dozent   = getDozentDB( $db, $dozentKurz,  $output  );
 
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
@@ -303,15 +305,16 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB(   $db, $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz(        $dozent );
 
- #deb($dozent[ 'aktuell' ] ,1);
+
 
   if ( $onlyData )
   { $stundenbilanz = $dozent[ 'aktuell' ];
   }
 
   else
-  { $stundenbilanz = renderZeitkontoProf( $dozent );
+  { $stundenbilanz = renderZeitkontoProf( $dozent ,  $output );
   }
+
   return $stundenbilanz;
 }
 
@@ -336,7 +339,7 @@ function calcStundenbilanz( $dozent )
   return $stunden;
 }
 
-function renderZeitkontoProf($dozent)
+function renderZeitkontoProf($dozent, $output = 'html' )
 {
 $html = '
 <table style="width: 100%; height: 50px;  border-spacing: 0"><tr>
@@ -352,7 +355,7 @@ $html .=  '<div class="fliestxt" >' .$dozent["Anrede"].' '.$dozent["Name"].', <b
 $html .= '<table   style="width: 100%;"  >
 <tr style="background-color: #cccccc;"   >
 <td style="width: 90%"                   > </td>
-<td style="width: 10%;" class="taC head" > LVS </td></tr>
+<td style="width: 10%;" class="taC head" > Ihre LVS </td></tr>
 <tr><td class="taL sum">Summe der Lehrveranstaltungen und Entlastungen:</td><td class="taC sum" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'summeLuE' ] , 2 ) .'</td></tr>
 <tr><td class="taL"    >Ihre Lehrverpflichtung:                        </td><td class="taC"     >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'Pflicht'  ] , 2 ) .'</td></tr>
 <!--tr><td class="taL sal"><a href="index.php?action=azkt&dozentKurz='. $dozent["aktuell"]["dozentLV"]["DozKurz"]  .'&output=html">Ihr Saldo im Semester '. $dozent["aktuell"]["dozentLV"]["Semester"]  .' '  . $dozent["aktuell"]["dozentLV"]["Jahr"]  .' beträgt:</a> </td><td class="taC sal" >'.  number_format( $dozent[ "aktuell" ][ "dozentLV" ][ 'saldo'    ] , 2 ) .'</td></tr-->
@@ -365,6 +368,7 @@ $html .=  '<br/><div class="fliestxt"> Wir haben im Einzelnen für Sie folgende 
 
 $html .=  generateLuETable( $dozent );
 
+
 $html .=  '<div class="fliestxt"><br/>
 Ihr Überstundenkonto der letzten Jahre oder Ihr Arbeitszeitkonto wird Ihnen gesondert zugestellt.<br/>
 Für weitere Fragen stehe ich Ihnen gerne zur Verfügung.<br/><br/>
@@ -373,6 +377,7 @@ Martin Holle, Prodekan LS
 </div>';
   
 $html .=  '<img width="300;" alt="sign-holle" src="img/sign-holle.png">';
+if ($output == 'html')
 $html .=  generateBeteiligung( $dozent );
 
 return $html;
@@ -412,9 +417,9 @@ function generateLuETable( $dozent )
         <td  style="width: 5%; " class="taC head" > B      </td>
         <!-- td  style="width: 3%; " class="taC head" > K      </td -->
         <td  style="width: 10%;" class="taC head" > Gruppe </td>
-        <td  style="width: 10%;" class="taC head" > SWS    </td>
+        <td  style="width: 10%;" class="taC head" > LVS V  </td>
         <td  style="width: 10%;" class="taC head" > Anteil </td>
-        <td  style="width: 10%;" class="taC head" > LVS    </td></tr> ' ;
+        <td  style="width: 10%;" class="taC head" > Ihre LVS    </td></tr> ' ;
   
   foreach ( $dozent["aktuell"]["veranstaltungsliste"]   as $t )
   {  $r .= '<tr> <td class="taL" id = "'. strtr( $t[ "Fach" ], ' ', '_' ) .'" onClick = "me( this );" oninput = "showResult(this, \'' .  $t[ "Fach" ] .'\' ); "  >' . $t[ "FachL"] . ' (' .  $t[ "Fach" ] .') </td>
@@ -428,11 +433,13 @@ function generateLuETable( $dozent )
   }
 
   $r .='</table>';
-  $r .='<br/><br/><table  style="width: 100%;" >';
+
+  $r .= '<div class="fliestxt" >&nbsp; (T = Teilgruppen, B = Betreuungsfaktor, LVS V = LVS der Veranstaltung )  </div>';
+  $r .='<br/><table  style="width: 100%;" >';
 
   $r .='<tr style="background-color: #cccccc; padding:5px;">
         <td  colspan="7"  style="width: 90%"                  > Titel der Entlastung </td>
-        <td  style="width: 10%;" class="taC head" > LVS </td></tr> ' ;
+        <td  style="width: 10%;" class="taC head" > Ihre LVS </td></tr> ' ;
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
   { $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;

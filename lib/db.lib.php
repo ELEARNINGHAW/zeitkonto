@@ -302,7 +302,7 @@ function setAnrede($dozent)
 
 
 
-function getDozentDB($db, $dozentKurz)
+function getDozentDB($db, $dozentKurz )
 {
   checkInput("dozentKurz" , $dozentKurz );
 

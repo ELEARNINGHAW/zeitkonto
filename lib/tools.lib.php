@@ -155,20 +155,20 @@ $htmlfooter = '
 
 // Erstellung des PDF Dokuments
 
-function renderPDF($html)
+function renderPDF($html, $title )
 {
  ini_set('display_errors', '1');
  ini_set('display_startup_errors', '1');
  error_reporting(E_ALL);
 
- $pdfName = "DAS PDF";
+ $pdfName = $title.".pdf";
 
  $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // Dokumenteninformationen
 $pdf->SetCreator(PDF_CREATOR);
 # $pdf->SetAuthor($pdfAuthor);
-# $pdf->SetTitle('Rechnung '.$rechnungs_nummer);
+ $pdf->SetTitle( $title );
 
 // Header und Footer Informationen
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -199,11 +199,14 @@ $pdf->writeHTML($html, true, false, true, false, '');
 
 //Ausgabe der PDF
 
+
 //Variante 1: PDF direkt an den Benutzer senden:
-$pdf->Output($pdfName, 'I');
+#$pdf->Output($pdfName, 'I');
+
+
 
 //Variante 2: PDF im Verzeichnis abspeichern:
-//$pdf->Output(dirname(__FILE__).'/'.$pdfName, 'F');
+$pdf->Output(dirname(__FILE__).'/'.$pdfName, 'F');
 //echo 'PDF herunterladen: <a href="'.$pdfName.'">'.$pdfName.'</a>';
 }
 
@@ -216,14 +219,16 @@ function getStundenbilanz( )
   if( !isset( $output ) ) { $output =  $g[ 'output' ] ; }
 
   $db   = connectDB();
-  $html = renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] );
+  $dozent   = getDozentDB( $db, $g[ 'dozentKurz' ] );
+  $title ='Stundenbilanz-'.$dozent['Name'].'-'.$dozent['Vorname'].'-'. $g[ 'semester' ].$g[ 'jahr' ];
+
+  $html = renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output);
+
   $html = $htmlheader . $html  . $htmlfooter;;
   error_reporting(0 );
 
-  #deb($html,1);
-  #  $html = "<html><body><h1>Hallo</h1></body></html>";
   if       ( $output == 'ohne' )  { return $html;        }
-  else if  ( $output == 'pdf'  )  { renderPDF( $html );  }
+  else if  ( $output == 'pdf'  )  { renderPDF( $html, $title );  }
   else                            { echo $html;          }
 }
 

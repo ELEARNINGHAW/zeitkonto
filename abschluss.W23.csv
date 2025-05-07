@@ -1,4 +1,4 @@
-﻿Dozent;Doz-Vorname;Doz-Nachname;Student/in Nachname;Student/in Name;Lehrentlastung weil;SummevonLehrentlastung SWS;SummevonLehrentlastung SWS
+﻿Anrede;VornameDoz;NameDoz;Student/in Nachname;Student/in Name;Lehrentlastung weil;SummevonLehrentlastung SWS;LVS
 Frau Prof. Dr.;Sybille;Adam;;;;;
 ;;;Bandisch;Katerina;Lehramt Staatsexamen o. MA Zweitbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,1;
 ;;;Pohlmann;Lya;Lehramt Bachelor Zweitbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,1;
@@ -16,12 +16,12 @@ Herr Prof. Dr.;Jörg;Andrä;;;;;
 Herr Prof. Dr.;Birger;Anspach;;;;;
 ;;;Fedai;Farhang;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
 ;;;;;;Summe von SummevonLehrentlastung SWS:;0,3
-Frau Prof. Dr.;Andrea;Bauer;;;;;
+Frau Prof. Dr.;Andrea;BauerA;;;;;
 ;;;Adler;Lea;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
 ;;;Hartmann;Emely;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
 ;;;Wittorf;Swana Luise;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
 ;;;;;;Summe von SummevonLehrentlastung SWS:;1
-Prof. Dr.;Margret;Bauera;;;;;
+Prof. Dr.;Margret;BauerM;;;;;
 ;;;Junge;Fabian;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
 ;;;;;;Summe von SummevonLehrentlastung SWS:;0,4
 Frau;Wiebke;Bendt;;;;;
@@ -182,9 +182,6 @@ Herr Prof. Dr.;Frank;Hörmann;;;;;
 ;;;Schmidt;Moritz;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
 ;;;Siponen;Yannik;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
 ;;;;;;Summe von SummevonLehrentlastung SWS:;1,2
-Herr M.Sc.;Yasin;Incedag;;;;;
-;;;Graf;Eike;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
-;;;;;;Summe von SummevonLehrentlastung SWS:;0,1
 Herr Prof. Dr.;Christian;Kaiser;;;;;
 ;;;Below;Anne;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
 ;;;Boran;Burcin Hazal;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
@@ -214,7 +211,7 @@ Herr Prof. Dr.;Bernd;Kellner;;;;;
 ;;;Nguyen;Hung Duc;Bachelorarbeit: Zweitbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,1;
 ;;;Said;Susan;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer extern);0,3;
 ;;;;;;Summe von SummevonLehrentlastung SWS:;2
-Prof. Dr.;André;Klussmann;;;;;
+Prof. Dr.;André;Klußmann;;;;;
 ;;;Garbe;Sandra;Bachelorarbeit: Erstbetreuer (bei 1. Betreuer HAW / 2. Betreuer HAW);0,2;
 ;;;Gurung;Nina;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
 ;;;Heß;Friederike;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer extern);0,5;
@@ -530,4 +527,3 @@ Herr Prof. Dr.;York;Zöllner;;;;;
 ;;;Silva Rojas;Rodrigo Javier;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
 ;;;Suleiman;Shaden;Masterthesis: Erstbetreuer (bei  1. Betreuer HAW / 2. Betreuer HAW);0,4;
 ;;;;;;Summe von SummevonLehrentlastung SWS:;2,3
-;;;;;;SummevonLehrentlastung SWS Gesamtsumme Summe:;100,6
