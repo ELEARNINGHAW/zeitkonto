@@ -321,7 +321,7 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
 function calcStundenbilanz( $dozent )
 { $stunden = array();
   $stunden[ 'veranstaltungssumme' ] = 0;
-  $stunden[ 'entlastungsumme'     ] = 0;
+  $stunden[ 'entlastungsumme1'     ] = 0;
   $stunden[ 'saldo'               ] = 0;
 
   foreach ($dozent['aktuell']['veranstaltungsliste'] as $vl )
@@ -330,11 +330,15 @@ function calcStundenbilanz( $dozent )
   }
   
   foreach ($dozent['aktuell']['entlastungsliste'] as $vl )
-  {  $stunden[ 'entlastungsumme' ]  += ( $vl['LVS']  );
+  {  $stunden[ 'entlastungsumme1' ]  += ( $vl['LVS']  );
   }
 
-  $stunden[ 'summeLuE' ] = $stunden[ 'entlastungsumme' ]  +  $stunden[ 'veranstaltungssumme' ];
-  $stunden[ 'saldo'    ] = $stunden[ 'entlastungsumme' ]  +  $stunden[ 'veranstaltungssumme' ] - $dozent[ 'aktuell']['dozentLV'][ 'Pflicht' ];
+  if( $stunden[ 'entlastungsumme1' ] > 4 ) {  $stunden[ 'entlastungsumme2' ] = 4;  }   ## Entlastungssumme darf höchsten 4 SWS sein.
+  else                                    {  $stunden[ 'entlastungsumme2' ] = stunden[ 'entlastungsumme1' ];  }
+
+  $stunden[ 'summeLuE' ] = $stunden[ 'entlastungsumme1' ]  +  $stunden[ 'veranstaltungssumme' ];
+
+  $stunden[ 'saldo'    ] = $stunden[ 'entlastungsumme1' ]  +  $stunden[ 'veranstaltungssumme' ] - $dozent[ 'aktuell']['dozentLV'][ 'Pflicht' ];
 
   return $stunden;
 }
@@ -409,7 +413,7 @@ Martin Holle, Prodekan LS
 }
 
 function generateLuETable( $dozent )
-{ $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
+{  $r = '<div style="position: absolute; left:50%; top:100px; padding: 10px;  border: solid black 1px; font-family: Arial, sans-serif;  font-size  : 12px; background-color: #FAFAFA; display: none;"  id="livesearch"> </div>
 <table  style="width: 100%;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px;">
         <td  style="width: 50%"           > Titel der Veranstaltung </td>
@@ -444,8 +448,12 @@ function generateLuETable( $dozent )
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
   { $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
   }
-  
-  $r .= '<tr><td colspan="7" class="sum"> Summe der Lehrveranstaltungen und Entlastungen: </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "summeLuE" ]  , 2) . '</td></tr>' ;
+
+    $r .= '<tr><td colspan="7" class="sum"> Summe der Entlastungen:  '.  number_format($dozent["aktuell"][ "dozentLV" ][ "entlastungsumme1" ]  , 2) . ' LVS. Gekürzt auf die maximal möglichen 4.00 LVS </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "entlastungsumme2" ]  , 2) . '</td></tr>' ;
+
+
+
+    $r .= '<tr><td colspan="7" class="sum"> Summe der Lehrveranstaltungen und Entlastungen: </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "summeLuE" ]  , 2) . '</td></tr>' ;
   $r .= '</table>';
 
   return $r;
