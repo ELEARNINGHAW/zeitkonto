@@ -334,7 +334,7 @@ function calcStundenbilanz( $dozent )
   }
 
   if( $stunden[ 'entlastungsumme1' ] > 4 ) {  $stunden[ 'entlastungsumme2' ] = 4;  }   ## Entlastungssumme darf höchsten 4 SWS sein.
-  else                                    {  $stunden[ 'entlastungsumme2' ] = stunden[ 'entlastungsumme1' ];  }
+  else                                    {  $stunden[ 'entlastungsumme2' ] = $stunden[ 'entlastungsumme1' ];  }
 
   $stunden[ 'summeLuE' ] = $stunden[ 'entlastungsumme1' ]  +  $stunden[ 'veranstaltungssumme' ];
 

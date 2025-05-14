@@ -1,8 +1,9 @@
 <?php
 
 function connectDB()
-{ $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
-  if ($db -> connect_errno)
+{    $db = new mysqli("141.22.110.33", "zeitkonto", "d4p0t2tLS", "zeitkonto");
+   # $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
+    if ($db -> connect_errno)
   { echo "Failed to connect to MySQL: " . $db->connect_error;
     exit();
   }
@@ -52,7 +53,7 @@ function getArbeitszeitlisteDB( $db, $dozentKurz  )
 
    $arbeitszeitliste[ 'aktuell' ][ "saldoTotal" ] = $saldoTotal;
    $arbeitszeitliste[ 'aktuell' ] +=  getDozentDB( $db, $dozentKurz ) ;
-    #  deb($arbeitszeitliste,1);
+
    return $arbeitszeitliste;
 }
 
@@ -92,7 +93,8 @@ function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
     $row2    = $result2 -> fetch_all( MYSQLI_ASSOC );
     $r1[ 'SWS' ] = $row2[ 0 ][ "SWS" ];
 
-    $sql3 = "SELECT * FROM `Fach`  WHERE Kurz       = \"" .  $r1[ 'Fach'        ]  ."\"";
+    $sql3 = "SELECT * FROM `fach`  WHERE Kurz       = \"" .  $r1[ 'Fach'        ]  ."\"";
+
     $result3 = $db -> query($sql3);
     $row3 = $result3 -> fetch_all( MYSQLI_ASSOC );
 
@@ -253,7 +255,7 @@ function getDozentenListeDB($db )
 function getDozentenListeSemDB( $db )
 { $jahr     =  $_SESSION[ 'aktuell' ][ 'jahr'     ] ;
   $semester =  $_SESSION[ 'aktuell' ][ 'semester' ] ;
-  #deb($_SESSION,1);
+
   $dozentenliste = array();
   
   $sql6 = "SELECT * FROM `dozent` ORDER BY Status DESC, Name  ";
