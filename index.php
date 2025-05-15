@@ -5,54 +5,53 @@ include_once( "lib/tools.lib.php"  );
 include_once( "lib/db.lib.php"     );
 include_once( "lib/render.lib.php" );
 
-
-
+$db   = connectDB();
 
 if ( isset( $_GET[ 'action'      ]  ) )
 {
 
 if     ( $_GET[ 'action' ] == 'lad'  )    ## -- Hauptliste -- Liste mit allen Dozierenden --
-{ getRenderAlleDozentenSem();
+{ getRenderAlleDozentenSem( $db );
 }
 
 else if( $_GET[ 'action' ] == 'sb'   )    ## -- aktuelle Stundenbilanz eines Dozierenden --
-{ getStundenbilanz( );
+{ getStundenbilanz( $db );
 }
 
 else if( $_GET[ 'action' ] == 'azkt' )    ## -- aktueller Stand des Arbeistzeitkontos eines Dozierenden --
-{ getStandArbeitszeitkonto( );
+{ getStandArbeitszeitkonto( $db  );
 }
 
 else if( $_GET[ 'action' ] == 'edoz' )    ## -- Basisliste mit allen Dozierenden --
-{ getRenderAlleDozenten();
+{ getRenderAlleDozenten( $db );
 }
 
 else if( $_GET[ 'action' ] == 'ef'   )    ## -- Basisliste mit allen Fächern --
-{ getRenderAlleFaecher();
+{ getRenderAlleFaecher( $db );
 }
 
 else if( $_GET[ 'action' ] == 'edep' )    ## -- Basisliste mit allen Departments --
-{ getRenderAlleDepartments();
+{ getRenderAlleDepartments( $db );
 }
 
 else if( $_GET[ 'action' ] == 'esg'  )    ## -- Basisliste mit allen Studiengängen --
-{ getRenderAlleStudiengang();
+{ getRenderAlleStudiengang( $db );
 }
 
 else if( $_GET[ 'action' ] == 'eeg'  )    ## -- Basisliste mit allen Entlastungsgründen --
-{ getRenderAlleEntlastungsgruenden();
+{ getRenderAlleEntlastungsgruenden( $db );
 }
 
 else if( $_GET[ 'action' ] == 'ad'   )    ## -- Login Spinwheel  --
-{ getRenderLoading();
+{ getRenderLoading( $db );
 }
 
 else if( $_GET[ 'action' ] == 'ls'   )    ## -- Login Screen  --
-{ getRenderLoginscreen();
+{ getRenderLoginscreen(  );
 }
 
 else if( $_GET[ 'action' ] == 'ss'   )    ## -- Spash Screen  --
-{ getRenderSplashscreen();
+{ getRenderSplashscreen( );
 }
 
 }

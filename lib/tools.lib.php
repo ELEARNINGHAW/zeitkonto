@@ -211,33 +211,31 @@ $pdf->Output(dirname(__FILE__).'/'.$pdfName, 'F');
 }
 
 
-function getStundenbilanz( )
+function getStundenbilanz( $db )
 { global $htmlheader, $htmlfooter;
 
   $g = checkGetInput();
 
   if( !isset( $output ) ) { $output =  $g[ 'output' ] ; }
 
-  $db   = connectDB();
-  $dozent   = getDozentDB( $db, $g[ 'dozentKurz' ] );
-  $title ='Stundenbilanz-'.$dozent['Name'].'-'.$dozent['Vorname'].'-'. $g[ 'semester' ].$g[ 'jahr' ];
+  $dozent =  getDozentDB( $db, $g[ 'dozentKurz' ] );
+  $title  =  'Stundenbilanz-'.$dozent['Name'].'-'.$dozent['Vorname'].'-'. $g[ 'semester' ].$g[ 'jahr' ];
 
-  $html = renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output);
-
-  $html = $htmlheader . $html  . $htmlfooter;;
+  $html   =  renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output);
+  $html   =  $htmlheader . $html  . $htmlfooter;;
   error_reporting(0 );
 
-  if       ( $output == 'ohne' )  { return $html;        }
+  if       ( $output == 'ohne' )  { return $html;                }
   else if  ( $output == 'pdf'  )  { renderPDF( $html, $title );  }
-  else                            { echo $html;          }
+  else                            { echo $html;                  }
 }
 
-function getStandArbeitszeitkonto(   $output = 'html' )
+function getStandArbeitszeitkonto(   $db ,  $output = 'html' )
 {
     $g = checkGetInput();
    # $g['dozentKurz'], $g['jahr'], $g['semester']
     global $htmlheader;
-  $db = connectDB();
+
   $html = renderArbeitszeitkonto( $db, $g['dozentKurz'] );
   $html = $htmlheader . $html;
   error_reporting(0 );
@@ -247,61 +245,61 @@ function getStandArbeitszeitkonto(   $output = 'html' )
   else                          { echo $html;         }
 }
 
-function getRenderAlleDozenten()
+function getRenderAlleDozenten(  $db  )
 { global $htmlheader, $htmlfooter;
   $html = '';
-  $db   = connectDB();
+
   $html = renderDozentenListe( $db );
   $html = $htmlheader . $html . $htmlfooter;
   echo $html;
 }
 
-function getRenderAlleDozentenSem()
+function getRenderAlleDozentenSem( $db )
 { $g = checkGetInput();
   global $htmlheader, $htmlfooter;
   $html = '';
-  $db   = connectDB();
+
   $html = renderDozentenListeSem( $db );
   $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
 }
 
-function getRenderAlleFaecher()
+function getRenderAlleFaecher( $db  )
 { global $htmlheader, $htmlfooter;
   $header = $htmlheader;
   $html = '';
-  $db = connectDB();
+
   $html = renderFaecherListe( $db );
   $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
 }
 
-function getRenderAlleDepartments()
+function getRenderAlleDepartments(  $db )
 { global $htmlheader, $htmlfooter;
   $html = '';
-  $db = connectDB();
+
   $html = renderDepartmentListe( $db );
   $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
    echo $html;
 }
 
-function getRenderAlleStudiengang()
+function getRenderAlleStudiengang(  $db )
 { global $htmlheader, $htmlfooter;
   $html = '';
-  $db = connectDB();
+
   $html = renderStudiengangListe( $db );
   $html = $htmlheader . $html . $htmlfooter;
 #  error_reporting(0 );
   echo $html;
 }
 
-function getRenderAlleEntlastungsgruenden()
+function getRenderAlleEntlastungsgruenden( $db )
 { global $htmlheader, $htmlfooter;
   $html = '';
-  $db = connectDB();
+
   $html = renderEntlastungsgruendeListe( $db );
   $html = $htmlheader . $html . $htmlfooter;
 # error_reporting(0 );

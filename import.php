@@ -1,28 +1,31 @@
 <?php
+include_once( "lib/db.lib.php" );
+
+$db   = connectDB();
 
 # $facher = getFachCSV( "auslastung.W23.S24.W24.csv" );
 #importLVA($facher); ## Importiert neue LVA in die DB
 
-#$facher = getFachCSV( "auslastung.W23.S24.W24.csv" );
-#importBeteiligung( $facher );
+#$facher = getFachCSV( $db , "auslastung.W23.S24.W24.csv" );
+#importBeteiligung( $db , $facher );
 
 #$entlastung = getFunktionsEntlastungCSV( "funktionsentlastungen.W24.csv" );
 $entlastung = getFunktionsEntlastungCSV( "funktionsentlastungen.W23.csv" );
 #deb($entlastung,1);
-importEntlastung(  $entlastung );
+importEntlastung(  $db , $entlastung );
 
 # $entlastung = getEntlastungCSV( 'entlastung.W23.S24.W24.csv' );
 
 # $entlastung   = getAbschlussarbeitenCSV( 'abschluss.S24.csv' , 'S24' );
 # $entlastung   = getAbschlussarbeitenCSV( 'abschluss.W23.csv' , 'W23' );
-# importEntlastung(  $entlastung );
+# importEntlastung(  $db , $entlastung );
 
 #$jahr = 2023;
 #$semester = 'W';
 #generatePDFs(  $jahr, $semester   );
 
-function generatePDFs(  $jahr, $semester )
-{ $dozenten = getAktiveDozenten( $jahr, $semester );
+function generatePDFs(  $db, $jahr, $semester )
+{ $dozenten = getAktiveDozenten( $db, $jahr, $semester );
   foreach ( $dozenten as $dozKurz) {
   echo "<iframe width='50%' height='50%;' name='".$dozKurz."'></iframe>";
   $url = "http://localhost/zeitkonto/index.php?action=sb&jahr=".$jahr."&semester=".$semester."&dozentKurz=".$dozKurz."&output=pdf";
@@ -30,9 +33,9 @@ function generatePDFs(  $jahr, $semester )
 }
 
 }
-function getAktiveDozenten( $jahr, $semester)
+function getAktiveDozenten( $db, $jahr, $semester)
 {
-  $db  = connectDB();
+
   $sql = "SELECT DISTINCT DozentKurz FROM `beteiligung` WHERE Jahr = '".$jahr."' AND Semester = '".$semester."';  ";
 
   foreach ($db->query($sql) as $row)
@@ -42,8 +45,8 @@ function getAktiveDozenten( $jahr, $semester)
   return $dozenten;
 }
 
-function checkDozent( $dozenten )
-{ $db = connectDB();
+function checkDozent( $db , $dozenten )
+{
   foreach ( $dozenten as $dozent )
   { $dozent = trim(strip_tags( $dozent ) , "   ");
     $sql = "SELECT COUNT(*) AS C FROM dozent WHERE Name LIKE LOWER('".$dozent."')";
@@ -57,8 +60,8 @@ function checkDozent( $dozenten )
 $db->close();
 }
 
-function getAlleDozenten( $param = null )
-{ $db = connectDB();
+function getAlleDozenten( $db , $param = null )
+{
   $sql = "SELECT *  FROM dozent ";
 
   foreach ($db->query($sql) as $row)
@@ -70,9 +73,9 @@ function getAlleDozenten( $param = null )
   return $dozenten;
 }
 
-function importBeteiligung( $lvas )
+function importBeteiligung(  $db ,$lvas )
 {
-  $db = connectDB();
+
   foreach ( $lvas as $lva ) {
 
   ## +----------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,11 +103,11 @@ function importBeteiligung( $lvas )
 }
 
 
-function importEntlastung(  $entlastung )
+function importEntlastung(  $db , $entlastung )
 {
   $lvas  = getFachCSV( "auslastung.W23.S24.W24.csv" );
 
-  $db = connectDB();
+
 
   #deb($entlastung,1);
 
@@ -140,8 +143,8 @@ function importEntlastung(  $entlastung )
 
 
 
-function importLVA( $lvas )
-{ $db = connectDB();
+function importLVA(  $db , $lvas )
+{
   foreach ( $lvas as $lva )
   {
 
@@ -191,8 +194,8 @@ function importLVA( $lvas )
 
 }
 
-function getDozentKurzName( $dozent )
-{ $db = connectDB();
+function getDozentKurzName(  $db , $dozent )
+{
   $kurz = '';
   $dozent = trim(strip_tags( $dozent ) , "   ");
   $sql = "SELECT Kurz AS K FROM dozent WHERE Name LIKE LOWER('" .$dozent. "')";
@@ -264,9 +267,9 @@ function getFachCSV( $filename )
    fclose( $handle );
   }
 
-  $dozenten =  getAlleDozenten( );
+  $dozenten =  getAlleDozenten(  $db  );
 
-  $db = connectDB();
+
   foreach ( $zeitkonten as $zk )
   {
     $zk[ 'LV-Name' ] =  trim( strip_tags( $zk[ 'LV-Name' ] ) , "   #+*'" );  ## unültige Zeichen aus Datum entfernen
@@ -448,14 +451,6 @@ function redefSemester( $sem )
   return $s;
 }
 
-function connectDB()
-{ $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
-  if ($db -> connect_errno)
-  { echo "Failed to connect to MySQL: " . $db->connect_error;
-    exit();
-  }
-  return ($db);
-}
 
 function setP2Praktikum ( $fachKurz )
 { $sl = strlen( $fachKurz );

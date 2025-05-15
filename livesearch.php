@@ -1,9 +1,11 @@
 <?php
 include_once( "lib/db.lib.php" );
 
+$db   = connectDB();
+
 $q = strip_tags( $_GET[ "q" ]);
 $h = strtr( strip_tags( $_GET[ "h" ] ), " ", "_" );
-$liste = getFaecherListeForLiveSeachDB( );
+$liste = getFaecherListeForLiveSeachDB( $db );
 
 $hint  = "";
 $closer =  '<div style="text-align: right; cursor: pointer;" onclick="closeResult( \''.$h.'\' );">[ X ]</div>';

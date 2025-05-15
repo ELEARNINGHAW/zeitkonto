@@ -19,7 +19,8 @@ function renderFaecherListe( $db )
 </tr>';
   }
   $r .= '</table>';
-  mysqli_close($db);
+  $r .= '</table>';
+ # mysqli_close($db);
   return $r;
 }
 
@@ -41,7 +42,7 @@ function renderStudiengangListe( $db )
            </tr>';
   }
   $r .= '</table>';
-  mysqli_close($db);
+ # mysqli_close($db);
   return $r;
 }
 
@@ -61,7 +62,7 @@ function renderEntlastungsgruendeListe( $db )
            </tr>';
     }
     $r .= '</table>';
-    mysqli_close($db);
+   # mysqli_close($db);
     return $r;
 }
 
@@ -82,7 +83,7 @@ function renderDepartmentListe( $db )
             </tr>';
   }
     $r .= '</table>';
-  mysqli_close($db);
+#  mysqli_close($db);
   return $r;
 }
 
@@ -158,14 +159,14 @@ function renderDozentenListe( $db )
 
 
 
-    mysqli_close($db);
+   # mysqli_close($db);
   return $r;
 }
 
 
-function getRenderLoading()
+function getRenderLoading( $db  )
 {
-    $g = checkGetInput();
+    $g = checkGetInput( );
 
 echo "<style>
 body
@@ -255,7 +256,7 @@ echo '<script language="javascript" type="text/javascript"> document.location="i
 
 function renderDozentenListeSem( $db )
 { $dozentenliste   = getDozentenListeSemDB( $db );
-   # deb($dozentenliste,1);
+
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">' ;
   $r .='<th  style="width: 5% ;"                  > Kurz     </th>' ;
@@ -283,29 +284,24 @@ function renderDozentenListeSem( $db )
     $r .= '</tr>';
   }
   $r .= '</table>';
-  mysqli_close($db);
+  #mysqli_close($db);
   
   return $r;
 }
 
 function renderArbeitszeitkonto( $db, $dozentKurz )
 { $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz  );
-  mysqli_close($db);
+ # mysqli_close($db);
   return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false , $output = 'html' )
-{
-
-    $dozent   = getDozentDB( $db, $dozentKurz,  $output  );
-
+{ $dozent = getDozentDB( $db, $dozentKurz, $output );
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB(            $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB(   $db, $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz(        $dozent );
-
-
 
   if ( $onlyData )
   { $stundenbilanz = $dozent[ 'aktuell' ];
@@ -321,25 +317,20 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
 function calcStundenbilanz( $dozent )
 { $stunden = array();
   $stunden[ 'veranstaltungssumme' ] = 0;
-  $stunden[ 'entlastungsumme1'     ] = 0;
+  $stunden[ 'entlastungsumme1'    ] = 0;
   $stunden[ 'saldo'               ] = 0;
 
   foreach ($dozent['aktuell']['veranstaltungsliste'] as $vl )
-  {
-      $stunden[ 'veranstaltungssumme' ]  += ( $vl['LVS'] *  $vl['T']  *$vl['B'] );
+  { $stunden[ 'veranstaltungssumme' ]  += ( $vl['LVS'] *  $vl['T']  *$vl['B'] );
   }
-  
   foreach ($dozent['aktuell']['entlastungsliste'] as $vl )
-  {  $stunden[ 'entlastungsumme1' ]  += ( $vl['LVS']  );
+  {
+    if($vl[ 'Grund' ] == 'B' AND $vl[ 'LVS' ] > 4  )  { $vl['LVS-orig'] = $vl['LVS']; $vl['LVS'] = 4; }
+       $stunden[ 'entlastungsumme1' ]  += ( $vl['LVS']  );
   }
-
-  if( $stunden[ 'entlastungsumme1' ] > 4 ) {  $stunden[ 'entlastungsumme2' ] = 4;  }   ## Entlastungssumme darf höchsten 4 SWS sein.
-  else                                    {  $stunden[ 'entlastungsumme2' ] = $stunden[ 'entlastungsumme1' ];  }
 
   $stunden[ 'summeLuE' ] = $stunden[ 'entlastungsumme1' ]  +  $stunden[ 'veranstaltungssumme' ];
-
   $stunden[ 'saldo'    ] = $stunden[ 'entlastungsumme1' ]  +  $stunden[ 'veranstaltungssumme' ] - $dozent[ 'aktuell']['dozentLV'][ 'Pflicht' ];
-
   return $stunden;
 }
 
@@ -371,7 +362,6 @@ $html .= '<table   style="width: 100%;"  >
 $html .=  '<br/><div class="fliestxt"> Wir haben im Einzelnen für Sie folgende Leistungen notiert:</div><br/>';
 
 $html .=  generateLuETable( $dozent );
-
 
 $html .=  '<div class="fliestxt"><br/>
 Ihr Überstundenkonto der letzten Jahre oder Ihr Arbeitszeitkonto wird Ihnen gesondert zugestellt.<br/>
@@ -437,23 +427,23 @@ function generateLuETable( $dozent )
   }
 
   $r .='</table>';
-
   $r .= '<div class="fliestxt" >&nbsp; (T = Teilgruppen, B = Betreuungsfaktor, LVS V = LVS der Veranstaltung )  </div>';
-  $r .='<br/><table  style="width: 100%;" >';
+  $r .= '<br/><table  style="width: 100%;" >';
 
-  $r .='<tr style="background-color: #cccccc; padding:5px;">
-        <td  colspan="7"  style="width: 90%"                  > Titel der Entlastung </td>
-        <td  style="width: 10%;" class="taC head" > Ihre LVS </td></tr> ' ;
+  $r .= '<tr style="background-color: #cccccc; padding:5px;">
+         <td  colspan="7"  style="width: 90%"    > Titel der Entlastung </td>
+         <td  style="width: 10%;" class="taC head" > Ihre LVS </td></tr> ' ;
   
   foreach ( $dozent['aktuell']['entlastungsliste']  as $t )
-  { $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
+  {
+    if (isset( $t[ "LVS-orig" ]   ) AND $t[ "Grund" ] == 'B'  )
+    { $t[ "auslastungsGrund" ] = $t[ "auslastungsGrund" ] .' = '.  $t[ "LVS-orig" ]. ' LVS  - Kappung nach § 7(2) LVVO auf maximal: ';
+    }
+    $r .= '<tr> <td colspan="7">' . $t[ "auslastungsGrund" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
   }
 
-    $r .= '<tr><td colspan="7" class="sum"> Summe der Entlastungen:  '.  number_format($dozent["aktuell"][ "dozentLV" ][ "entlastungsumme1" ]  , 2) . ' LVS. Gekürzt auf die maximal möglichen 4.00 LVS </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "entlastungsumme2" ]  , 2) . '</td></tr>' ;
 
-
-
-    $r .= '<tr><td colspan="7" class="sum"> Summe der Lehrveranstaltungen und Entlastungen: </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "summeLuE" ]  , 2) . '</td></tr>' ;
+  $r .= '<tr><td colspan="7" class="sum"> Summe der Lehrveranstaltungen und Entlastungen: </td>  <td class="taC sum"> ' .    number_format($dozent["aktuell"][ "dozentLV" ][ "summeLuE" ]  , 2) . '</td></tr>' ;
   $r .= '</table>';
 
   return $r;
@@ -506,7 +496,7 @@ function generateAZKTTable( $dozent )
 
 
   foreach ( $dozent   as $dVL )
-  { #deb( $dVL,1);
+  {
     $d = $dVL['dozentLV'];
     $r .= '<tr> 
            <td class="taC"><a href="http://localhost/zeitkonto/index.php?action=sb&jahr='. $d[ "Jahr"  ] . '&semester='.  $d[ "Semester" ] .'&dozentKurz='. $d[ "DozKurz"  ] . '&output=html">' .   $d[ "Jahr"   ]   . ' (' .  $d[ "Semester" ] .') </a> </td>

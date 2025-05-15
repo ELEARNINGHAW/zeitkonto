@@ -1,8 +1,8 @@
 <?php
 
 function connectDB()
-{    $db = new mysqli("141.22.110.33", "zeitkonto", "d4p0t2tLS", "zeitkonto");
-   # $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
+{  #  $db = new mysqli("141.22.110.33", "zeitkonto", "d4p0t2tLS", "zeitkonto");
+    $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
     if ($db -> connect_errno)
   { echo "Failed to connect to MySQL: " . $db->connect_error;
     exit();
@@ -128,8 +128,10 @@ function getEntlastungslisteDB( $db , $dozentKurz , $jahr , $semester )
 
   $row = $result -> fetch_all( MYSQLI_ASSOC );
   $entlastungsliste = array();
-  foreach ($row as $r3)
-  {  $r3[ 'auslastungsGrund' ] = $auslastung[ $r3[ 'Grund' ] ];
+  foreach ( $row as $r3 )
+  {  if ( $r3[ 'Grund' ] == 'B' AND  $r3[ 'LVS' ] > 4 )
+    { $r3[ 'LVS-orig' ] = $r3[ 'LVS' ];  $r3[ 'LVS' ] = 4; }   ## ---- Beschränkung auf Maximal 4 LVS für Betreuung für Bachelor / Masterarbeiten möglich ----
+      $r3[ 'auslastungsGrund' ] = $auslastung[ $r3[ 'Grund' ] ];
      $entlastungsliste[] =  $r3;
   }
   return $entlastungsliste;
@@ -177,11 +179,6 @@ function getFaecherListeDB( $db )
   return $faecherliste;
 }
 
-
-
-
-
-
 function getStudiengangListeDB($db )
 {
   $studiengangliste = array();
@@ -193,11 +190,8 @@ function getStudiengangListeDB($db )
   foreach ($row as $r4)
   {  $studiengangliste[] = $r4;
   }
-  
   return $studiengangliste;
 }
-
-
 
 function getEntlastungsgruendeListeDB($db )
 {
@@ -214,8 +208,6 @@ function getEntlastungsgruendeListeDB($db )
     return $entlastungsliste;
 }
 
-
-
 function getDepartmentListeDB($db )
 {
   $departmentliste = array();
@@ -231,12 +223,8 @@ function getDepartmentListeDB($db )
   return $departmentliste;
 }
 
-
-
 function getDozentenListeDB($db )
-{
-  
-  $dozentenliste = array();
+{ $dozentenliste = array();
   
   $sql6 = "SELECT * FROM `dozent` ORDER BY Name  ";
   $result = $db -> query($sql6);
@@ -244,8 +232,7 @@ function getDozentenListeDB($db )
   $row = $result -> fetch_all(MYSQLI_ASSOC);
   
   foreach ($row as $r4)
-  {
-    $r4[ 'Anrede' ] = setAnrede( $r4 );
+  { $r4[ 'Anrede' ] = setAnrede( $r4 );
     $dozentenliste[] = $r4;
   }
  
@@ -264,13 +251,10 @@ function getDozentenListeSemDB( $db )
   $row = $result -> fetch_all( MYSQLI_ASSOC );
 
   foreach ($row as $r4)
-  {
-    $r4[ 'AnzV'   ] = sizeof( getVeranstaltungslisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
-
-    $r4[ 'AnzE'   ] = sizeof( getEntlastungslisteDB(    $db, $r4[ 'Kurz' ], $jahr, $semester ) );
-    $r4[ 'Anrede' ] = setAnrede( $r4 );
-
-    $r4[ 'aktuell' ] =   getArbeitszeitlisteDB( $db, $r4[ 'Kurz' ] )[ 'aktuell' ];   ;
+  { $r4[ 'AnzV'    ] = sizeof( getVeranstaltungslisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
+    $r4[ 'AnzE'    ] = sizeof( getEntlastungslisteDB(    $db, $r4[ 'Kurz' ], $jahr, $semester ) );
+    $r4[ 'Anrede'  ] = setAnrede( $r4 );
+    $r4[ 'aktuell' ] = getArbeitszeitlisteDB( $db, $r4[ 'Kurz' ] )[ 'aktuell' ];   ;
 
     if ($r4[ 'AnzV'   ] > 0 OR   $r4[ 'AnzE'   ] > 0 )   # Liste 1: Dozenten mit Lehre oder Entlastung
     {  $tmpListe1[] = $r4;}
@@ -305,8 +289,7 @@ function setAnrede($dozent)
 
 
 function getDozentDB($db, $dozentKurz )
-{
-  checkInput("dozentKurz" , $dozentKurz );
+{ checkInput("dozentKurz" , $dozentKurz );
 
   $sql6 = "SELECT * FROM `dozent` WHERE  Kurz =\"". $dozentKurz ."\"";
   $result = $db -> query($sql6);
@@ -346,8 +329,8 @@ function getDozentLVDB($db, $dozentKurz, $jahr, $semester)
   return $dozentLV;
 }
 
-function getFaecherListeForLiveSeachDB( )
-{ $db = connectDB();
+function getFaecherListeForLiveSeachDB( $db )
+{
   $faecherliste = array();
   $sql6 = "SELECT * FROM `fach` ORDER BY Name  ASC , Name  ";
   $result = $db -> query($sql6);

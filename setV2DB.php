@@ -17,6 +17,10 @@ $v[ 'zeitkonto'      ] ="1";
 insertNewData( '$dozent',  $v );
 */
 
+include_once( "lib/db.lib.php" );
+
+$db   = connectDB();
+
 
 if (isset( $_GET[ 'k' ]  ) ) { $key      =  $_GET[ 'k'  ] ; } else  { $key    =  0; }
 if (isset( $_GET[ 'v' ]  ) ) { $value    =  $_GET[ 'v'  ] ; } else  { $value  =  0; }
@@ -40,7 +44,7 @@ if (isset($_GET[ 'action' ])  AND $_GET[ 'action' ] == 'sado' )
     if ( isset( $_GET[ 'department'     ] ) AND $_GET[ 'department'     ] != '' ) { $v[ 'department'     ] = $_GET[ 'department'     ]; } else { $v [ 'department'     ] = ''  ; }
     if ( isset( $_GET[ 'zeitkonto'      ] ) AND $_GET[ 'zeitkonto'      ] != '' ) { $v[ 'zeitkonto'      ] = $_GET[ 'zeitkonto'      ]; } else { $v [ 'zeitkonto'      ] = ''  ; }
 
-    insertNewData( 'dozent' ,  $v );
+    insertNewData( $db , 'dozent' ,  $v );
     header('Location: index.php?action=edoz');
 
      #deb($v,1);
@@ -56,7 +60,7 @@ if (isset($_GET[ 'action' ])  AND $_GET[ 'action' ] == 'sado' )
  * @return null
  */
 function getValue($table, $key, $value, $col, $id)
-{ return updateValue($table, $key, $value, $col, $id);
+{ return updateValue( $db , $table, $key, $value, $col, $id);
 }
 
 if ($col !=0 AND $table != 0 AND $key != 0  AND  $id != 0 )
@@ -87,8 +91,8 @@ if ($table == 'auslastungsgrund')
 
 
 
-function updateValue( $table,  $key, $value, $col, $id, $quote = true )
-{  $db = connectDB();
+function updateValue(  $db , $table,  $key, $value, $col, $id, $quote = true )
+{
    $value = strip_tags( $value );
    if ( $quote )  $value  = '"' .$value .'"';
    $sql = ' UPDATE ' .$table. ' SET ' .$key. ' = '.$value. ' WHERE ' .$col . ' = "' .$id .'"';
@@ -101,20 +105,11 @@ function updateValue( $table,  $key, $value, $col, $id, $quote = true )
    return $e;
 }
 
-function connectDB()
-{ $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
-  if ($db -> connect_errno)
-  { echo "Failed to connect to MySQL: " . $db->connect_error;
-    exit();
-  }
-  return ($db);
-}
-
-function insertNewData( $table,  $v )
+function insertNewData(  $db ,$table,  $v )
 {
 
 
-    $db = connectDB();
+
     /*
 $v[ 'name'           ] = checkInput($db, "name"           , $v['name'           ] );
 $v[ 'vorname'        ] = checkInput($db, "vorname"        , $v['vorname'        ] );
