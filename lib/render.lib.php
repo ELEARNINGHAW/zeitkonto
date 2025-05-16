@@ -290,13 +290,16 @@ function renderDozentenListeSem( $db )
 }
 
 function renderArbeitszeitkonto( $db, $dozentKurz )
-{ $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz  );
+{
+
+    $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten );
  # mysqli_close($db);
   return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false , $output = 'html' )
-{ $dozent = getDozentDB( $db, $dozentKurz, $output );
+{
+    $dozent = getDozentDB( $db, $dozentKurz, $output );
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB(            $db, $dozentKurz, $jahr, $semester );
