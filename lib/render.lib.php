@@ -291,7 +291,7 @@ function renderDozentenListeSem( $db )
 
 function renderArbeitszeitkonto( $db, $dozentKurz )
 {
-
+    $alleDozenten = getDozentenListeDB($db );
     $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten );
  # mysqli_close($db);
   return renderZeitkontoTotalProf( $arbeitszeitliste );
@@ -299,13 +299,13 @@ function renderArbeitszeitkonto( $db, $dozentKurz )
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false , $output = 'html' )
 {
-    $dozent = getDozentDB( $db, $dozentKurz, $output );
+  $dozent = getDozentDB( $db, $dozentKurz, $output );
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB(            $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB(   $db, $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz(        $dozent );
-
+#deb(  $dozent[ 'aktuell' ][ 'entlastungsliste'    ]   ,1);
   if ( $onlyData )
   { $stundenbilanz = $dozent[ 'aktuell' ];
   }

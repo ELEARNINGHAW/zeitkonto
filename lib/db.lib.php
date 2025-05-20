@@ -1,6 +1,6 @@
 <?php
-$count;
-$st = hrtime(true );
+$timepice = false;   ## Laufzeitmessung der DB Zugriffe
+if( $timepice ) { $count = 0; $st = hrtime(false )[0]; }
 
 function connectDB()
 {   $user = 'zeitkonto';
@@ -9,10 +9,10 @@ function connectDB()
     $host = 'localhost';
 
     # $db = new mysqli("141.22.110.33", "zeitkonto", "d4p0t2tLS", "zeitkonto");
-
+    $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
     #$db = new PDO('mysql:host=localhost;dbname=zeitkonto', $user, $pass);
 
-    $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
+
    # if ($db -> connect_errno)
  # { echo "Failed to connect to MySQL: " . $db->connect_error;
  #   exit();
@@ -33,6 +33,8 @@ function getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten )
   global $st;
   global $tim1;
   global $tim2;
+  global $timepice;
+
   checkInput("dozentKurz", $dozentKurz);
   $arbeitszeitliste = array();
   $saldoTotal = 0;
@@ -47,28 +49,19 @@ function getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten )
    $arbeitszeitliste[ 'aktuell' ][ "jahr"     ] = 0;
     $overflow = '';
    foreach ( $row as $r1 )
-   {  $tim2 = $tim1;
-       $tim1 =( hrtime(true ) - $st );
-       $tim3 = $tim1 - $tim2;
+   {
+      if( $timepice ){ $tim2 = $tim1; $tim1 = ( hrtime(false )[0] - $st ); echo '<br>'.' azl: '.  $count++  .' '.$tim1; }    #Zeitmessung der DB Zugriffe
 
-
-       echo '<br>'. $tim3 .' azl: '.  $count++  .' '.$tim1/1e+6;
-
-
-
-
-       $sb =  renderStundenbilanz( $db , $dozentKurz , $r1[ 'Jahr' ], $r1[ 'Semester' ] , true );
+      $sb =  renderStundenbilanz( $db , $dozentKurz , $r1[ 'Jahr' ], $r1[ 'Semester' ] , true );
       $arbeitszeitliste[ 'aktuell' ] =  $sb[ 'dozentLV' ];
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] =  $sb;
       $saldo =  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
       $saldoTotal +=  $saldo;
 
-
       if ( $saldoTotal > 36 )
-      {
-        $overflow = $saldoTotal - 36 ;
+      { $overflow = $saldoTotal - 36 ;
         $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "LVS verfallen: ". number_format($overflow,1);
-         $saldoTotal = 36;
+        $saldoTotal = 36;
       }
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldoTotal" ] = $saldoTotal;
    }
@@ -157,24 +150,14 @@ function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
     . "\"";
 
 
- 
-
-
-
-
     /*
     $stmt = $db->prepare($sql2);
-
-
     $stmt->bindParam(1, $jahr);
     $stmt->bindParam(2, $semester);
     $stmt->bindParam(3,  $r1[ 'Studiengang' ]);
     $stmt->bindParam(4,  $r1[ 'Fach'        ]);
-
     $stmt->execute();
 */
-
-
     $result2 = $db -> query( $sql2 );
     $row2    = $result2 -> fetch_all( MYSQLI_ASSOC );
     $r1[ 'SWS' ] = $row2[ 0 ][ "SWS" ];
@@ -187,42 +170,76 @@ function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
     $r1[ 'FachL'  ] = $row3[ 0 ][ "Name" ];
     $r1[ 'LVS'    ] = $r1[ 'K' ] *  $r1[ 'SWS' ]    ;
     $r1[ 'Anteil' ] = ( int ) ( $r1[ 'K' ] * 100 ) ;
-
     return  $r1;
-
 }
 
 function getEntlastungslisteDB( $db , $dozentKurz , $jahr , $semester )
 {
- checkInput("dozentKurz" , $dozentKurz );
- checkInput("jahr"       , $jahr       );
- checkInput("smester"    , $semester   );
+  checkInput("dozentKurz" , $dozentKurz );
+  checkInput("jahr"       , $jahr       );
+  checkInput("smester"    , $semester   );
 
-  $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
-  $result = $db -> query( $sql5 );
-  $row    = $result -> fetch_all( MYSQLI_ASSOC );
+
+#   $alleEntlastungsGrunde = null;
+   $entlastungsGrunde = getEntlastungsgruendeListeDB( $db );   ## ----------- Wird nur 1x gebraucht .-----
+#
+#  deb($entlastungsGrunde);
+
+#   $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
+#  $result = $db -> query( $sql5 );
+#  $row    = $result -> fetch_all( MYSQLI_ASSOC );
   
-  foreach ( $row as $r2 )
-  { $auslastung[ $r2[ 'Grund' ] ] = $r2[ 'Text' ];
-  }
-  
+#  foreach ( $row as $r2 )
+#  { $auslastung[ $r2[ 'Grund' ] ] = $r2[ 'Text' ];
+#  }
+
+#    deb($auslastung,1);
+
   $sql4 = "SELECT * FROM `auslastung` WHERE Jahr =     \"" . $jahr
                                 . "\" AND DozentKurz = \"" . $dozentKurz
                                 . "\" AND Semester =   \"" . $semester
                                 . "\" ORDER BY Grund";
   $result = $db -> query( $sql4 );
 
+ # deb($sql4);
+
   $row = $result -> fetch_all( MYSQLI_ASSOC );
   $entlastungsliste = array();
-  foreach ( $row as $r3 )
-  {  if ( $r3[ 'Grund' ] == 'B' AND  $r3[ 'LVS' ] > 4 )
-    { $r3[ 'LVS-orig' ] = $r3[ 'LVS' ];  $r3[ 'LVS' ] = 4; }   ## ---- Beschränkung auf Maximal 4 LVS für Betreuung für Bachelor / Masterarbeiten möglich ----
-      $r3[ 'auslastungsGrund' ] = $auslastung[ $r3[ 'Grund' ] ];
-     $entlastungsliste[] =  $r3;
-  }
-  return $entlastungsliste;
-}
 
+  foreach ( $row as $r3 )
+  { $entlastungsgrund[ $r3[ 'Grund' ]][ $r3[ 'ID' ]] = $r3;
+  }
+
+  #deb($entlastungsgrund );
+if (isset($entlastungsgrund))
+{
+  foreach ( $entlastungsgrund as $eg )
+  {
+    $i = 0; $lvsG = 0;
+    foreach ( $eg as $e )
+    { $lvsG += $e['LVS'];
+      $i++;
+    }
+    $e['LVSgesammt'] = $lvsG;
+    $e['LVS']        = $lvsG;
+
+    $e['anz'] = $i;
+    $entGrund[] = $e;
+  }
+
+   #deb($entGrund);
+
+
+   foreach ( $row as $r3 )
+   {
+    if ( $r3[ 'Grund' ] == 'B' AND  $r3[ 'LVS' ] > 4 )
+    { $r3[ 'LVS-orig' ] = $r3[ 'LVS' ];  $r3[ 'LVS' ] = 4; }   ## ---- Beschränkung auf Maximal 4 LVS für Betreuung für Bachelor / Masterarbeiten möglich ----
+      $r3[ 'auslastungsGrund' ] = $entlastungsGrunde[ $r3[ 'Grund' ] ]['Text'];
+     $entlastungsliste[] =  $r3;
+  }}
+  return $entlastungsliste;
+
+}
 
 function getBeteiligungslisteDB($db, $veranstaltungsliste )
 { $beteiligungsliste = array();
@@ -288,7 +305,7 @@ function getEntlastungsgruendeListeDB($db )
     $row = $result -> fetch_all(MYSQLI_ASSOC);
 
     foreach ($row as $r4)
-    {  $entlastungsliste[] = $r4;
+    {  $entlastungsliste[ $r4[ 'Grund' ] ] = $r4;
     }
 
     return $entlastungsliste;
@@ -329,7 +346,7 @@ function getDozentenListeSemDB( $db )
 { $jahr     =  $_SESSION[ 'aktuell' ][ 'jahr'     ] ;
   $semester =  $_SESSION[ 'aktuell' ][ 'semester' ] ;
 
-   $alleDozenten = getDozentenListeDB($db );
+  $alleDozenten = getDozentenListeDB($db );
 
   $dozentenliste = array();
   
@@ -337,12 +354,11 @@ function getDozentenListeSemDB( $db )
 
   $stmt = $db->prepare( $sql6 );
 
-    $orderby = 'Status';
-    $desc = 'Name';
+  #$orderby = 'Status';
+  #$desc = 'Name';
+ # $stmt->bind_param("ss", $orderby, $desc);
 
-   # $stmt->bind_param("ss", $orderby, $desc);
-
-    $stmt -> execute();
+  $stmt -> execute();
   $result = $stmt->get_result();
   $stmt = $result ->  fetch_all( MYSQLI_ASSOC );;
 
@@ -363,6 +379,7 @@ function getDozentenListeSemDB( $db )
     else
     {  $tmpListe2[] = $r4;}                                # Liste  2: Dozenten ohne Lehre und ohne Entlastung
   }
+
   foreach ( $tmpListe2 as $tl2 )
   { $tmpListe1[] = $tl2;                                 # Liste 2 wird an die Liste 1 angehängt
   }
