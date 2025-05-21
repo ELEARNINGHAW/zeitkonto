@@ -1,5 +1,5 @@
 <?php
-$timepice = false;   ## Laufzeitmessung der DB Zugriffe
+$timepice = true;   ## Laufzeitmessung der DB Zugriffe
 if( $timepice ) { $count = 0; $st = hrtime(false )[0]; }
 
 function connectDB()
@@ -10,6 +10,8 @@ function connectDB()
 
     # $db = new mysqli("141.22.110.33", "zeitkonto", "d4p0t2tLS", "zeitkonto");
     $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
+
+
     #$db = new PDO('mysql:host=localhost;dbname=zeitkonto', $user, $pass);
 
 
