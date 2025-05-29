@@ -199,11 +199,8 @@ $pdf->writeHTML($html, true, false, true, false, '');
 
 //Ausgabe der PDF
 
-
 //Variante 1: PDF direkt an den Benutzer senden:
 #$pdf->Output($pdfName, 'I');
-
-
 
 //Variante 2: PDF im Verzeichnis abspeichern:
 $pdf->Output(dirname(__FILE__).'/'.$pdfName, 'F');
@@ -232,9 +229,9 @@ function getStundenbilanz( $db )
 
 function getStandArbeitszeitkonto(   $db ,  $output = 'html' )
 {
-    $g = checkGetInput();
-   # $g['dozentKurz'], $g['jahr'], $g['semester']
-    global $htmlheader;
+  $g = checkGetInput();
+  # $g['dozentKurz'], $g['jahr'], $g['semester']
+  global $htmlheader;
 
   $html = renderArbeitszeitkonto( $db, $g['dozentKurz'] );
   $html = $htmlheader . $html;
@@ -258,10 +255,9 @@ function getRenderAlleDozentenSem( $db )
 { $g = checkGetInput();
   global $htmlheader, $htmlfooter;
   $html = '';
-
-  $html = renderDozentenListeSem( $db );
+  $html = renderDozentenListeSem( $db, getDozentenListeSemDB( $db ) );
   $html = $htmlheader . $html . $htmlfooter;
-#  error_reporting(0 );
+# error_reporting(0 );
   echo $html;
 }
 
@@ -305,6 +301,20 @@ function getRenderAlleEntlastungsgruenden( $db )
 # error_reporting(0 );
   echo $html;
 }
+
+
+
+
+
+function renderArbeitszeitkonto( $db, $dozentKurz )
+{
+    $alleDozenten = getDozentenListeDB($db );
+    $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten );
+    # mysqli_close($db);
+    return renderZeitkontoTotalProf( $arbeitszeitliste );
+}
+
+
 
 function checkGetInput()
 { if (isset( $_GET[ 'jahr'       ]  ) ) { $g[ 'jahr'       ]  =  $_GET[ 'jahr'       ] ; $_SESSION[ 'aktuell' ][ 'jahr'     ] = $g[ 'jahr'        ];} #else  { $g[ 'jahr'       ]  =  0; }

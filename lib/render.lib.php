@@ -254,9 +254,9 @@ span:before
 echo '<script language="javascript" type="text/javascript"> document.location="index.php?action=lad"; </script>';
 }
 
-function renderDozentenListeSem( $db )
-{ $dozentenliste   = getDozentenListeSemDB( $db );
-
+function renderDozentenListeSem( $db, $dozentenliste )
+{
+  #deb($dozentenliste,1);
   $r = '<table   style="width: 100%;   position: relative;" >';
   $r .='<tr style="background-color: #cccccc; padding:5px; position: sticky; top: 0;">' ;
   $r .='<th  style="width: 5% ;"                  > Kurz     </th>' ;
@@ -285,27 +285,23 @@ function renderDozentenListeSem( $db )
   }
   $r .= '</table>';
   #mysqli_close($db);
-  
   return $r;
-}
-
-function renderArbeitszeitkonto( $db, $dozentKurz )
-{
-    $alleDozenten = getDozentenListeDB($db );
-    $arbeitszeitliste =  getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten );
- # mysqli_close($db);
-  return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
 
 function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false , $output = 'html' )
 {
-  $dozent = getDozentDB( $db, $dozentKurz, $output );
+  $dozent = getDozentDB( $db, $dozentKurz );
+ #   deb('1'); deb($dozent);
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
+ #   deb('2'); deb($dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
+ #   deb('3'); deb( $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  );
   $dozent[ 'aktuell' ][ 'dozentLV'            ]  =  getDozentLVDB(            $db, $dozentKurz, $jahr, $semester );
+ #   deb('4'); deb( $dozent[ 'aktuell' ][ 'dozentLV'            ] );
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB(   $db, $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
+ #  deb('5'); deb($dozent[ 'aktuell' ][ 'beteiligung'         ]  );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz(        $dozent );
-#deb(  $dozent[ 'aktuell' ][ 'entlastungsliste'    ]   ,1);
+  #deb(  $dozent[ 'aktuell' ][ 'entlastungsliste'    ]   ,1);
   if ( $onlyData )
   { $stundenbilanz = $dozent[ 'aktuell' ];
   }

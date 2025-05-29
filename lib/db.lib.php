@@ -10,12 +10,8 @@ function connectDB()
 
     # $db = new mysqli("141.22.110.33", "zeitkonto", "d4p0t2tLS", "zeitkonto");
     $db = new mysqli("localhost", "zeitkonto", "zeitkonto", "zeitkonto");
-
-
     #$db = new PDO('mysql:host=localhost;dbname=zeitkonto', $user, $pass);
-
-
-   # if ($db -> connect_errno)
+    # if ($db -> connect_errno)
  # { echo "Failed to connect to MySQL: " . $db->connect_error;
  #   exit();
  # }
@@ -43,37 +39,43 @@ function getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten )
   $sql1   = "SELECT DISTINCT  Jahr, Semester  FROM `beteiligung` WHERE  DozentKurz = \"". $dozentKurz
         . "\"  ORDER by Jahr ASC, Semester ASC ";
 
-   $result = $db -> query( $sql1 );
-   $row    = $result -> fetch_all( MYSQLI_ASSOC );
+  $result = $db -> query( $sql1 );
+  $row    = $result -> fetch_all( MYSQLI_ASSOC );   ## Alle Semester in dem der Dozent aktiv war
 
-   $arbeitszeitliste[ 'aktuell' ][ "saldo"    ] = 0;
-   $arbeitszeitliste[ 'aktuell' ][ "semester" ] = 0;
-   $arbeitszeitliste[ 'aktuell' ][ "jahr"     ] = 0;
-    $overflow = '';
-   foreach ( $row as $r1 )
-   {
-      if( $timepice ){ $tim2 = $tim1; $tim1 = ( hrtime(false )[0] - $st ); echo '<br>'.' azl: '.  $count++  .' '.$tim1; }    #Zeitmessung der DB Zugriffe
+  $arbeitszeitliste[ 'aktuell' ][ "saldo"    ] = 0;
+  $arbeitszeitliste[ 'aktuell' ][ "semester" ] = 0;
+  $arbeitszeitliste[ 'aktuell' ][ "jahr"     ] = 0;
+  $overflow = '';
 
-      $sb =  renderStundenbilanz( $db , $dozentKurz , $r1[ 'Jahr' ], $r1[ 'Semester' ] , true );
-      $arbeitszeitliste[ 'aktuell' ] =  $sb[ 'dozentLV' ];
-      $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] =  $sb;
-      $saldo =  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
-      $saldoTotal +=  $saldo;
+  if( $timepice ){
+     # deb($row);
+     #echo( "<h1>".$dozentKurz. '</h1>'  );
+    }
 
-      if ( $saldoTotal > 36 )
-      { $overflow = $saldoTotal - 36 ;
-        $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "Kommentar" ] .=  "LVS verfallen: ". number_format($overflow,1);
-        $saldoTotal = 36;
-      }
-      $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldoTotal" ] = $saldoTotal;
-   }
+  foreach ( $row as $r1 )
+  { if( $timepice ){ $tim2 = $tim1; $tim1 = ( hrtime(false )[ 0 ] - $st ); echo '<br>'.' azl: '.  $count++  .' '.$tim1; }    #Zeitmessung der DB Zugriffe
+   # deb($r1 );
+    $sb =  renderStundenbilanz( $db , $dozentKurz , $r1[ 'Jahr' ], $r1[ 'Semester' ] , true );
+   # deb($sb,1 );
 
+    $arbeitszeitliste[ 'aktuell' ] =  $sb[ 'dozentLV' ];
+    $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] =  $sb;
+    $saldo =  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ] ] [ 'dozentLV' ][ "saldo" ];
+    $saldoTotal +=  $saldo;
 
-   $arbeitszeitliste[ 'aktuell' ][ "saldoTotal" ] = $saldoTotal;
+    if ( $saldoTotal > 36 )
+    { $overflow = $saldoTotal - 36 ;
+      $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ] ] [ 'dozentLV' ][ "Kommentar" ] .=  "LVS verfallen: ". number_format( $overflow,1 );
+      $saldoTotal = 36;
+    }
+    $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ] ] [ 'dozentLV' ][ "saldoTotal" ] = $saldoTotal;
+  }
+
+  $arbeitszeitliste[ 'aktuell' ][ "saldoTotal" ] = $saldoTotal;
   # $arbeitszeitliste[ 'aktuell' ] +=  getDozentDB( $db, $dozentKurz ) ;
-    $arbeitszeitliste[ 'aktuell' ] +=  $alleDozenten[ $dozentKurz ] ;
-   # $alleDozenten = getDozentenListeDB($db );
-   return $arbeitszeitliste;
+  $arbeitszeitliste[ 'aktuell' ] +=  $alleDozenten[ $dozentKurz ] ;
+  # $alleDozenten = getDozentenListeDB($db );
+  return $arbeitszeitliste;
 }
 
 function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
@@ -91,68 +93,60 @@ function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
  #       . " AND Semester   = 'S' "
  #       . " ORDER BY Fach" ;
 
-
-
-
  #   $stmt = $db->prepare($sql1);
 
  #   $stmt->bindParam( ':jahr',  $jahr );
  #   $stmt->bindParam(':dozentKurz', $dozentKurz);
  #   $stmt->bindParam(':semester', $semester );
 
-  #  $stmt->execute();
+ #  $stmt->execute();
 
-
-  #  foreach ($stmt as $row) {
-  #      print_r($row);
-  #  }
-
-
+ #  foreach ($stmt as $row) {
+ #      print_r($row);
+ #  }
 
  $sql1   = "SELECT * FROM `beteiligung` WHERE Jahr     = \"" . $jahr
                                    . "\" AND DozentKurz = \"". $dozentKurz
                                    . "\" AND Semester   = \"". $semester
                                    . "\" ORDER BY Fach";
 
-
-  $result = $db -> query( $sql1 );
-    $stmt    = $result -> fetch_all( MYSQLI_ASSOC );
+  #$result = ;
+  $stmt    = $db -> query( $sql1 ) -> fetch_all( MYSQLI_ASSOC );
   /*  */
-    $veranstaltungsliste = array();
-  foreach ( $stmt as $r1 )
 
-  { $veranstaltungsliste[] =  getVeranstaltungDB( $db, $r1, $jahr, $semester );
+  $veranstaltungsliste = array();
+  foreach ( $stmt as $beteiligung )
+  { #deb($beteiligung);
+      $veranstaltungsliste[] =  getVeranstaltungDB( $db, $beteiligung, $jahr, $semester );
   }
 
- ;
+#  deb($veranstaltungsliste );
   return $veranstaltungsliste;
 }
 
 function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
-{
-    checkInput("jahr"       , $jahr       );
-    checkInput("smester"    , $semester   );
+{ checkInput("jahr"       , $jahr       );
+  checkInput("smester"    , $semester   );
 
-
-    #$stmt = $db->prepare("SELECT * FROM REGISTRY where name = ?");
-    #$stmt->execute([$_GET['name']]);
+  #$stmt = $db->prepare("SELECT * FROM REGISTRY where name = ?");
+  #$stmt->execute([$_GET['name']]);
 
 /*
     $sql2 = "SELECT * FROM `lva`  WHERE Jahr       = ?"
         . "  AND Semester     = ?"
         . "  AND Studiengang  = ?"
         . "  AND FachKurz     = ?";
-
 */
 
-    $sql2   = "SELECT * FROM `lva` WHERE Jahr     = \"" . $jahr
+ $sql2  = "SELECT * FROM `lva` WHERE Jahr     = \"" . $jahr
         . "\" AND Studiengang = \"". $r1[ 'Studiengang' ]
         . "\" AND Semester   = \"". $semester
         . "\" AND FachKurz   = \"". $r1[ 'Fach'        ]
     . "\"";
 
+  # deb($sql2);
 
-    /*
+/*
     $stmt = $db->prepare($sql2);
     $stmt->bindParam(1, $jahr);
     $stmt->bindParam(2, $semester);
@@ -162,13 +156,21 @@ function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
 */
     $result2 = $db -> query( $sql2 );
     $row2    = $result2 -> fetch_all( MYSQLI_ASSOC );
+
+  #   deb($row2);
+    if (!empty($row2))
+    {
     $r1[ 'SWS' ] = $row2[ 0 ][ "SWS" ];
+
+    }
+    $r1[ 'SWS' ]  = -1;
+
 
     $sql3 = "SELECT * FROM `fach`  WHERE Kurz       = \"" .  $r1[ 'Fach'        ]  ."\"";
 
     $result3 = $db -> query($sql3);
     $row3 = $result3 -> fetch_all( MYSQLI_ASSOC );
-
+deb($row3);
     $r1[ 'FachL'  ] = $row3[ 0 ][ "Name" ];
     $r1[ 'LVS'    ] = $r1[ 'K' ] *  $r1[ 'SWS' ]    ;
     $r1[ 'Anteil' ] = ( int ) ( $r1[ 'K' ] * 100 ) ;
@@ -176,18 +178,16 @@ function getVeranstaltungDB( $db , $r1 , $jahr , $semester )
 }
 
 function getEntlastungslisteDB( $db , $dozentKurz , $jahr , $semester )
-{
-  checkInput("dozentKurz" , $dozentKurz );
+{ checkInput("dozentKurz" , $dozentKurz );
   checkInput("jahr"       , $jahr       );
   checkInput("smester"    , $semester   );
 
-
-#   $alleEntlastungsGrunde = null;
+#  $alleEntlastungsGrunde = null;
    $entlastungsGrunde = getEntlastungsgruendeListeDB( $db );   ## ----------- Wird nur 1x gebraucht .-----
 #
 #  deb($entlastungsGrunde);
 
-#   $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
+#  $sql5   = "SELECT * FROM `auslastungsgrund`  ORDER BY Grund";
 #  $result = $db -> query( $sql5 );
 #  $row    = $result -> fetch_all( MYSQLI_ASSOC );
   
@@ -314,33 +314,27 @@ function getEntlastungsgruendeListeDB($db )
 }
 
 function getDepartmentListeDB($db )
-{
-  $departmentliste = array();
-  $sql6 = "SELECT * FROM `department` ORDER BY Name  ASC , Name  ";
+{ $departmentliste = array();
+  $sql6   = "SELECT * FROM `department` ORDER BY Name  ASC , Name  ";
   $result = $db -> query($sql6);
-  
-  $row = $result -> fetch_all(MYSQLI_ASSOC);
-  
+  $row    = $result -> fetch_all(MYSQLI_ASSOC);
   foreach ($row as $r4)
   {  $departmentliste[] = $r4;
   }
-  
   return $departmentliste;
 }
 
-function getDozentenListeDB($db )
+function getDozentenListeDB($db ) ## Array ALLER Dozierenden
 { $dozentenliste = array();
   
-  $sql6 = "SELECT * FROM `dozent` ORDER BY Name  ";
+  $sql6   = "SELECT * FROM `dozent` ORDER BY Name  ";
   $result = $db -> query($sql6);
-  
-  $row = $result -> fetch_all(MYSQLI_ASSOC);
+  $row    = $result -> fetch_all(MYSQLI_ASSOC);
   
   foreach ($row as $r4)
   { $r4[ 'Anrede' ] = setAnrede( $r4 );
     $dozentenliste[$r4[ 'Kurz' ] ] = $r4;
   }
-
   return $dozentenliste;
 }
 
@@ -349,37 +343,33 @@ function getDozentenListeSemDB( $db )
   $semester =  $_SESSION[ 'aktuell' ][ 'semester' ] ;
 
   $alleDozenten = getDozentenListeDB($db );
-
+#deb($alleDozenten );
   $dozentenliste = array();
   
   $sql6 = "SELECT * FROM `dozent` ORDER BY Status DESC, Name  ";
-
   $stmt = $db->prepare( $sql6 );
+  $stmt -> execute();
+  $result = $stmt -> get_result();
+  $stmt = $result ->  fetch_all( MYSQLI_ASSOC );;
 
   #$orderby = 'Status';
   #$desc = 'Name';
- # $stmt->bind_param("ss", $orderby, $desc);
+  # $stmt->bind_param("ss", $orderby, $desc);
 
-  $stmt -> execute();
-  $result = $stmt->get_result();
-  $stmt = $result ->  fetch_all( MYSQLI_ASSOC );;
-
-
-
-# $res = $db -> mysqli_query( $sql6 );
-# $stmt = mysqli_fetch_assoc($res);
+  # $res = $db -> mysqli_query( $sql6 );
+  # $stmt = mysqli_fetch_assoc($res);
 
   foreach ($stmt as $r4)
-  { $r4[ 'AnzV'    ] = sizeof( getVeranstaltungslisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
+  {
+   # deb($r4);
+      $r4[ 'AnzV'    ] = sizeof( getVeranstaltungslisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
     $r4[ 'AnzE'    ] = sizeof( getEntlastungslisteDB(    $db, $r4[ 'Kurz' ], $jahr, $semester ) );
-    $r4[ 'Anrede'  ] = setAnrede( $r4 );
-
     $r4[ 'aktuell' ] = getArbeitszeitlisteDB( $db, $r4[ 'Kurz' ] ,$alleDozenten )[ 'aktuell' ];   ;
 
-    if ($r4[ 'AnzV'   ] > 0 OR   $r4[ 'AnzE'   ] > 0 )   # Liste 1: Dozenten mit Lehre oder Entlastung
+    if ($r4[ 'AnzV'   ] > 0 OR   $r4[ 'AnzE'   ] > 0 )   # tmp-Liste 1: Dozenten mit Lehre oder Entlastung
     {  $tmpListe1[] = $r4;}
     else
-    {  $tmpListe2[] = $r4;}                                # Liste  2: Dozenten ohne Lehre und ohne Entlastung
+    {  $tmpListe2[] = $r4;}                              # tmp-Liste 2: Dozenten ohne Lehre und ohne Entlastung
   }
 
   foreach ( $tmpListe2 as $tl2 )
@@ -387,11 +377,8 @@ function getDozentenListeSemDB( $db )
   }
   $dozentenliste = $tmpListe1;
 
-
-
   return $dozentenliste;
 }
-
 
 function setAnrede($dozent)
 { if( $dozent [ 'Geschlecht' ] == 'm')
@@ -406,6 +393,7 @@ function setAnrede($dozent)
     {  $a = 'Liebe Kollegin';
     }
   }
+  return $a;
 }
 
 

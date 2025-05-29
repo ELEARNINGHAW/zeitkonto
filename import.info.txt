@@ -1,0 +1,8 @@
+DB dozent anpassen:
+BauerM 
+BauerA
+
+INSERT INTO `dozent` (`Name`, `Vorname`, `Pflicht_weg`, `Status`, `Kurz`, `Geschlecht`, `Professur`, `Anrede`, `Mailadresse`, `Mailzustellung`, `Department`, `Zeitkonto`) VALUES ('Çiçek', 'Serhat', '0.00', '', 'Çi', 'm', NULL, 'Lieber Kollege', 'serhatsezai.cicek@haw-hamburg.de', b'1', NULL, b'0') 
+
+ALTER TABLE `auslastungsgrund` ADD `Kappung` TINYINT NULL DEFAULT NULL AFTER `Text`; 
+

@@ -3,21 +3,25 @@ include_once( "lib/db.lib.php" );
 
 $db   = connectDB();
 
-# $facher = getFachCSV( "auslastung.W23.S24.W24.csv" );
-#importLVA($facher); ## Importiert neue LVA in die DB
+# $facher = getFachCSV( $db,"auslastung.W23.S24.W24.csv" );
+# importLVA($db, $facher  ); ## Importiert neue LVA in die DB
 
-#$facher = getFachCSV( $db , "auslastung.W23.S24.W24.csv" );
-#importBeteiligung( $db , $facher );
+# $facher = getFachCSV( $db , "auslastung.W23.S24.W24.csv" );
+# importBeteiligung( $db , $facher );
 
-#$entlastung = getFunktionsEntlastungCSV( "funktionsentlastungen.W24.csv" );
-$entlastung = getFunktionsEntlastungCSV( "funktionsentlastungen.W23.csv" );
-#deb($entlastung,1);
-importEntlastung(  $db , $entlastung );
+# $entlastung = getFunktionsEntlastungCSV( $db,"funktionsentlastungen.W24.csv" );
+# importEntlastung(  $db , $entlastung );
 
-# $entlastung = getEntlastungCSV( 'entlastung.W23.S24.W24.csv' );
+# $entlastung = getFunktionsEntlastungCSV( $db  ,"funktionsentlastungen.W23.csv" );
+# importEntlastung(  $db , $entlastung );
 
-# $entlastung   = getAbschlussarbeitenCSV( 'abschluss.S24.csv' , 'S24' );
-# $entlastung   = getAbschlussarbeitenCSV( 'abschluss.W23.csv' , 'W23' );
+# $entlastung = getEntlastungCSV( $db  ,'entlastung.W23.S24.W24.csv' );
+# importEntlastung(  $db , $entlastung );
+
+# $entlastung   = getAbschlussarbeitenCSV(   $db ,'abschluss.S24.csv' , 'S24' );
+# importEntlastung(  $db , $entlastung );
+
+# $entlastung   = getAbschlussarbeitenCSV(  $db , 'abschluss.W23.csv' , 'W23' );
 # importEntlastung(  $db , $entlastung );
 
 #$jahr = 2023;
@@ -35,13 +39,11 @@ function generatePDFs(  $db, $jahr, $semester )
 }
 function getAktiveDozenten( $db, $jahr, $semester)
 {
-
   $sql = "SELECT DISTINCT DozentKurz FROM `beteiligung` WHERE Jahr = '".$jahr."' AND Semester = '".$semester."';  ";
-
   foreach ($db->query($sql) as $row)
   { $dozenten[ ] =  $row['DozentKurz']; ;
   }
-  $db->close();
+
   return $dozenten;
 }
 
@@ -57,7 +59,6 @@ function checkDozent( $db , $dozenten )
       }
     }
   }
-$db->close();
 }
 
 function getAlleDozenten( $db , $param = null )
@@ -69,15 +70,13 @@ function getAlleDozenten( $db , $param = null )
     if     ($param == 'K') { $dozenten[ $row['Kurz'] ] =  $row ; }
     else                   { $dozenten[ $row['Name'] ] =  $row ; }
   }
-  $db->close();
+
   return $dozenten;
 }
 
 function importBeteiligung(  $db ,$lvas )
 {
-
   foreach ( $lvas as $lva ) {
-
   ## +----------------------------------------------------------------------------------------------------------------------------------------------
   $sql3 = "SELECT COUNT(*) AS C FROM `beteiligung`";
 
@@ -105,16 +104,9 @@ function importBeteiligung(  $db ,$lvas )
 
 function importEntlastung(  $db , $entlastung )
 {
-  $lvas  = getFachCSV( "auslastung.W23.S24.W24.csv" );
-
-
-
+  #$lvas  = getFachCSV( $db,"auslastung.W23.S24.W24.csv" );
   #deb($entlastung,1);
-
-
-
   foreach ( $entlastung as $ent ) {
-
   ## +----------------------------------------------------------------------------------------------------------------------------------------------
     $sql3 = "SELECT COUNT(*) AS C FROM `auslastung`";
 
@@ -123,9 +115,6 @@ function importEntlastung(  $db , $entlastung )
     $sql3 .= " AND `DozentKurz` LIKE '" .   $ent[ 'doz' ][ 'Kurz'   ] . "'";
     $sql3 .= " AND `Status`     LIKE '" .   $ent[ 'doz' ][ 'Status' ] . "'";
     $sql3 .= " AND `Grund`      LIKE '" .   $ent[ 'Grund' ] . "'";
-
-    #deb($sql3,1);
-
     foreach ($db->query($sql3) as $row)
     { if ($row['C'] == 0) {
 
@@ -144,34 +133,26 @@ function importEntlastung(  $db , $entlastung )
 
 
 function importLVA(  $db , $lvas )
-{
-  foreach ( $lvas as $lva )
-  {
-
-    ## +----------------------------------------------------------------------------------------------------------------------------------------------
+{ foreach ( $lvas as $lva )
+  { ## +----------------------------------------------------------------------------------------------------------------------------------------------
     $sql3  = "SELECT COUNT(*) AS C FROM `lehrverpflichtung`";
     $sql3 .= " WHERE `Jahr`     LIKE '" . ($lva[ 'sem' ][ 'j2'     ]  ) ."'";
     $sql3 .= " AND `Semester`   LIKE '" .  $lva[ 'sem' ][ 's1'     ]  ."'";
-    $sql3 .= " AND `DozKurz`    LIKE '" . $lva[ 'doz' ][ 'Kurz'   ]  ."'";
-    $sql3 .= " AND `Status`     LIKE '" . $lva[ 'doz' ][ 'Status' ]  ."'";
+    $sql3 .= " AND `DozKurz`    LIKE '" .  $lva[ 'doz' ][ 'Kurz'   ]  ."'";
+    $sql3 .= " AND `Status`     LIKE '" .  $lva[ 'doz' ][ 'Status' ]  ."'";
 
-    deb("lehrverpflichtung! " . $sql3 );
+  #  deb("lehrverpflichtung! " . $sql3 );
     foreach ( $db -> query( $sql3 ) as $row )
     { if ( $row[ 'C' ] == 0 )
-    {
-
-      $sql4 ="INSERT INTO `lehrverpflichtung` (`DozKurz` ,  `Status`  , `Jahr` , `Semester` , `Pflicht` ) ";
-      $sql4 .= "VALUES                        ('" . $lva[ 'doz' ][ 'Kurz' ] ."' , '" . $lva[ 'doz' ][ 'Status' ] ."', '" . ($lva[ 'sem' ][ 'j'      ] + 2000 ) ."' , '" . $lva[ 'sem' ][ 's'  ] ."', '".$lva['doz']['Pflicht_weg']."' )";
-
-      deb("Import Dataset LV ! ". $sql4 );
-       $result = $db -> query( $sql4 );
-     # deb( $result,1 );
+      { $sql4 ="INSERT INTO `lehrverpflichtung` (`DozKurz` ,  `Status`  , `Jahr` , `Semester` , `Pflicht` ) ";
+        $sql4 .= "VALUES                        ('" . $lva[ 'doz' ][ 'Kurz' ] ."' , '" . $lva[ 'doz' ][ 'Status' ] ."', '" . ($lva[ 'sem' ][ 'j2'      ]  ) ."' , '" . $lva[ 'sem' ][ 's1'  ] ."', '".$lva['doz']['Pflicht_weg']."' )";
+        deb("Import Dataset LV ! ". $sql4 );
+        $result = $db -> query( $sql4 );
+      }
+      else
+      { deb("Dataset already exists in lehrverpflichtung! " . $sql3 );
+      }
     }
-    else
-    { deb("Dataset already exists in lehrverpflichtung! " . $sql3 );
-    }
-    }
-
 
     ## +----------------------------------------------------------------------------------------------------------------------------------------------
     $sql1 = "SELECT COUNT(*) AS C FROM `lva` WHERE `Jahr` = ". ( $lva['sem']['j2']   ) ." AND `Semester` LIKE '".$lva['sem']['s1']."' AND `FachKurz` LIKE '".$lva['imp']['k-base']."' AND `Studiengang` LIKE '" .$lva['Studiengruppe']."'";
@@ -203,7 +184,7 @@ function getDozentKurzName(  $db , $dozent )
   foreach ($db->query($sql) as $row)
   {  $kurz =  $row['K'] ;
   }
-  $db->close();
+
   return $kurz;
 }
 
@@ -235,7 +216,7 @@ function getFachNameDB( $db,  $fachKurz )
   return  $a[ 'n-base' ];
 }
 
-function getFachCSV( $filename )
+function getFachCSV($db, $filename )
 { $row = 0;
   if ( ( $handle = fopen( $filename, "r" ) ) !== FALSE )
   { while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )
@@ -264,7 +245,7 @@ function getFachCSV( $filename )
       }
       else{  $h = $data; }
     }
-   fclose( $handle );
+
   }
 
   $dozenten =  getAlleDozenten(  $db  );
@@ -303,13 +284,13 @@ function getFachCSV( $filename )
   }
 
     return $f;
-    #$db->close();
+
 }
 
-function getEntlastungCSV( $filename )
+function getEntlastungCSV( $db , $filename )
 { $row = 0;
   $entlastung = null;
-  $dozenten = getAlleDozenten( );
+  $dozenten = getAlleDozenten( $db );
   if ( ( $handle = fopen( $filename, "r" ) ) !== FALSE )
   { while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )
     { $zk = null;
@@ -334,16 +315,16 @@ function getEntlastungCSV( $filename )
       }
       else{  $h = $data; }
     }
-    fclose( $handle );
+
   }
 #deb($entlastung,1);
 return $entlastung;
 }
 
-function getFunktionsEntlastungCSV( $filename )
+function getFunktionsEntlastungCSV( $db, $filename )
 { $row = 0;$zk = null;
   $entlastung = null;
-  $dozenten = getAlleDozenten( );
+  $dozenten = getAlleDozenten($db );
   if ( ( $handle = fopen( $filename, "r" ) ) !== FALSE )
   { while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )
     {
@@ -389,9 +370,9 @@ function getFunktionsEntlastungCSV( $filename )
 }
 
 
-function getAbschlussarbeitenCSV( $filename,$sem, $key = null )
+function getAbschlussarbeitenCSV($db,  $filename,$sem, $key = null )
 { $row = 0;
-  $dozenten = getAlleDozenten();
+  $dozenten = getAlleDozenten($db );
 
   if ( ( $handle = fopen( $filename, "r" ) ) !=  FALSE )
   { while ( ( $data = fgetcsv( $handle, 2000, ";" ) ) !== FALSE )

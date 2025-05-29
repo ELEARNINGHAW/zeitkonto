@@ -7,6 +7,9 @@ include_once( "lib/render.lib.php" );
 
 $db   = connectDB();
 
+#deb( renderStundenbilanz( $db , 'Ad' , '2024', 'S' , true ) ,1 ) ;
+
+
 if ( isset( $_GET[ 'action'      ]  ) )
 {
 
