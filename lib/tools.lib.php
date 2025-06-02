@@ -32,7 +32,7 @@ td.sum
 
 td.sal 
 { color      : #000000;
-  background-color: lightyellow;
+  background-color: aliceblue;
 }
 
 .taL { text-align: left  ; }
@@ -218,10 +218,12 @@ function getStundenbilanz( $db )
 
   if( !isset( $output ) ) { $output =  $g[ 'output' ] ; }
 
+
+
   $dozent =  getDozentDB( $db, $g[ 'dozentKurz' ] );
   $title  =  'Stundenbilanz-'.$dozent['Name'].'-'.$dozent['Vorname'].'-'. $g[ 'semester' ].$g[ 'jahr' ];
 
-  $html   =  renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output);
+  $html   =  renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output  );
   $html   =  $htmlheader . $html  . $htmlfooter;;
   error_reporting(0 );
 

@@ -1,5 +1,5 @@
 <?php
-$timepice = true;   ## Laufzeitmessung der DB Zugriffe
+$timepice = false;   ## Laufzeitmessung der DB Zugriffe
 if( $timepice ) { $count = 0; $st = hrtime(false )[0]; }
 
 function connectDB()
@@ -282,6 +282,21 @@ function getFaecherListeDB( $db )
   }
 
   return $faecherliste;
+}
+
+
+function getAuslastungsListeDB($db )
+{
+    $liste = array();
+    $sql6 = "SELECT * FROM `auslastung` ";
+    $result = $db -> query($sql6);
+
+    $row = $result -> fetch_all(MYSQLI_ASSOC);
+
+    foreach ($row as $r4)
+    {  $liste[] = $r4;
+    }
+    return $liste;
 }
 
 function getStudiengangListeDB($db )

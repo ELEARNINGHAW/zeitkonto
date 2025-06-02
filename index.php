@@ -7,6 +7,21 @@ include_once( "lib/render.lib.php" );
 
 $db   = connectDB();
 
+/*
+$x = getAuslastungsListeDB($db );
+#deb( $x);
+foreach ($x as $k=>$v){
+    if( $v['Grund'] ==  'P') {
+        $r[ $v['DozentKurz'].$v['Jahr'].$v['Semester'].$v['Grund']  ]['L'] += $v['LVS'];
+        $r[ $v['DozentKurz'].$v['Jahr'].$v['Semester'].$v['Grund'] ]['c']++ ;
+    }
+  if($r[ $v['DozentKurz'].$v['Jahr'].$v['Semester'].$v['Grund']  ]['L'] > 4) { deb($r[ $v['DozentKurz'].$v['Jahr'].$v['Semester'].$v['Grund']  ],1); }
+}
+
+deb( $r,1 );
+
+*/
+
 if ( isset( $_GET[ 'action'      ]  ) )
 {
 
