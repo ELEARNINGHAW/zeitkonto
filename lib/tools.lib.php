@@ -32,7 +32,7 @@ td.sum
 
 td.sal 
 { color      : #000000;
-  background-color: aliceblue;
+  background-color: lightyellow;
 }
 
 .taL { text-align: left  ; }
@@ -199,11 +199,8 @@ $pdf->writeHTML($html, true, false, true, false, '');
 
 //Ausgabe der PDF
 
-
 //Variante 1: PDF direkt an den Benutzer senden:
 #$pdf->Output($pdfName, 'I');
-
-
 
 //Variante 2: PDF im Verzeichnis abspeichern:
 $pdf->Output(dirname(__FILE__).'/'.$pdfName, 'F');
@@ -218,12 +215,10 @@ function getStundenbilanz( $db )
 
   if( !isset( $output ) ) { $output =  $g[ 'output' ] ; }
 
-
-
   $dozent =  getDozentDB( $db, $g[ 'dozentKurz' ] );
   $title  =  'Stundenbilanz-'.$dozent['Name'].'-'.$dozent['Vorname'].'-'. $g[ 'semester' ].$g[ 'jahr' ];
 
-  $html   =  renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output  );
+  $html   =  renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output);
   $html   =  $htmlheader . $html  . $htmlfooter;;
   error_reporting(0 );
 
@@ -234,9 +229,9 @@ function getStundenbilanz( $db )
 
 function getStandArbeitszeitkonto(   $db ,  $output = 'html' )
 {
-    $g = checkGetInput();
-   # $g['dozentKurz'], $g['jahr'], $g['semester']
-    global $htmlheader;
+  $g = checkGetInput();
+  # $g['dozentKurz'], $g['jahr'], $g['semester']
+  global $htmlheader;
 
   $html = renderArbeitszeitkonto( $db, $g['dozentKurz'] );
   $html = $htmlheader . $html;
@@ -260,10 +255,9 @@ function getRenderAlleDozentenSem( $db )
 { $g = checkGetInput();
   global $htmlheader, $htmlfooter;
   $html = '';
-
-  $html = renderDozentenListeSem( $db );
+  $html = renderDozentenListeSem( $db, getDozentenListeSemDB( $db ) );
   $html = $htmlheader . $html . $htmlfooter;
-#  error_reporting(0 );
+# error_reporting(0 );
   echo $html;
 }
 
@@ -307,6 +301,11 @@ function getRenderAlleEntlastungsgruenden( $db )
 # error_reporting(0 );
   echo $html;
 }
+
+
+
+
+
 
 function checkGetInput()
 { if (isset( $_GET[ 'jahr'       ]  ) ) { $g[ 'jahr'       ]  =  $_GET[ 'jahr'       ] ; $_SESSION[ 'aktuell' ][ 'jahr'     ] = $g[ 'jahr'        ];} #else  { $g[ 'jahr'       ]  =  0; }

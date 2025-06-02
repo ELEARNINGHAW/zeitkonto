@@ -308,7 +308,8 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB(   $db, $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz(        $dozent , $egl );
 
-  if ( $onlyData )
+
+  if (  $onlyData )
   { $stundenbilanz = $dozent[ 'aktuell' ];
   }
 
@@ -476,7 +477,7 @@ function generateLuETable( $dozent )
         if( $t[ "LVS" ] != 0 )
         {
         if (  $t[ "LVS-orig" ]  >  $t[ "LVS" ] )
-        { $t[ "Text" ] = $t[ "Text" ] .' = '.  $t[ "LVS-orig" ]. '<span style="   text-align: end; float: right;"> LVS.  Kappung nach § 7(2) LVVO auf maximal:</span> ';
+        { $t[ "Text" ] = $t[ "Text" ] .' = '.  $t[ "LVS-orig" ]. ' LVS <span style="   text-align: end; float: right;"> LVS.  Kappung nach § 7(2) LVVO auf maximal:</span> ';
         }
         $r .= '<tr> <td colspan="7">' . $t[ "Text" ] . '</td>  <td  class="taC">' .  number_format( $t[ "LVS" ], 2) . '</td></tr> ' ;
         }

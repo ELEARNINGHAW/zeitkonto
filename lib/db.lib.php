@@ -58,6 +58,8 @@ function getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten )
       $arbeitszeitliste[ 'aktuell' ] =  $sb[ 'dozentLV' ];
       $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] =  $sb;
       $saldo =  $arbeitszeitliste[ $r1[ 'Jahr' ]. $r1[ 'Semester' ]  ] [ 'dozentLV' ][ "saldo" ];
+       deb("---------saldo-------------");
+       deb($arbeitszeitliste,1);
       $saldoTotal +=  $saldo;
 
       if ( $saldoTotal > 36 )
@@ -73,7 +75,10 @@ function getArbeitszeitlisteDB( $db, $dozentKurz ,$alleDozenten )
   # $arbeitszeitliste[ 'aktuell' ] +=  getDozentDB( $db, $dozentKurz ) ;
     $arbeitszeitliste[ 'aktuell' ] +=  $alleDozenten[ $dozentKurz ] ;
    # $alleDozenten = getDozentenListeDB($db );
-   return $arbeitszeitliste;
+
+    deb("-----------------------------");
+    deb($arbeitszeitliste);
+    return $arbeitszeitliste;
 }
 
 function getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester )
@@ -369,20 +374,10 @@ function getDozentenListeSemDB( $db )
   
   $sql6 = "SELECT * FROM `dozent` ORDER BY Status DESC, Name  ";
 
-  $stmt = $db->prepare( $sql6 );
-
-  #$orderby = 'Status';
-  #$desc = 'Name';
- # $stmt->bind_param("ss", $orderby, $desc);
-
-  $stmt -> execute();
-  $result = $stmt->get_result();
-  $stmt = $result ->  fetch_all( MYSQLI_ASSOC );;
-
-
-
-# $res = $db -> mysqli_query( $sql6 );
-# $stmt = mysqli_fetch_assoc($res);
+  $stmt   = $db -> prepare( $sql6 );
+            $stmt -> execute();
+  $result = $stmt -> get_result();
+  $stmt   = $result -> fetch_all( MYSQLI_ASSOC );;
 
   foreach ($stmt as $r4)
   { $r4[ 'AnzV'    ] = sizeof( getVeranstaltungslisteDB( $db, $r4[ 'Kurz' ], $jahr, $semester ) );
@@ -395,6 +390,8 @@ function getDozentenListeSemDB( $db )
     {  $tmpListe1[] = $r4;}
     else
     {  $tmpListe2[] = $r4;}                                # Liste  2: Dozenten ohne Lehre und ohne Entlastung
+
+  deb($r4);
   }
 
   foreach ( $tmpListe2 as $tl2 )
