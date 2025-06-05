@@ -8,28 +8,6 @@ include_once( "lib/render.lib.php" );
 $db   = connectDB();
 
 
-########## -------------------------------------------------------------------------------------
-$dozentKurz  = 'Svd';
-$jahr = '2019';
-$semester = 'W';
-
-$sb = renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = true  ) ;
-
-$x[ 'lehre'      ] = $sb[ 'dozentLV' ][ 'veranstaltungssumme' ];
-$x[ 'entlastung' ] = $sb[ 'dozentLV' ][ 'entlastungsumme1'    ];
-$x[ 'jahr'       ] = $sb[ 'dozentLV' ][ 'Jahr'                ];
-$x[ 'semester'   ] = $sb[ 'dozentLV' ][ 'Semester'            ];
-$x[ 'saldo'      ] = $sb[ 'dozentLV' ][ 'saldo'               ];
-$x[ 'pflicht'    ] = $sb[ 'dozentLV' ][ 'pflicht'             ];
-$x[ 'dozkurz'    ] = $sb[ 'dozentLV' ][ 'DozKurz'             ];
-
-deb($x ,1);
-
-# SELECT saldo FROM `konto` WHERE dozent = 'Svd' AND semester = '2019W';
-# INSERT INTO `konto` (`ID`, `dozent`, `semester`, `saldo`, `lehre`, `entlastung`, `pflicht`, `datum`) VALUES (NULL, 'Svd', '2019W', '14.267', '19.267', '13', '18', current_timestamp());
-
-########## -------------------------------------------------------------------------------------
-
 
 /*
 $x = getAuslastungsListeDB($db );
@@ -52,6 +30,12 @@ if ( isset( $_GET[ 'action'      ]  ) )
 if     ( $_GET[ 'action' ] == 'lad'  )    ## -- Hauptliste -- Liste mit allen Dozierenden --
 { getRenderAlleDozentenSem( $db );
 }
+
+if     ( $_GET[ 'action' ] == 'rec'  )    ## -- Hauptliste -- Liste mit allen Dozierenden --
+{ getRecalcAlleDozenten( $db );
+}
+
+
 
 else if( $_GET[ 'action' ] == 'sb'   )    ## -- aktuelle Stundenbilanz eines Dozierenden --
 { getStundenbilanz( $db );

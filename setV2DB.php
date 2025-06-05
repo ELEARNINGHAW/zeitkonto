@@ -128,13 +128,10 @@ $v[ 'zeitkonto'      ] = checkInput($db, "zeitkonto"      , $v['zeitkonto'      
 
   $sql = "INSERT INTO `dozent` (`Name`, `Vorname`, `Pflicht_weg`, `Status`, `Kurz`, `Geschlecht`, `Professur`, `Anrede`, `Mailadresse`, `Mailzustellung`, `Department`, `Zeitkonto`)";
   $sql .= " VALUES (  '".$v['name'] ."','". $v['vorname'] ."','". $v['pflicht_weg'] ."','". $v['status'] ."','". $v['kurz'] ."','". $v['geschlecht'] ."','". $v['professur'] ."','". $v['anrede'] ."','". $v['mailadresse'] ."','". $v['mailzustellung'] ."','". $v['department'] ."','". $v['zeitkonto']."')" ;
-
-
-    if ($db->query($sql) === TRUE) { $e = "Record insert successfully";            }
-    else                           { $e =  "Error inserting record: " . $db->error;  }
-
-    $db->close();
-    echo $e;
+  if ($db->query($sql) === TRUE) { $e = "Record insert successfully";            }
+  else                           { $e =  "Error inserting record: " . $db->error;  }
+  $db->close();
+  echo $e;
 
 }
 

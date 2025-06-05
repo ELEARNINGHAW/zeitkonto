@@ -10,9 +10,9 @@ $db   = connectDB();
 #importBeteiligung( $db , $facher );
 
 #$entlastung = getFunktionsEntlastungCSV( "funktionsentlastungen.W24.csv" );
-$entlastung = getFunktionsEntlastungCSV( "funktionsentlastungen.W23.csv" );
+#$entlastung = getFunktionsEntlastungCSV( "funktionsentlastungen.W23.csv" );
 #deb($entlastung,1);
-importEntlastung(  $db , $entlastung );
+#importEntlastung(  $db , $entlastung );
 
 # $entlastung = getEntlastungCSV( 'entlastung.W23.S24.W24.csv' );
 

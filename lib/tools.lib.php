@@ -217,8 +217,8 @@ function getStundenbilanz( $db )
 
   $dozent =  getDozentDB( $db, $g[ 'dozentKurz' ] );
   $title  =  'Stundenbilanz-'.$dozent['Name'].'-'.$dozent['Vorname'].'-'. $g[ 'semester' ].$g[ 'jahr' ];
-
-  $html   =  renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , false,  $output);
+  $egl    =  getEntlastungsgruendeListeDB($db );
+  $html   =  renderStundenbilanz( $db, $g[ 'dozentKurz' ], $g[ 'jahr' ], $g[ 'semester' ] , $egl, false,  $output);
   $html   =  $htmlheader . $html  . $htmlfooter;;
   error_reporting(0 );
 
@@ -252,14 +252,19 @@ function getRenderAlleDozenten(  $db  )
 }
 
 function getRenderAlleDozentenSem( $db )
-{ $g = checkGetInput();
-  global $htmlheader, $htmlfooter;
+{ global $htmlheader, $htmlfooter;
   $html = '';
   $html = renderDozentenListeSem( $db, getDozentenListeSemDB( $db ) );
   $html = $htmlheader . $html . $htmlfooter;
-# error_reporting(0 );
   echo $html;
 }
+
+function getRecalcAlleDozenten( $db )
+{   recalcAlleDozentenDB( $db );
+}
+
+
+
 
 function getRenderAlleFaecher( $db  )
 { global $htmlheader, $htmlfooter;

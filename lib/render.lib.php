@@ -297,10 +297,8 @@ function renderArbeitszeitkonto( $db, $dozentKurz )
   return renderZeitkontoTotalProf( $arbeitszeitliste );
 }
 
-function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = false , $output = 'html'   )
+function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $egl,  $onlyData = false , $output = 'html'   )
 {
-  $egl =   getEntlastungsgruendeListeDB($db );
-
   $dozent = getDozentDB( $db, $dozentKurz, $output );
   $dozent[ 'aktuell' ][ 'veranstaltungsliste' ]  =  getVeranstaltungslisteDB( $db, $dozentKurz, $jahr, $semester );
   $dozent[ 'aktuell' ][ 'entlastungsliste'    ]  =  getEntlastungslisteDB(    $db, $dozentKurz, $jahr, $semester );
@@ -308,6 +306,7 @@ function renderStundenbilanz( $db, $dozentKurz, $jahr, $semester, $onlyData = fa
   $dozent[ 'aktuell' ][ 'beteiligung'         ]  =  getBeteiligungslisteDB(   $db, $dozent[ 'aktuell' ][ 'veranstaltungsliste' ] );
   $dozent[ 'aktuell' ][ 'dozentLV'            ] +=  calcStundenbilanz(        $dozent , $egl );
 
+  #deb($dozent,1);
 
   if (  $onlyData )
   { $stundenbilanz = $dozent[ 'aktuell' ];
